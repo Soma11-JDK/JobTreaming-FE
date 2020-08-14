@@ -20,5 +20,13 @@ module.exports = {
       },
     ],
     'no-console': 0,
+    "no-unused-vars":1
+  },
+  settings:{
+    'import/resolver':{
+      node:{
+        moduleDirectory: ['node_modules','src']
+      },
+    },
   },
 };
