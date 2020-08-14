@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
-  font-size: 12px;
   padding: 5px;
   display: flex;
 `;
@@ -12,9 +11,7 @@ const Icon = styled.div`
   object-fit: contain;
 `;
 
-const Text = styled.div`
-  font-size: 12px;
-`;
+const Text = styled.div``;
 
 const HeaderIcon = () => (
   <Container>
