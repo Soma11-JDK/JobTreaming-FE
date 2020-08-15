@@ -1,10 +1,8 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable react/destructuring-assignment */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import KakaoLogin from 'react-kakao-login';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 
 const Conatainer = styled.div`
   display: flex;
@@ -14,7 +12,7 @@ const Conatainer = styled.div`
 const KakaoButton = styled(KakaoLogin)`
   padding: 0;
   width: 190px;
-  height: 444px;
+  height: 44px;
   line-height: 44px;
   color: #783c00;
   background-color: #ffeb00;
@@ -39,13 +37,15 @@ class Login extends Component {
 
   // Kakao Login
   responseKakao = res => {
+    const { onLogin, history } = this.props;
+
     this.setState({
       id: res.profile.id,
       name: res.profile.properties.nickname,
       provider: 'kakao',
     });
-    this.props.onLogin();
-    this.props.history.push('/');
+    onLogin();
+    history.push('/');
   };
 
   // Login Fail
@@ -70,4 +70,10 @@ class Login extends Component {
   }
 }
 
+Login.propTypes = {
+  onLogin: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+};
 export default withRouter(Login);
