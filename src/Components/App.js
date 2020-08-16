@@ -27,6 +27,15 @@ class App extends Component {
     };
   }
 
+  componentDidMount() {
+    const id = window.sessionStorage.getItem('id');
+    if (id) {
+      this.onLogin();
+    } else {
+      this.onLogout();
+    }
+  }
+
   // Login Func
   onLogin = () => {
     this.setState({
@@ -39,6 +48,18 @@ class App extends Component {
     this.setState({
       logged: false,
     });
+
+    const provider = window.sessionStorage.getItem('provider');
+
+    // Kakao AccessToken Remove
+    if (provider === 'kakao') {
+      window.Kakao.Auth.logout(function () {
+        console.log('Kakao Logout');
+      });
+    }
+
+    // SessionStorage Clear
+    window.sessionStorage.clear();
   };
 
   render() {
