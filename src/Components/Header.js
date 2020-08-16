@@ -31,8 +31,8 @@ const Logo = styled.div`
 
 const Input = styled.input`
   align-items: center;
-  display: flex;
-  width: 40%;
+  display: fixed;
+  width: 40vw;
   --bg-opacity: 1;
   background-color: rgba(238, 238, 238, var(--bg-opacity));
   border-radius: 9999px;
@@ -60,11 +60,7 @@ class Header extends PureComponent {
         </HeaderLeft>
         <Input type="text" placeholder="강연을 검색어로 찾아보세요!" />
         {logged ? (
-          <ShortCut>
-            <Link to="/" onClick={onLogout}>
-              로그아웃
-            </Link>
-          </ShortCut>
+          <HeaderIcon onLogout={onLogout} />
         ) : (
           <ShortCut>
             <Link to="/login">로그인/회원가입</Link>

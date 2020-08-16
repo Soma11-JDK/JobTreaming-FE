@@ -7,6 +7,8 @@ import KakaoLogin from 'react-kakao-login';
 import { withRouter } from 'react-router-dom';
 
 const Conatainer = styled.div`
+  width: 100%;
+  align-items: center;
   display: flex;
   flex-flow: column wrap;
 `;
@@ -14,7 +16,7 @@ const Conatainer = styled.div`
 const KakaoButton = styled(KakaoLogin)`
   padding: 0;
   width: 190px;
-  height: 444px;
+  height: 44px;
   line-height: 44px;
   color: #783c00;
   background-color: #ffeb00;

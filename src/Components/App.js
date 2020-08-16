@@ -9,7 +9,7 @@ import Store from '../Store/Store';
 
 const Layout = styled.div`
   margin: 0 auto;
-  display: fex;
+  display: flex;
   width: 100%;
   flex-flow: row wrap;
 `;
@@ -47,9 +47,7 @@ class App extends Component {
       <Layout>
         <Store.Provider value={this.state}>
           <Header logged={logged} onLogout={onLogout} />
-          <Content>
-            <Router />
-          </Content>
+          <Router />
           <GlobalStyles />
         </Store.Provider>
       </Layout>
