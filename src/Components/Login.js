@@ -5,6 +5,8 @@ import KakaoLogin from 'react-kakao-login';
 import { withRouter, Link } from 'react-router-dom';
 
 const Conatainer = styled.div`
+  width: 100%;
+  align-items: center;
   display: flex;
   flex-flow: column wrap;
 `;

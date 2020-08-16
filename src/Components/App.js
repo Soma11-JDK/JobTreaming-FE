@@ -47,9 +47,7 @@ class App extends Component {
       <Layout>
         <Store.Provider value={this.state}>
           <Header logged={logged} onLogout={onLogout} />
-          <Content>
-            <Router />
-          </Content>
+          <Router />
           <GlobalStyles />
         </Store.Provider>
       </Layout>

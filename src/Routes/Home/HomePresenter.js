@@ -1,5 +1,6 @@
 import React from 'react';
+import Slider from 'Components/Slider';
 
-const HomePresenter = () => 'Home';
+const HomePresenter = () => <Slider />;
 
 export default HomePresenter;
