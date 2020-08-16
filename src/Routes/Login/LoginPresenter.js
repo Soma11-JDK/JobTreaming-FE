@@ -39,20 +39,28 @@ class Login extends Component {
 
   // Kakao Login
   responseKakao = res => {
-    const { onLogin, history } = this.props;
-
     this.setState({
       id: res.profile.id,
       name: res.profile.properties.nickname,
       provider: 'kakao',
     });
-    onLogin();
-    history.push('/');
+    this.doSignUp();
   };
 
   // Login Fail
   responseFail = err => {
     console.error(err);
+  };
+
+  doSignUp = () => {
+    const { onLogin, history } = this.props;
+    const { id, name, provider } = this.state;
+
+    window.sessionStorage.setItem('id', id);
+    window.sessionStorage.setItem('name', name);
+    window.sessionStorage.setItem('provider', provider);
+    onLogin();
+    history.push('/');
   };
 
   render() {

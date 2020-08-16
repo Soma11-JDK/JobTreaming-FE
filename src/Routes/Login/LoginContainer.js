@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import Store from '../Store/Store';
-import Login from './Login';
+import Store from '../../Store/Store';
+import Login from './LoginPresenter';
 
 const LoginContainer = () => {
   return (

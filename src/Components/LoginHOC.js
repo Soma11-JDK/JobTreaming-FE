@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 
 import Store from 'Store/Store';
-import LoginContainer from './LoginContainer';
+import LoginContainer from 'Routes/Login/LoginContainer';
 
 const withLogin = WrappedComponent =>
   class IsLogin extends PureComponent {
