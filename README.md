@@ -1,8 +1,64 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# JobTreaming
 
-## Available Scripts
 
-In the project directory, you can run:
+
+## 기획
+
+---
+
+- [요구사항 정의서](https://docs.google.com/spreadsheets/d/1shebn4ccE5Rxb3ogWD3ZbBjPg64D1uAgfd2KeD5vUdk/edit?ts=5f05afe3#gid=221702792)
+- ERD(추후 링크 추가 예정)
+- 화면 설계서(PPT로 작성해서 추후 추가 예정)
+
+
+
+## 개발
+
+---
+
+- eslint & prettier 설정(https://13.125.91.162/swmaestro/jdk-1/-/wikis/VS-Code-&-Project-Setup)
+
+
+
+## 개발 환경
+
+- React js
+- Spring Boot, Spring security
+- Node.js
+
+---
+
+
+
+## 핵심 기능
+
+### - 진로 사이트 최초의 실시간 스트리밍 서비스!
+
+### - 좀 더 스마트하게 강연을 듣게 할 AI기반 강연 추천!
+
+### - 듣고 싶은 강연을 청원할 수 있느 청원서비스!
+
+
+
+---
+
+## 메인테이너
+
+- 조민규
+- 김성진
+- 김지영
+
+---
+
+
+
+## 아래의 내용은 CRA로 생성 후 자동 생성된 내용으로 필요한 내용은 추후 정리 예정
+
+## 
+
+## 프로젝트 클론 후 시작 방법
+
+---
 
 ### `yarn start`
 
