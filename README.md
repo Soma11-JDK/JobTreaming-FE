@@ -22,7 +22,7 @@
 * 듣고 싶은 강연이 없을 경우 강연 청원을 등록할 수 있음.
 
 ![overview](/uploads/4e95d22099d0fac559dd361677cf5afa/overview.png)
-
+<br/><br/>
 # 2. 핵심 기능 및 시스템 구성도
 
 ## 핵심 기능
@@ -50,7 +50,8 @@
 - 화면 설계서(PPT로 작성해서 추후 추가 예정)
 - DB 설계서
 - API 문서
-- ![예상손익계산서](/uploads/b2284d28e88f5449ffd8e221f69abf0c/예상손익계산서.png)
+- 예상 손익 계산서
+![예상손익계산서](/uploads/b2284d28e88f5449ffd8e221f69abf0c/예상손익계산서.png)
 - 소스 코드
   * 프론트엔드: https://13.125.91.162/swmaestro/jdk-1
   * 백엔드: https://13.125.91.162/swmaestro/jdk
