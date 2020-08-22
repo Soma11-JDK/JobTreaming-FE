@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import KakaoLogin from 'react-kakao-login';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 const Conatainer = styled.div`
   width: 100%;
@@ -24,8 +24,6 @@ const KakaoButton = styled(KakaoLogin)`
   font-weight: bold;
   text-align: center;
 `;
-
-const StyledText = styled.span``;
 
 class Login extends Component {
   constructor(props) {
@@ -52,6 +50,7 @@ class Login extends Component {
     console.error(err);
   };
 
+  // 로그인 정보 저장
   doSignUp = () => {
     const { onLogin, history } = this.props;
     const { id, name, provider } = this.state;

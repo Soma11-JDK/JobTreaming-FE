@@ -23,6 +23,8 @@ const HeaderLeft = styled.div`
   white-space: nowrap;
 `;
 
+const logoUrl = require('assets/tempLogo.png');
+
 const Logo = styled.div`
   height: 25px;
   object-fit: contain;
@@ -54,9 +56,9 @@ class Header extends PureComponent {
     return (
       <Container>
         <HeaderLeft>
-          <Logo>
-            <Link to="/">Logo</Link>
-          </Logo>
+          <Link to="/">
+            <Logo> JobTreaming</Logo>
+          </Link>
           <span>사이트 맵</span>
         </HeaderLeft>
         <Input type="text" placeholder="강연을 검색어로 찾아보세요!" />

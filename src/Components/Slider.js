@@ -5,16 +5,16 @@ import { func } from 'prop-types';
 
 const Container = styled.div`
   overflow: hidden;
+  margin: 10px 0px 50px 0px;
 `;
 
 const StyledSlider = styled(Slider)`
   .slick-slide img {
     max-width: 100%;
-    min-height: 150px;
-    max-height: 300px;
+    min-height: 200px;
+    max-height: 500px;
   }
   .slick-slide div {
-    overflow: hidden;
     outline: none;
     text-align: center;
     justify-content: center;
@@ -29,7 +29,7 @@ const ImageContainer = styled.div`
 
 const Image = styled.img``;
 
-const imgUrl = require('assets/testImage.jpg');
+const imgUrl = require('assets/tempBanner.png');
 
 const items = [
   { id: 1, url: imgUrl },
@@ -51,18 +51,20 @@ export default class MultipleItems extends Component {
   }
 
   render() {
+    // 슬라이더 세팅
     const settings = {
-      dots: true,
+      dots: false,
       infinite: true,
       speed: 500,
       slidesToShow: 1,
       slidesToScroll: 1,
       arrows: false,
       centerMode: true,
+      autoplay: true,
+      autopalySpeed: 2000,
     };
     return (
       <Container>
-        <h2> Multiple items </h2>
         {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <StyledSlider {...settings} style={{ width: '100%', padding: 0 }}>
           {items.map(item => {

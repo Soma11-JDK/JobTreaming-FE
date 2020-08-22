@@ -1,4 +1,3 @@
-/* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import Router from '../Routes/Router';
@@ -65,13 +64,13 @@ class App extends Component {
   render() {
     const { logged, onLogin, onLogout } = this.state;
     return (
-      <Layout>
-        <Store.Provider value={this.state}>
+      <Store.Provider value={this.state}>
+        <Layout>
           <Header logged={logged} onLogout={onLogout} />
           <Router />
           <GlobalStyles />
-        </Store.Provider>
-      </Layout>
+        </Layout>
+      </Store.Provider>
     );
   }
 }
