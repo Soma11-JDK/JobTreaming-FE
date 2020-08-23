@@ -1,7 +1,6 @@
-import React, { PureComponent, Component } from 'react';
+import React, { Component } from 'react';
 import Slider from 'react-slick';
 import styled from 'styled-components';
-import { func } from 'prop-types';
 
 const Container = styled.div`
   overflow: hidden;

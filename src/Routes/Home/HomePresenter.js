@@ -1,17 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 import Slider from 'Components/Slider';
+import Category from 'Components/Category';
 
 const Container = styled.div`
   display: flex;
   width: 100%;
   flex-flow: row wrap;
-`;
-
-const Title = styled.span`
-  font-size: 14px;
-  font-weight: 600;
 `;
 
 const CategoryDivider = styled.div`
@@ -48,7 +45,14 @@ const CategoryText = styled.span`
   align-items: center;
 `;
 
-const HomePresenter = () => (
+const CategoryContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const HomePresenter = ({ categoryItems }) => (
   <>
     <Slider />
     <CategoryDivider>
@@ -57,7 +61,20 @@ const HomePresenter = () => (
         <CategoryText>카테고리 별 강연 찾기</CategoryText>
       </CategoryBox>
     </CategoryDivider>
+    <CategoryContainer>
+      <Category categoryItems={categoryItems} />
+    </CategoryContainer>
   </>
 );
+
+HomePresenter.propTypes = {
+  categoryItems: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      name: PropTypes.string,
+      url: PropTypes.node,
+    }),
+  ).isRequired,
+};
 
 export default HomePresenter;
