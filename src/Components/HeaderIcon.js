@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 
 import withLogin from './LoginHOC';
 
@@ -19,8 +18,6 @@ const Icon = styled.img`
   object-fit: contain;
   margin-right: 5px;
 `;
-
-const Text = styled.div``;
 
 const imgUrl = require('assets/tempProfile.png');
 

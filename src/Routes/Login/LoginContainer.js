@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import Store from '../../Store/Store';
 import Login from './LoginPresenter';

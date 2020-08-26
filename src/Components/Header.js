@@ -78,4 +78,5 @@ Header.propTypes = {
   logged: PropTypes.bool.isRequired,
   onLogout: PropTypes.func.isRequired,
 };
+
 export default Header;
