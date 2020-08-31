@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import HeaderIcon from './HeaderIcon';
 
 const Container = styled.div`
-  width: 100%;
+  width: 100vw;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -15,6 +15,7 @@ const Container = styled.div`
   top: 0;
   z-index: 100;
   background-color: white;
+  border-bottom: 1px solid black;
 `;
 
 const HeaderLeft = styled.div`
@@ -31,6 +32,10 @@ const Logo = styled.div`
   margin-right: 10px;
 `;
 
+const Span = styled.div`
+  display: flex;
+  align-items: center;
+`;
 const Input = styled.input`
   align-items: center;
   display: fixed;
@@ -47,6 +52,7 @@ const ShortCut = styled.div`
   width: 150px;
   height: 20px;
   text-align: right;
+  word-break: keep-all;
 `;
 
 class Header extends PureComponent {
@@ -59,14 +65,14 @@ class Header extends PureComponent {
           <Link to="/">
             <Logo> JobTreaming</Logo>
           </Link>
-          <span>사이트 맵</span>
+          <Span>사이트 맵</Span>
         </HeaderLeft>
         <Input type="text" placeholder="강연을 검색어로 찾아보세요!" />
         {logged ? (
           <HeaderIcon onLogout={onLogout} />
         ) : (
           <ShortCut>
-            <Link to="/login">로그인/회원가입</Link>
+            <Link to="/login">로그인 / 회원가입</Link>
           </ShortCut>
         )}
       </Container>

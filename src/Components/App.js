@@ -7,7 +7,6 @@ import Header from './Header';
 import Store from '../Store/Store';
 
 const Layout = styled.div`
-  margin: 0 auto;
   display: flex;
   width: 100%;
   flex-flow: row wrap;

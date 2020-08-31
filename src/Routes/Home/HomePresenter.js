@@ -4,16 +4,18 @@ import PropTypes from 'prop-types';
 
 import Slider from 'Components/Slider';
 import Category from 'Components/Category';
+import LecturePreview from 'Components/LecturePreview';
+import Popular from 'Components/Popular';
 
-const Container = styled.div`
+const DividerContainer = styled.div`
+  :last-child {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  width: 100%;
   display: flex;
-  width: 100%;
-  flex-flow: row wrap;
-`;
-
-const CategoryDivider = styled.div`
-  width: 100%;
-  height: 50px;
+  flex-direction: column;
+  margin-bottom: 125px;
 `;
 
 const Line = styled.hr`
@@ -21,16 +23,12 @@ const Line = styled.hr`
   width: 100%;
   color: gray;
   size: 1px;
-  top: 50%;
-  z-index: -1;
   transform: translate(0, -50%);
 `;
 
-const CategoryBox = styled.div`
+const DivideBox = styled.div`
   position: relative;
-  z-index: 2;
   width: 200px;
-  top: 50%;
   left: 50%;
   transform: translate(-50%, -75%);
   background-color: white;
@@ -38,7 +36,7 @@ const CategoryBox = styled.div`
   border: 1px solid gray;
 `;
 
-const CategoryText = styled.span`
+const DivideText = styled.span`
   height: 100%;
   display: flex;
   justify-content: center;
@@ -52,18 +50,86 @@ const CategoryContainer = styled.div`
   align-items: center;
 `;
 
+const BelowContainer = styled.div`
+  :not(:last-child) {
+    margin-right: 10px;
+  }
+  width: 50vw;
+  background-color: lightgray;
+`;
+
+const testSet = [
+  {
+    id: 1,
+    title: 'test',
+    // eslint-disable-next-line global-require
+    imageUrl: require('assets/tempProfile.png'),
+    date: '2020.08.27',
+  },
+  {
+    id: 2,
+    title: 'test2',
+    // eslint-disable-next-line global-require
+    imageUrl: require('assets/categories/before/cate_1_before.jpg'),
+    date: '2020.08.27',
+  },
+];
 const HomePresenter = ({ categoryItems }) => (
   <>
     <Slider />
-    <CategoryDivider>
+    {/* 카테고리 별 강연 찾기 */}
+    <DividerContainer>
       <Line />
-      <CategoryBox>
-        <CategoryText>카테고리 별 강연 찾기</CategoryText>
-      </CategoryBox>
-    </CategoryDivider>
-    <CategoryContainer>
-      <Category categoryItems={categoryItems} />
-    </CategoryContainer>
+      <DivideBox>
+        <DivideText>카테고리 별 강연 찾기</DivideText>
+      </DivideBox>
+
+      {/* 카테고리 이미지 */}
+      <CategoryContainer>
+        <Category categoryItems={categoryItems} />
+      </CategoryContainer>
+    </DividerContainer>
+
+    {/* 인기 강연 */}
+    <DividerContainer>
+      <BelowContainer>
+        <DivideBox>
+          <DivideText>인기 강연</DivideText>
+        </DivideBox>
+        {/* 인기 강연 포스터 */}
+
+        <Popular>
+          {testSet.map(test => (
+            <LecturePreview
+              key={test.id}
+              id={test.id}
+              title={test.title}
+              imageUrl={test.imageUrl}
+              date={test.date}
+            />
+          ))}
+        </Popular>
+      </BelowContainer>
+
+      {/* 인기 강연 */}
+      <BelowContainer>
+        <DivideBox>
+          <DivideText>인기 청원</DivideText>
+        </DivideBox>
+        {/* 인기 강연 포스터 */}
+        <Popular>
+          {testSet.map(test => (
+            <LecturePreview
+              key={test.id}
+              id={test.id}
+              title={test.title}
+              imageUrl={test.imageUrl}
+              date={test.date}
+            />
+          ))}
+        </Popular>
+      </BelowContainer>
+    </DividerContainer>
   </>
 );
 
