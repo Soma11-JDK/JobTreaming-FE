@@ -40,14 +40,14 @@ const ImageContainer = styled.div`
 
 const Title = styled.span`
   display: block;
-  font-size: 2.5vw;
+  font-size: 2vw;
   margin-left: 10px;
 `;
 
 const Date = styled.span`
   margin-left: 10px;
   margin-bottom: 5px;
-  font-size: 2vw;
+  font-size: 1.5vw;
 `;
 
 const Tag = styled.span``;

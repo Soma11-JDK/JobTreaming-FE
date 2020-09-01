@@ -6,6 +6,7 @@ import { withRouter } from 'react-router-dom';
 
 const Conatainer = styled.div`
   width: 100%;
+  height: calc(100vh - 270px);
   align-items: center;
   display: flex;
   flex-flow: column wrap;
@@ -15,6 +16,7 @@ const KakaoButton = styled(KakaoLogin)`
   padding: 0;
   width: 190px;
   height: 44px;
+  margin-top: 20px;
   line-height: 44px;
   color: #783c00;
   background-color: #ffeb00;

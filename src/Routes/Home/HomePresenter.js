@@ -8,7 +8,7 @@ import LecturePreview from 'Components/LecturePreview';
 import Popular from 'Components/Popular';
 
 const DividerContainer = styled.div`
-  :last-child {
+  &.below {
     flex-direction: row;
     justify-content: space-between;
   }
@@ -91,7 +91,7 @@ const HomePresenter = ({ categoryItems }) => (
     </DividerContainer>
 
     {/* 인기 강연 */}
-    <DividerContainer>
+    <DividerContainer className="below">
       <BelowContainer>
         <DivideBox>
           <DivideText>인기 강연</DivideText>

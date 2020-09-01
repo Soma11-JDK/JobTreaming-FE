@@ -5,16 +5,15 @@ import GlobalStyles from './GlobalStyles';
 
 import Header from './Header';
 import Store from '../Store/Store';
+import Footer from './Footer';
 
 const Layout = styled.div`
   display: flex;
   width: 100%;
+  min-height: 100%;
   flex-flow: row wrap;
 `;
 
-const Content = styled.div`
-  margin: 0 auto;
-`;
 class App extends Component {
   constructor(props) {
     super(props);
@@ -69,6 +68,7 @@ class App extends Component {
           <Router />
           <GlobalStyles />
         </Layout>
+        <Footer />
       </Store.Provider>
     );
   }
