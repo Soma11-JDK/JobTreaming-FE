@@ -25,7 +25,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const id = window.sessionStorage.getItem('id');
+    const id = window.localStorage.getItem('id');
     if (id) {
       this.onLogin();
     } else {
@@ -46,7 +46,7 @@ class App extends Component {
       logged: false,
     });
 
-    const provider = window.sessionStorage.getItem('provider');
+    const provider = window.localStorage.getItem('provider');
 
     // Kakao AccessToken Remove
     if (provider === 'kakao') {
@@ -55,8 +55,8 @@ class App extends Component {
       });
     }
 
-    // SessionStorage Clear
-    window.sessionStorage.clear();
+    // localStorage Clear
+    window.localStorage.clear();
   };
 
   render() {

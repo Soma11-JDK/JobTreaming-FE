@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const Container = styled.div`
   --bg-opacity: 0.7;
@@ -106,17 +107,18 @@ class Category extends Component {
       <Container>
         <Grid>
           {categoryItems.map(category => (
-            <CategoryContainer
-              key={category.id}
-              onMouseEnter={() => this.handleHover({ category })}
-              onMouseLeave={() => this.handleUnHover()}
-            >
-              <CategoryImage
-                url={id === category.id ? category.hoverUrl : category.url}
-                alt={category.name}
-              />
-              <CategoryName key={category.id}> {category.name} </CategoryName>
-            </CategoryContainer>
+            <Link to={`category/${category.id}`} key={category.id}>
+              <CategoryContainer
+                onMouseEnter={() => this.handleHover({ category })}
+                onMouseLeave={() => this.handleUnHover()}
+              >
+                <CategoryImage
+                  url={id === category.id ? category.hoverUrl : category.url}
+                  alt={category.name}
+                />
+                <CategoryName key={category.id}> {category.name} </CategoryName>
+              </CategoryContainer>
+            </Link>
           ))}
         </Grid>
       </Container>

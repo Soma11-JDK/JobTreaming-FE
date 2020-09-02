@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom';
 
 const Conatainer = styled.div`
   width: 100%;
-  height: calc(100vh - 270px);
+  height: calc(100vh - 220px);
   align-items: center;
   display: flex;
   flex-flow: column wrap;
@@ -57,9 +57,9 @@ class Login extends Component {
     const { onLogin, history } = this.props;
     const { id, name, provider } = this.state;
 
-    window.sessionStorage.setItem('id', id);
-    window.sessionStorage.setItem('name', name);
-    window.sessionStorage.setItem('provider', provider);
+    window.localStorage.setItem('id', id);
+    window.localStorage.setItem('name', name);
+    window.localStorage.setItem('provider', provider);
     onLogin();
     history.push('/');
   };
