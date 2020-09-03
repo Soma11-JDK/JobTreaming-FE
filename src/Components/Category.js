@@ -276,10 +276,7 @@ class Category extends Component {
       <Container>
         <Grid>
           {categoryItems.map(category => (
-            <Link
-              key={category.id}
-              to={`category/${category.id}/${category.title}`}
-            >
+            <Link key={category.id} to={`category/${category.id}`}>
               <CategoryContainer
                 onMouseEnter={() => this.handleHover({ category })}
                 onMouseLeave={() => this.handleUnHover()}
