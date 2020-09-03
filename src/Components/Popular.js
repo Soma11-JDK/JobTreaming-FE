@@ -11,6 +11,7 @@ const Container = styled.div`
 const Grid = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
 `;
 
 const Popular = ({ children }) => (

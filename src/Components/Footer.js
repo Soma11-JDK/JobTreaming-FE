@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link, withRouter } from 'react-router-dom';
-import PropTypes from 'prop-types';
 
 const Container = styled.footer`
   display: flex;

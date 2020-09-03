@@ -73,8 +73,15 @@ const testSet = [
     imageUrl: require('assets/categories/before/cate_1_before.jpg'),
     date: '2020.08.27',
   },
+  {
+    id: 3,
+    title: 'test3',
+    // eslint-disable-next-line global-require
+    imageUrl: require('assets/categories/before/cate_1_before.jpg'),
+    date: '2020.08.27',
+  },
 ];
-const HomePresenter = ({ categoryItems }) => (
+const HomePresenter = () => (
   <>
     <Slider />
     {/* 카테고리 별 강연 찾기 */}
@@ -86,7 +93,7 @@ const HomePresenter = ({ categoryItems }) => (
 
       {/* 카테고리 이미지 */}
       <CategoryContainer>
-        <Category categoryItems={categoryItems} />
+        <Category />
       </CategoryContainer>
     </DividerContainer>
 
@@ -133,14 +140,5 @@ const HomePresenter = ({ categoryItems }) => (
   </>
 );
 
-HomePresenter.propTypes = {
-  categoryItems: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number,
-      name: PropTypes.string,
-      url: PropTypes.node,
-    }),
-  ).isRequired,
-};
-
 export default HomePresenter;
+export { testSet };

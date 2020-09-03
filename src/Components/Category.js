@@ -1,5 +1,5 @@
+/* eslint-disable global-require */
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
@@ -43,8 +43,179 @@ const CategoryName = styled.span`
   font-size: 14px;
   height: 30px;
   text-align: center;
+  word-break: keep-all;
 `;
 
+const categoryItems = [
+  {
+    id: 1,
+    title: '01. 사업관리',
+    url: require('assets/categories/before/cate_1_before.jpg'),
+    hoverUrl: require('assets/categories/after/cate_1_after.jpg'),
+    hover: false,
+  },
+  {
+    id: 2,
+    title: '02. 경영·회계·사무',
+    url: require('assets/categories/before/cate_2_before.jpg'),
+    hoverUrl: require('assets/categories/after/cate_1_after.jpg'),
+    hover: false,
+  },
+  {
+    id: 3,
+    title: '03. 금융·보험',
+    url: require('assets/categories/before/cate_3_before.jpg'),
+    hoverUrl: require('assets/categories/after/cate_1_after.jpg'),
+    hover: false,
+  },
+  {
+    id: 4,
+    title: '04. 교육·자연·사회과학',
+    url: require('assets/categories/before/cate_4_before.jpg'),
+    hoverUrl: require('assets/categories/after/cate_1_after.jpg'),
+    hover: false,
+  },
+  {
+    id: 5,
+    title: '05. 법률·경찰·소방·교도·국방',
+    url: require('assets/categories/before/cate_5_before.jpg'),
+    hoverUrl: require('assets/categories/after/cate_1_after.jpg'),
+    hover: false,
+  },
+  {
+    id: 6,
+    title: '06. 보건·의료',
+    url: require('assets/categories/before/cate_6_before.jpg'),
+    hoverUrl: require('assets/categories/after/cate_1_after.jpg'),
+    hover: false,
+  },
+  {
+    id: 7,
+    title: '07. 사회복지·종교',
+    url: require('assets/categories/before/cate_7_before.jpg'),
+    hoverUrl: require('assets/categories/after/cate_1_after.jpg'),
+    hover: false,
+  },
+  {
+    id: 8,
+    title: '08. 문화·예술·디자인·방송',
+    url: require('assets/categories/before/cate_8_before.jpg'),
+    hoverUrl: require('assets/categories/after/cate_1_after.jpg'),
+    hover: false,
+  },
+  {
+    id: 9,
+    title: '09. 운전·운송',
+    url: require('assets/categories/before/cate_9_before.jpg'),
+    hoverUrl: require('assets/categories/after/cate_1_after.jpg'),
+    hover: false,
+  },
+  {
+    id: 10,
+    title: '10. 영업판매',
+    url: require('assets/categories/before/cate_10_before.jpg'),
+    hoverUrl: require('assets/categories/after/cate_1_after.jpg'),
+    hover: false,
+  },
+  {
+    id: 11,
+    title: '11. 경비·청소',
+    url: require('assets/categories/before/cate_11_before.jpg'),
+    hoverUrl: require('assets/categories/after/cate_1_after.jpg'),
+    hover: false,
+  },
+  {
+    id: 12,
+    title: '12. 이용·숙박·여행·오락·스포츠',
+    url: require('assets/categories/before/cate_12_before.jpg'),
+    hoverUrl: require('assets/categories/after/cate_1_after.jpg'),
+    hover: false,
+  },
+  {
+    id: 13,
+    title: '13. 음식서비스',
+    url: require('assets/categories/before/cate_13_before.jpg'),
+    hoverUrl: require('assets/categories/after/cate_1_after.jpg'),
+    hover: false,
+  },
+  {
+    id: 14,
+    title: '14. 건설',
+    url: require('assets/categories/before/cate_14_before.jpg'),
+    hoverUrl: require('assets/categories/after/cate_1_after.jpg'),
+    hover: false,
+  },
+  {
+    id: 15,
+    title: '15. 기계',
+    url: require('assets/categories/before/cate_15_before.jpg'),
+    hoverUrl: require('assets/categories/after/cate_1_after.jpg'),
+    hover: false,
+  },
+  {
+    id: 16,
+    title: '16. 재료',
+    url: require('assets/categories/before/cate_16_before.jpg'),
+    hoverUrl: require('assets/categories/after/cate_1_after.jpg'),
+    hover: false,
+  },
+  {
+    id: 17,
+    title: '17. 화학',
+    url: require('assets/categories/before/cate_17_before.jpg'),
+    hoverUrl: require('assets/categories/after/cate_1_after.jpg'),
+    hover: false,
+  },
+  {
+    id: 18,
+    title: '18. 섬유·의복',
+    url: require('assets/categories/before/cate_18_before.jpg'),
+    hoverUrl: require('assets/categories/after/cate_1_after.jpg'),
+    hover: false,
+  },
+  {
+    id: 19,
+    title: '19. 전기·전자',
+    url: require('assets/categories/before/cate_19_before.jpg'),
+    hoverUrl: require('assets/categories/after/cate_1_after.jpg'),
+    hover: false,
+  },
+  {
+    id: 20,
+    title: '20. 정보통신',
+    url: require('assets/categories/before/cate_20_before.jpg'),
+    hoverUrl: require('assets/categories/after/cate_1_after.jpg'),
+    hover: false,
+  },
+  {
+    id: 21,
+    title: '21. 식품가공',
+    url: require('assets/categories/before/cate_21_before.jpg'),
+    hoverUrl: require('assets/categories/after/cate_1_after.jpg'),
+    hover: false,
+  },
+  {
+    id: 22,
+    title: '22. 인쇄·목재·가구·공예',
+    url: require('assets/categories/before/cate_22_before.jpg'),
+    hoverUrl: require('assets/categories/after/cate_1_after.jpg'),
+    hover: false,
+  },
+  {
+    id: 23,
+    title: '23. 환경·에너지·안전',
+    url: require('assets/categories/before/cate_23_before.jpg'),
+    hoverUrl: require('assets/categories/after/cate_1_after.jpg'),
+    hover: false,
+  },
+  {
+    id: 24,
+    title: '24. 농림어업',
+    url: require('assets/categories/before/cate_24_before.jpg'),
+    hoverUrl: require('assets/categories/after/cate_1_after.jpg'),
+    hover: false,
+  },
+];
 // const hoverId = ``;
 // 이 방식으로 해결 불가능한지 궁금합니다!
 /* const Category = ({ categoryItems }) => {
@@ -83,9 +254,7 @@ const CategoryName = styled.span`
 class Category extends Component {
   constructor(props) {
     super(props);
-    const { categoryItems } = props;
     this.state = {
-      categoryItems,
       id: '',
     };
   }
@@ -102,21 +271,24 @@ class Category extends Component {
   }
 
   render() {
-    const { categoryItems, id } = this.state;
+    const { id } = this.state;
     return (
       <Container>
         <Grid>
           {categoryItems.map(category => (
-            <Link to={`category/${category.id}`} key={category.id}>
+            <Link
+              key={category.id}
+              to={`category/${category.id}/${category.title}`}
+            >
               <CategoryContainer
                 onMouseEnter={() => this.handleHover({ category })}
                 onMouseLeave={() => this.handleUnHover()}
               >
                 <CategoryImage
                   url={id === category.id ? category.hoverUrl : category.url}
-                  alt={category.name}
+                  alt={category.title}
                 />
-                <CategoryName key={category.id}> {category.name} </CategoryName>
+                <CategoryName key={category.id}>{category.title}</CategoryName>
               </CategoryContainer>
             </Link>
           ))}
@@ -126,15 +298,5 @@ class Category extends Component {
   }
 }
 
-Category.propTypes = {
-  categoryItems: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number,
-      name: PropTypes.string,
-      url: PropTypes.node,
-      hoverUrl: PropTypes.node,
-      hover: PropTypes.bool,
-    }),
-  ).isRequired,
-};
 export default Category;
+export { categoryItems };
