@@ -9,20 +9,22 @@ const Container = styled.div`
 
 const StyledSlider = styled(Slider)`
   .slick-slide img {
-    max-width: 100%;
+    max-width: 90%;
     min-height: 200px;
     max-height: 500px;
+    border-radius: 10px;
   }
   .slick-slide div {
+    display: flex;
     outline: none;
     text-align: center;
     justify-content: center;
     max-width: 100%;
+    margin-top: 5px;
   }
 `;
 
 const ImageContainer = styled.div`
-  position: relative;
   margin: 0px 13px;
 `;
 
@@ -58,7 +60,6 @@ export default class MultipleItems extends Component {
       slidesToShow: 1,
       slidesToScroll: 1,
       arrows: false,
-      centerMode: true,
       autoplay: true,
       autopalySpeed: 2000,
     };
