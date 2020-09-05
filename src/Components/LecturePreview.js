@@ -40,7 +40,8 @@ const ImageContainer = styled.div`
 
 const Title = styled.span`
   display: block;
-  font-size: 2vw;
+  font-size: 1.8vw;
+  margin-top: 8px;
   margin-left: 10px;
 `;
 
