@@ -8,7 +8,7 @@ export default () => (
     <Route path="/" exact component={Home} />
     <Route path="/login" component={Login} />
     <Route path="/category/:id" component={Lecture} />
-    <Route path="/petition" componet={Petition} />
+    <Route path="/petition" component={Petition} />
     <Redirect from="*" to="/" />
   </Switch>
 );
