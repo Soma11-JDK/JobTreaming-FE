@@ -48,7 +48,6 @@ const Input = styled.input`
   border: 1px solid black;
   height: 35px;
   flex: 0.7;
-  outline: none;
   margin-right: 50px;
   padding-left: 10px;
 `;
