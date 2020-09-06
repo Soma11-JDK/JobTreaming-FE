@@ -16,7 +16,6 @@ const StyledSlider = styled(Slider)`
   }
   .slick-slide div {
     display: flex;
-    outline: none;
     text-align: center;
     justify-content: center;
     max-width: 100%;
