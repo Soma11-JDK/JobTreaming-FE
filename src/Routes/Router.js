@@ -1,13 +1,14 @@
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 
-import { Home, Login, Lecture } from './index';
+import { Home, Login, Lecture, Petition } from './index';
 
 export default () => (
   <Switch>
     <Route path="/" exact component={Home} />
     <Route path="/login" component={Login} />
     <Route path="/category/:id" component={Lecture} />
+    <Route path="/petition" componet={Petition} />
     <Redirect from="*" to="/" />
   </Switch>
 );
