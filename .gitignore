@@ -24,3 +24,9 @@ yarn-error.log*
 
 # 환경변수
 .env
+
+# api
+api.js
+
+# api test
+.http

@@ -37,6 +37,7 @@ const Span = styled.div`
   display: flex;
   align-items: center;
 `;
+
 const Input = styled.input`
   align-items: center;
   display: fixed;
@@ -46,6 +47,10 @@ const Input = styled.input`
   border-radius: 9999px;
   border: 1px solid black;
   height: 35px;
+  flex: 0.7;
+  outline: none;
+  margin-right: 50px;
+  padding-left: 10px;
 `;
 
 const ShortCut = styled.div`
@@ -54,6 +59,22 @@ const ShortCut = styled.div`
   height: 20px;
   text-align: right;
   word-break: keep-all;
+`;
+
+const CenterContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const PetitionContainer = styled.div`
+  width: 60px;
+  height: 20px;
+  background-color: lightgray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 5px;
 `;
 
 class Header extends PureComponent {
@@ -68,7 +89,12 @@ class Header extends PureComponent {
           </Link>
           <Span>사이트 맵</Span>
         </HeaderLeft>
-        <Input type="text" placeholder="강연을 검색어로 찾아보세요!" />
+        <CenterContainer>
+          <Link to="/petition">
+            <PetitionContainer>청원하기</PetitionContainer>
+          </Link>
+          <Input type="text" placeholder="강연을 검색어로 찾아보세요!" />
+        </CenterContainer>
         {logged ? (
           <HeaderIcon onLogout={onLogout} />
         ) : (
