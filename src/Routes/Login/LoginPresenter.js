@@ -4,12 +4,30 @@ import styled from 'styled-components';
 import KakaoLogin from 'react-kakao-login';
 import { withRouter } from 'react-router-dom';
 
+import { loginApi } from 'api';
+
 const Conatainer = styled.div`
   width: 100%;
   height: 100vh;
   align-items: center;
   display: flex;
   flex-flow: column wrap;
+`;
+
+const TestLoginButton = styled.button`
+  padding: 0;
+  width: 190px;
+  height: 44px;
+  margin-top: 20px;
+  line-height: 44px;
+  color: black;
+  background-color: lightgray;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
 `;
 
 const KakaoButton = styled(KakaoLogin)`
@@ -25,6 +43,7 @@ const KakaoButton = styled(KakaoLogin)`
   font-size: 16px;
   font-weight: bold;
   text-align: center;
+  cursor: pointer;
 `;
 
 class Login extends Component {
@@ -36,6 +55,23 @@ class Login extends Component {
       provider: '',
     };
   }
+
+  // Test Login
+  handleTestLogin = async () => {
+    try {
+      const { history } = this.props;
+      await loginApi.socialLogin();
+      console.log('로그인 성공입니다.');
+      this.setState({
+        id: 'test',
+        name: 'test',
+        provider: 'test',
+      });
+      this.doSignUp();
+    } catch {
+      console.log('로그인 에러입니다.');
+    }
+  };
 
   // Kakao Login
   responseKakao = res => {
@@ -66,6 +102,7 @@ class Login extends Component {
 
   render() {
     const { id, name, provider } = this.state;
+    const { handleTestLogin } = this;
 
     return (
       <Conatainer>
@@ -73,9 +110,12 @@ class Login extends Component {
           jsKey={process.env.REACT_APP_Kakao}
           buttonText="Kakao"
           onSuccess={this.responseKakao}
-          onFailure={this.responseKakao}
+          onFailure={this.responseFail}
           getProfile="true"
         />
+        <TestLoginButton onClick={handleTestLogin}>
+          테스트 로그인
+        </TestLoginButton>
       </Conatainer>
     );
   }
