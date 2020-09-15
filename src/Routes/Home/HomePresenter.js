@@ -7,6 +7,10 @@ import Category from 'Components/Category';
 import LecturePreview from 'Components/LecturePreview';
 import Popular from 'Components/Popular';
 
+const Container = styled.div`
+  width: 100%;
+  height: 100%;
+`;
 const DividerContainer = styled.div`
   &.below {
     flex-direction: row;
@@ -83,60 +87,62 @@ const testSet = [
 ];
 const HomePresenter = () => (
   <>
-    <Slider />
-    {/* 카테고리 별 강연 찾기 */}
-    <DividerContainer>
-      <Line />
-      <DivideBox>
-        <DivideText>카테고리 별 강연 찾기</DivideText>
-      </DivideBox>
-
-      {/* 카테고리 이미지 */}
-      <CategoryContainer>
-        <Category />
-      </CategoryContainer>
-    </DividerContainer>
-
-    {/* 인기 강연 */}
-    <DividerContainer className="below">
-      <BelowContainer>
+    <Container>
+      <Slider />
+      {/* 카테고리 별 강연 찾기 */}
+      <DividerContainer>
+        <Line />
         <DivideBox>
-          <DivideText>인기 강연</DivideText>
+          <DivideText>카테고리 별 강연 찾기</DivideText>
         </DivideBox>
-        {/* 인기 강연 포스터 */}
 
-        <Popular>
-          {testSet.map(test => (
-            <LecturePreview
-              key={test.id}
-              id={test.id}
-              title={test.title}
-              imageUrl={test.imageUrl}
-              date={test.date}
-            />
-          ))}
-        </Popular>
-      </BelowContainer>
+        {/* 카테고리 이미지 */}
+        <CategoryContainer>
+          <Category />
+        </CategoryContainer>
+      </DividerContainer>
 
       {/* 인기 강연 */}
-      <BelowContainer>
-        <DivideBox>
-          <DivideText>인기 청원</DivideText>
-        </DivideBox>
-        {/* 인기 강연 포스터 */}
-        <Popular>
-          {testSet.map(test => (
-            <LecturePreview
-              key={test.id}
-              id={test.id}
-              title={test.title}
-              imageUrl={test.imageUrl}
-              date={test.date}
-            />
-          ))}
-        </Popular>
-      </BelowContainer>
-    </DividerContainer>
+      <DividerContainer className="below">
+        <BelowContainer>
+          <DivideBox>
+            <DivideText>인기 강연</DivideText>
+          </DivideBox>
+          {/* 인기 강연 포스터 */}
+
+          <Popular>
+            {testSet.map(test => (
+              <LecturePreview
+                key={test.id}
+                id={test.id}
+                title={test.title}
+                imageUrl={test.imageUrl}
+                date={test.date}
+              />
+            ))}
+          </Popular>
+        </BelowContainer>
+
+        {/* 인기 강연 */}
+        <BelowContainer>
+          <DivideBox>
+            <DivideText>인기 청원</DivideText>
+          </DivideBox>
+          {/* 인기 강연 포스터 */}
+          <Popular>
+            {testSet.map(test => (
+              <LecturePreview
+                key={test.id}
+                id={test.id}
+                title={test.title}
+                imageUrl={test.imageUrl}
+                date={test.date}
+              />
+            ))}
+          </Popular>
+        </BelowContainer>
+      </DividerContainer>
+    </Container>
   </>
 );
 
