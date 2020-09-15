@@ -11,6 +11,7 @@ const Container = styled.div`
   align-items: center;
   text-align: right;
   justify-content: flex-end;
+  word-break: keep-all;
 `;
 
 const Icon = styled.img`

@@ -259,10 +259,7 @@ class Category extends Component {
     };
   }
 
-  handleHover(category) {
-    const {
-      category: { id },
-    } = category;
+  handleHover(id) {
     this.setState({ id });
   }
 
@@ -278,7 +275,7 @@ class Category extends Component {
           {categoryItems.map(category => (
             <Link key={category.id} to={`category/${category.id}`}>
               <CategoryContainer
-                onMouseEnter={() => this.handleHover({ category })}
+                onMouseEnter={() => this.handleHover(category.id)}
                 onMouseLeave={() => this.handleUnHover()}
               >
                 <CategoryImage
