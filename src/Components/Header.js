@@ -11,7 +11,6 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px;
   position: sticky;
   top: 0;
   z-index: 100;
@@ -25,55 +24,31 @@ const HeaderLeft = styled.div`
   white-space: nowrap;
 `;
 
-const logoUrl = require('assets/tempLogo.png');
+const smallLogo = require('assets/Logo/Logo.png');
+const mediumLogo = require('assets/Logo/Logo@2x.png');
+const largeLogo = require('assets/Logo/Logo@3x.png');
 
-const Logo = styled.div`
+const Logo = styled.img`
   height: 25px;
   object-fit: contain;
   margin-right: 10px;
 `;
 
+const HeaderRight = styled.div`
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+  margin-right: 20px;
+  align-items: center;
+`;
+
 const Span = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const Input = styled.input`
-  align-items: center;
-  display: fixed;
-  width: 40vw;
-  --bg-opacity: 1;
-  background-color: rgba(238, 238, 238, var(--bg-opacity));
-  border-radius: 9999px;
-  border: 1px solid black;
-  height: 35px;
-  flex: 0.7;
-  margin-right: 50px;
-  padding-left: 10px;
-`;
-
-const ShortCut = styled.div`
-  order: 1;
-  width: 150px;
-  height: 20px;
-  text-align: right;
   word-break: keep-all;
-`;
-
-const CenterContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const PetitionContainer = styled.div`
-  width: 60px;
-  height: 20px;
-  background-color: lightgray;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-right: 5px;
+  font-weight: bold;
+  margin-left: 10px;
+  @media only screen and (max-width: 600px) {
+    font-size: 2vw;
+  }
 `;
 
 class Header extends PureComponent {
@@ -84,23 +59,34 @@ class Header extends PureComponent {
       <Container>
         <HeaderLeft>
           <Link to="/">
-            <Logo> JobTreaming</Logo>
+            <Logo
+              src={largeLogo}
+              srcSet={`${smallLogo} 300w, ${mediumLogo} 768w, ${largeLogo} 1280w`}
+            />
           </Link>
-          <Span>사이트 맵</Span>
         </HeaderLeft>
-        <CenterContainer>
-          <Link to="/petition">
-            <PetitionContainer>청원하기</PetitionContainer>
+
+        <HeaderRight>
+          <Link to="/">
+            <Span>카테고리</Span>
           </Link>
-          <Input type="text" placeholder="강연을 검색어로 찾아보세요!" />
-        </CenterContainer>
-        {logged ? (
-          <HeaderIcon onLogout={onLogout} />
-        ) : (
-          <ShortCut>
-            <Link to="/login">로그인 / 회원가입</Link>
-          </ShortCut>
-        )}
+          <Link to="/petition">
+            <Span>청원하기</Span>
+          </Link>
+          <Link to="/">
+            <Span>나의 강의장</Span>
+          </Link>
+          <Link to="/">
+            <Span>알림</Span>
+          </Link>
+          {logged ? (
+            <HeaderIcon onLogout={onLogout} />
+          ) : (
+            <Link to="/login">
+              <Span>로그인 / 회원가입</Span>
+            </Link>
+          )}
+        </HeaderRight>
       </Container>
     );
   }

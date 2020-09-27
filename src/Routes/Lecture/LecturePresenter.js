@@ -5,11 +5,11 @@ import PropTypes from 'prop-types';
 import SideBar from 'Components/SideBar';
 import { categoryItems } from 'Components/Category';
 import LecturePreview from 'Components/LecturePreview';
-import { testSet } from '../Home/HomePresenter';
+import { items } from '../Home/HomePresenter';
 
 const Container = styled.div`
   width: 100%;
-  height: 100%;
+  height: 100vh;
   background-color: white;
   display: flex;
   @media only screen and (max-width: 600px) {
@@ -49,13 +49,13 @@ const LecturePresenter = ({
       <SideBar key={categoryId} current={categoryId} itemList={categoryItems} />
       <LectureContainer>
         <LectureGird>
-          {testSet.map(test => (
+          {items.map(test => (
             <LecturePreview
               key={test.id}
               id={test.id}
               title={test.title}
-              imageUrl={test.imageUrl}
-              date={test.date}
+              imageUrl={test.url}
+              date={test.endTime}
             />
           ))}
         </LectureGird>
