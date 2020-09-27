@@ -13,7 +13,7 @@ const Container = styled.div`
 
 export default class LectureContainer extends Component {
   constructor(props) {
-    super(props);
+    super();
     const {
       match: {
         params: { id },

@@ -6,18 +6,22 @@ import withLogin from './LoginHOC';
 
 const Container = styled.div`
   padding: 5px;
-  width: 150px;
   display: flex;
   align-items: center;
-  text-align: right;
-  justify-content: flex-end;
-  word-break: keep-all;
+  margin-left: 10px;
 `;
 
 const Icon = styled.img`
   height: 25px;
-  object-fit: contain;
   margin-right: 5px;
+`;
+
+const Span = styled.div`
+  word-break: keep-all;
+  font-weight: bold;
+  @media only screen and (max-width: 600px) {
+    font-size: 2vw;
+  }
 `;
 
 const imgUrl = require('assets/tempProfile.png');
@@ -28,7 +32,7 @@ const HeaderIcon = ({ onLogout }) => {
     <Container>
       <Icon src={imgUrl} alt="icon" />
       <Link to="/" onClick={onLogout}>
-        로그아웃
+        <Span>로그아웃</Span>
       </Link>
     </Container>
   );

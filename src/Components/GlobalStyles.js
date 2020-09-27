@@ -14,7 +14,7 @@ const globalStyles = createGlobalStyle`
     outline: none;
   }
   body{
-    font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: 'Roboto', sans-serif !important;
     font-size:12px;
     background-color:rgba(256, 256, 256, 1);
     color:black;

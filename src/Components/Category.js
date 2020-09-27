@@ -4,215 +4,97 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 const Container = styled.div`
-  --bg-opacity: 0.7;
-  width: 80%;
-  margin-top: 20px;
+  width: 50%;
+  height: 100%;
+  margin-top: 74px;
 `;
 
 const Grid = styled.div`
   display: grid;
-  grid-template-rows: repeat(auto-fit, minmax(auto, 1fr));
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-  border-top: 1px solid black;
-  border-left: 1px solid black;
+  grid-template-rows: repeat(auto-fill, minmax(auto, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(174px, 1fr));
+  grid-gap: 30px;
+  justify-content: center;
 `;
 
 const CategoryImage = styled.img.attrs(props => ({
   src: props.url,
 }))`
-  width: 80px;
-  height: 80px;
-  margin: 5px auto;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
 `;
 
 const CategoryContainer = styled.div`
-  background-color: rgba(238, 238, 238, var(--bg-opacity));
-  width: 100%;
-  height: 100%;
+  background-color: #ffffff;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border-bottom: 1px solid black;
-  border-right: 1px solid black;
+  border-radius: 30px;
+  width: 100%;
+  height: 174px;
+  box-shadow: 0 0 9px 0 rgba(164, 164, 164, 0.3);
   &:hover {
     cursor: pointer;
+    background-color: #dcecff;
   }
 `;
 
 const CategoryName = styled.span`
-  font-size: 14px;
-  height: 30px;
+  height: 25px;
   text-align: center;
   word-break: keep-all;
+  font-weight: 500;
+  font-size: 21px;
 `;
 
 const categoryItems = [
   {
     id: 1,
-    title: '01. 사업관리',
-    url: require('assets/categories/before/cate_1_before.jpg'),
-    hoverUrl: require('assets/categories/after/cate_1_after.jpg'),
+    title: '경영·회계·사무',
+    url: require('assets/Categories/cate_1.png'),
     hover: false,
   },
   {
     id: 2,
-    title: '02. 경영·회계·사무',
-    url: require('assets/categories/before/cate_2_before.jpg'),
-    hoverUrl: require('assets/categories/after/cate_1_after.jpg'),
+    title: '영업판매',
+    url: require('assets/Categories/cate_2.png'),
     hover: false,
   },
   {
     id: 3,
-    title: '03. 금융·보험',
-    url: require('assets/categories/before/cate_3_before.jpg'),
-    hoverUrl: require('assets/categories/after/cate_1_after.jpg'),
+    title: '보건·의료',
+    url: require('assets/Categories/cate_3.png'),
     hover: false,
   },
   {
     id: 4,
-    title: '04. 교육·자연·사회과학',
-    url: require('assets/categories/before/cate_4_before.jpg'),
-    hoverUrl: require('assets/categories/after/cate_1_after.jpg'),
+    title: '음식 서비스',
+    url: require('assets/Categories/cate_4.png'),
     hover: false,
   },
   {
     id: 5,
-    title: '05. 법률·경찰·소방·교도·국방',
-    url: require('assets/categories/before/cate_5_before.jpg'),
-    hoverUrl: require('assets/categories/after/cate_1_after.jpg'),
+    title: '기계',
+    url: require('assets/Categories/cate_5.png'),
     hover: false,
   },
   {
     id: 6,
-    title: '06. 보건·의료',
-    url: require('assets/categories/before/cate_6_before.jpg'),
-    hoverUrl: require('assets/categories/after/cate_1_after.jpg'),
+    title: '화학',
+    url: require('assets/Categories/cate_6.png'),
     hover: false,
   },
   {
     id: 7,
-    title: '07. 사회복지·종교',
-    url: require('assets/categories/before/cate_7_before.jpg'),
-    hoverUrl: require('assets/categories/after/cate_1_after.jpg'),
+    title: '전기·전자',
+    url: require('assets/Categories/cate_7.png'),
     hover: false,
   },
   {
     id: 8,
-    title: '08. 문화·예술·디자인·방송',
-    url: require('assets/categories/before/cate_8_before.jpg'),
-    hoverUrl: require('assets/categories/after/cate_1_after.jpg'),
-    hover: false,
-  },
-  {
-    id: 9,
-    title: '09. 운전·운송',
-    url: require('assets/categories/before/cate_9_before.jpg'),
-    hoverUrl: require('assets/categories/after/cate_1_after.jpg'),
-    hover: false,
-  },
-  {
-    id: 10,
-    title: '10. 영업판매',
-    url: require('assets/categories/before/cate_10_before.jpg'),
-    hoverUrl: require('assets/categories/after/cate_1_after.jpg'),
-    hover: false,
-  },
-  {
-    id: 11,
-    title: '11. 경비·청소',
-    url: require('assets/categories/before/cate_11_before.jpg'),
-    hoverUrl: require('assets/categories/after/cate_1_after.jpg'),
-    hover: false,
-  },
-  {
-    id: 12,
-    title: '12. 이용·숙박·여행·오락·스포츠',
-    url: require('assets/categories/before/cate_12_before.jpg'),
-    hoverUrl: require('assets/categories/after/cate_1_after.jpg'),
-    hover: false,
-  },
-  {
-    id: 13,
-    title: '13. 음식서비스',
-    url: require('assets/categories/before/cate_13_before.jpg'),
-    hoverUrl: require('assets/categories/after/cate_1_after.jpg'),
-    hover: false,
-  },
-  {
-    id: 14,
-    title: '14. 건설',
-    url: require('assets/categories/before/cate_14_before.jpg'),
-    hoverUrl: require('assets/categories/after/cate_1_after.jpg'),
-    hover: false,
-  },
-  {
-    id: 15,
-    title: '15. 기계',
-    url: require('assets/categories/before/cate_15_before.jpg'),
-    hoverUrl: require('assets/categories/after/cate_1_after.jpg'),
-    hover: false,
-  },
-  {
-    id: 16,
-    title: '16. 재료',
-    url: require('assets/categories/before/cate_16_before.jpg'),
-    hoverUrl: require('assets/categories/after/cate_1_after.jpg'),
-    hover: false,
-  },
-  {
-    id: 17,
-    title: '17. 화학',
-    url: require('assets/categories/before/cate_17_before.jpg'),
-    hoverUrl: require('assets/categories/after/cate_1_after.jpg'),
-    hover: false,
-  },
-  {
-    id: 18,
-    title: '18. 섬유·의복',
-    url: require('assets/categories/before/cate_18_before.jpg'),
-    hoverUrl: require('assets/categories/after/cate_1_after.jpg'),
-    hover: false,
-  },
-  {
-    id: 19,
-    title: '19. 전기·전자',
-    url: require('assets/categories/before/cate_19_before.jpg'),
-    hoverUrl: require('assets/categories/after/cate_1_after.jpg'),
-    hover: false,
-  },
-  {
-    id: 20,
-    title: '20. 정보통신',
-    url: require('assets/categories/before/cate_20_before.jpg'),
-    hoverUrl: require('assets/categories/after/cate_1_after.jpg'),
-    hover: false,
-  },
-  {
-    id: 21,
-    title: '21. 식품가공',
-    url: require('assets/categories/before/cate_21_before.jpg'),
-    hoverUrl: require('assets/categories/after/cate_1_after.jpg'),
-    hover: false,
-  },
-  {
-    id: 22,
-    title: '22. 인쇄·목재·가구·공예',
-    url: require('assets/categories/before/cate_22_before.jpg'),
-    hoverUrl: require('assets/categories/after/cate_1_after.jpg'),
-    hover: false,
-  },
-  {
-    id: 23,
-    title: '23. 환경·에너지·안전',
-    url: require('assets/categories/before/cate_23_before.jpg'),
-    hoverUrl: require('assets/categories/after/cate_1_after.jpg'),
-    hover: false,
-  },
-  {
-    id: 24,
-    title: '24. 농림어업',
-    url: require('assets/categories/before/cate_24_before.jpg'),
-    hoverUrl: require('assets/categories/after/cate_1_after.jpg'),
+    title: '정보통신',
+    url: require('assets/Categories/cate_8.png'),
     hover: false,
   },
 ];
@@ -253,7 +135,7 @@ const categoryItems = [
 
 class Category extends Component {
   constructor(props) {
-    super(props);
+    super();
     this.state = {
       id: '',
     };
@@ -278,10 +160,7 @@ class Category extends Component {
                 onMouseEnter={() => this.handleHover(category.id)}
                 onMouseLeave={() => this.handleUnHover()}
               >
-                <CategoryImage
-                  url={id === category.id ? category.hoverUrl : category.url}
-                  alt={category.title}
-                />
+                <CategoryImage url={category.url} alt={category.title} />
                 <CategoryName key={category.id}>{category.title}</CategoryName>
               </CategoryContainer>
             </Link>

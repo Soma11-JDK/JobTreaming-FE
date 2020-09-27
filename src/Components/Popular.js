@@ -3,14 +3,13 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const Container = styled.div`
-  :not(:last-child) {
-    margin-bottom: 50px;
-  }
+  width: 80%;
+  margin: auto;
 `;
 
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   grid-gap: 10px;
 `;
 

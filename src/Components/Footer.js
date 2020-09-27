@@ -9,10 +9,15 @@ const Container = styled.footer`
   border-top: 1px solid black;
   width: 100%;
   height: 150px;
-  background-color: lightgray;
+  background-color: #dcecff;
 `;
 
-const Logo = styled.div`
+const smallLogo = require('assets/Logo/Logo.png');
+const mediumLogo = require('assets/Logo/Logo@2x.png');
+const largeLogo = require('assets/Logo/Logo@3x.png');
+
+const Logo = styled.img`
+  width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
@@ -62,7 +67,10 @@ const Footer = () => {
   return (
     <Container>
       <Link to="/">
-        <Logo> JobTreaming</Logo>
+        <Logo
+          src={smallLogo}
+          srcSet={`${smallLogo} 300w, ${mediumLogo} 768w, ${largeLogo} 1280w`}
+        />
       </Link>
       <InfoContainer>
         <ShortCutContainer>

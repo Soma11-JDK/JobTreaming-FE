@@ -4,7 +4,6 @@ import styled from 'styled-components';
 
 const Container = styled.div`
   font-size: 12px;
-  border: 1px solid;
   background-color: white;
   display: flex;
   flex-direction: column;
