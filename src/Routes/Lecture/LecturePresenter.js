@@ -26,7 +26,7 @@ const CategoryTitleContainer = styled.div`
   margin-bottom: 10px;
 `;
 
-const LectureContainer = styled.div`
+const LectureViewContainer = styled.div`
   width: 100%;
   height: 100%;
   padding: 0px 20px;
@@ -47,7 +47,7 @@ const LecturePresenter = ({
     <CategoryTitleContainer>{categoryTitle}</CategoryTitleContainer>
     <Container>
       <SideBar key={categoryId} current={categoryId} itemList={categoryItems} />
-      <LectureContainer>
+      <LectureViewContainer>
         <LectureGird>
           {items.map(test => (
             <LecturePreview
@@ -59,7 +59,7 @@ const LecturePresenter = ({
             />
           ))}
         </LectureGird>
-      </LectureContainer>
+      </LectureViewContainer>
     </Container>
   </>
 );

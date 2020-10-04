@@ -1,9 +1,11 @@
-import React, { PureComponent } from 'react';
+import React, { useState } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
+import { categoryItems } from 'Components/Category';
 import HeaderIcon from './HeaderIcon';
+import Dropdown from './Dropdown';
 
 const Container = styled.div`
   width: 100%;
@@ -40,57 +42,92 @@ const HeaderRight = styled.div`
   font-size: 16px;
   margin-right: 20px;
   align-items: center;
+  height: 100%;
+`;
+
+const NavItem = styled.li`
+  display: flex;
+  align-items: center;
+  height: 100%;
 `;
 
 const Span = styled.div`
   word-break: keep-all;
   font-weight: bold;
   margin-left: 10px;
+  height: 100%;
+  display: flex;
+  align-items: center;
   @media only screen and (max-width: 600px) {
     font-size: 2vw;
   }
 `;
 
-class Header extends PureComponent {
-  render() {
-    const { logged, onLogout } = this.props;
+const SLink = styled(Link)`
+  height: 100%;
+`;
 
-    return (
-      <Container>
-        <HeaderLeft>
-          <Link to="/">
-            <Logo
-              src={largeLogo}
-              srcSet={`${smallLogo} 300w, ${mediumLogo} 768w, ${largeLogo} 1280w`}
-            />
-          </Link>
-        </HeaderLeft>
+const Header = ({ logged, onLogout }) => {
+  const [dropdown, setDropdown] = useState(false);
 
-        <HeaderRight>
-          <Link to="/">
-            <Span>카테고리</Span>
-          </Link>
-          <Link to="/petition">
+  const onMouseEnter = () => {
+    setDropdown(true);
+  };
+
+  const onMouseLeave = () => {
+    setDropdown(false);
+  };
+
+  return (
+    <Container>
+      <HeaderLeft>
+        <Link to="/">
+          <Logo
+            src={largeLogo}
+            srcSet={`${smallLogo} 300w, ${mediumLogo} 768w, ${largeLogo} 1280w`}
+          />
+        </Link>
+      </HeaderLeft>
+
+      <HeaderRight>
+        <NavItem
+          onClick={onMouseLeave}
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}
+        >
+          <SLink to="/category/1">
+            <Span> 카테고리 </Span>
+          </SLink>
+          {dropdown && <Dropdown categoryItems={categoryItems} />}
+        </NavItem>
+        <NavItem>
+          <SLink to="/petition">
             <Span>청원하기</Span>
-          </Link>
-          <Link to="/">
+          </SLink>
+        </NavItem>
+        <NavItem>
+          <SLink to="/">
             <Span>나의 강의장</Span>
-          </Link>
-          <Link to="/">
+          </SLink>
+        </NavItem>
+        <NavItem>
+          <SLink to="/">
             <Span>알림</Span>
-          </Link>
+          </SLink>
+        </NavItem>
+        <NavItem>
           {logged ? (
             <HeaderIcon onLogout={onLogout} />
           ) : (
-            <Link to="/login">
+            <SLink to="/login">
               <Span>로그인 / 회원가입</Span>
-            </Link>
+            </SLink>
           )}
-        </HeaderRight>
-      </Container>
-    );
-  }
-}
+        </NavItem>
+      </HeaderRight>
+    </Container>
+  );
+};
 
 Header.propTypes = {
   logged: PropTypes.bool.isRequired,

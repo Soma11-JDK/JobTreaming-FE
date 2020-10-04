@@ -16,7 +16,7 @@ const Layout = styled.div`
 
 class App extends Component {
   constructor(props) {
-    super(props);
+    super();
     this.state = {
       logged: false,
       onLogin: this.onLogin,
