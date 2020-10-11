@@ -8,6 +8,7 @@ import Category from 'Components/Category';
 import LecturePreview from 'Components/LecturePreview';
 import Popular from 'Components/Popular';
 import PopularSlider from 'Components/PopularSlider';
+import Advertise from 'Components/Advertise';
 
 const Container = styled.div`
   width: 100%;
@@ -215,6 +216,9 @@ const HomePresenter = () => (
             </Popular> */}
         </BelowContainer>
       </DividerContainer>
+
+      {/* 광고 */}
+      <Advertise />
     </Container>
   </>
 );
