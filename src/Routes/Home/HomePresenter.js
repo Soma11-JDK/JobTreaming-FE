@@ -8,6 +8,7 @@ import Category from 'Components/Category';
 import Popular from 'Components/Popular';
 import PopularSlider from 'Components/PopularSlider';
 import Advertise from 'Components/Advertise';
+import Subtitle from 'Components/Subtitle';
 
 const Container = styled.div`
   width: 100%;
@@ -81,19 +82,6 @@ const TodayStreamingContainer = styled.div`
   align-items: center;
 `;
 
-const TodayStreamingLeft = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const TodayStreamingSpan = styled.div`
-  font-size: 36px;
-  font-weight: bold;
-  @media only screen and (max-width: 600px) {
-    font-size: 20px;
-  }
-`;
-
 const TodayStreamingMore = styled.div`
   font-size: 21px;
   font-weight: 500;
@@ -103,12 +91,6 @@ const TodayStreamingMore = styled.div`
   @media only screen and (max-width: 600px) {
     font-size: 15px;
   }
-`;
-
-const PolygonUrl = require('assets/Polygon 3.png');
-
-const PolygonIcon = styled.img`
-  margin-right: 10px;
 `;
 
 const items = [
@@ -193,10 +175,7 @@ const HomePresenter = () => (
       <DividerContainer className="below">
         <BelowContainer>
           <TodayStreamingContainer>
-            <TodayStreamingLeft>
-              <PolygonIcon src={PolygonUrl} />
-              <TodayStreamingSpan> 오늘의 잡트리밍</TodayStreamingSpan>
-            </TodayStreamingLeft>
+            <Subtitle title="오늘의 잡트리밍" />
             <TodayStreamingMore>전체 보기</TodayStreamingMore>
           </TodayStreamingContainer>
           {/* 인기 강연 포스터 */}
