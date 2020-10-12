@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 import SideBar from 'Components/SideBar';
-import { categoryItems } from 'Components/Category';
 import LecturePreview from 'Components/LecturePreview';
+import { categoryItems } from 'Components/Category';
 import { items } from '../Home/HomePresenter';
 
 const Container = styled.div`

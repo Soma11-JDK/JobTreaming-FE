@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 
 import Slider from 'Components/Slider';
 import Category from 'Components/Category';
-import LecturePreview from 'Components/LecturePreview';
 import Popular from 'Components/Popular';
 import PopularSlider from 'Components/PopularSlider';
 import Advertise from 'Components/Advertise';
