@@ -2,59 +2,62 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import CurrencyFormat from './CurrencyFormat';
+
 const Container = styled.div`
   width: 100%;
   height: 100%;
 `;
 
+const ImageContainer = styled.div`
+  height: auto;
+  position: relative;
+`;
+
 const Heart = styled.img`
   cursor: pointer;
-  z-index: 10;
+  z-index: 1;
   position: absolute;
   width: auto;
   height: auto;
   top: 0;
-  margin-top: 0.5%;
-  margin-left: 1vw;
-`;
-
-const ImageContainer = styled.div`
-  height: auto;
+  margin-top: 1vw;
+  margin-left: 1.5vw;
 `;
 
 const Image = styled.img`
   width: 100%;
+  min-height: 105px;
 `;
 
 const InfoTopContainer = styled.div`
   height: 30px;
+  max-height: 30px;
 `;
 
 const InfoContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 17px;
   align-content: center;
-
-  ${InfoTopContainer} {
-    display: flex;
-  }
 `;
 
 const InfoMidContainer = styled.div`
   display: flex;
-  height: 56px;
+  display: -webkit-flex;
+  min-height: 80px;
+  height: fit-content;
 `;
 
 const InfoBottomContainer = styled.div`
   display: flex;
+  display: -webkit-flex;
   height: 30px;
+  align-items: center;
 `;
 
 const Span = styled.span.attrs(props => ({
-  role: 'img',
+  role: props.role,
 }))`
   display: flex;
+  display: -webkit-flex;
   font-size: 22px;
   color: #000000;
   word-break: keep-all;
@@ -71,8 +74,7 @@ const Span = styled.span.attrs(props => ({
   .price {
     font-size: 1.2vw;
     opacity: 0.5;
-    flex: 1;
-    margin-right: 5px;
+    flex: 2;
     text-decoration: line-through;
   }
   .salePercentage {
@@ -81,7 +83,7 @@ const Span = styled.span.attrs(props => ({
     flex: 1;
   }
   .salePrice {
-    font-size: 1.8vw;
+    font-size: 1.6vw;
     font-weight: bold;
     flex: 3;
     justify-content: flex-end;
@@ -114,8 +116,8 @@ const LecturePreview = ({
 }) => (
   <Container>
     <ImageContainer>
-      <Image src={imageUrl} />
       <Heart src={heartUrl} />
+      <Image src={imageUrl} />
     </ImageContainer>
     <InfoContainer>
       <InfoTopContainer>
@@ -137,10 +139,12 @@ const LecturePreview = ({
       </InfoMidContainer>
       <InfoBottomContainer>
         <Span>
-          <Span className="price">{price}</Span>
+          <Span className="price">
+            <CurrencyFormat price={price} />
+          </Span>
           <Span className="salePercentage">{salePercentage}%</Span>
           <Span className="salePrice">
-            {(price * (100 - salePercentage)) / 100}
+            <CurrencyFormat price={price} salePercentage={salePercentage} />
           </Span>
         </Span>
       </InfoBottomContainer>

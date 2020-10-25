@@ -10,8 +10,8 @@ import Footer from './Footer';
 const Layout = styled.div`
   display: flex;
   width: 100%;
-  min-height: 100%;
-  flex-flow: row wrap;
+  /* 화면 전체에서 헤더와 푸터 높이를 빼줌 */
+  min-height: calc(100vh - 220px);
 `;
 
 class App extends Component {
@@ -63,8 +63,8 @@ class App extends Component {
     const { logged, onLogin, onLogout } = this.state;
     return (
       <Store.Provider value={this.state}>
+        <Header logged={logged} onLogout={onLogout} />
         <Layout>
-          <Header logged={logged} onLogout={onLogout} />
           <Router />
           <GlobalStyles />
         </Layout>

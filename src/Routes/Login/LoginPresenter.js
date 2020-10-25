@@ -8,7 +8,7 @@ import { loginApi } from 'api';
 
 const Conatainer = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 100%;
   align-items: center;
   display: flex;
   flex-flow: column wrap;

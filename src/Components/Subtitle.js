@@ -16,9 +16,6 @@ const PolygonIcon = styled.img`
 const Span = styled.div`
   font-size: 36px;
   font-weight: bold;
-  @media only screen and (max-width: 600px) {
-    font-size: 20px;
-  }
 `;
 
 const Subtitle = ({ title }) => {

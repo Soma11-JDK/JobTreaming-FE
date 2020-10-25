@@ -51,6 +51,13 @@ const NavItem = styled.li`
   height: 100%;
 `;
 
+const DropdownContainer = styled.div`
+  width: 169px;
+  height: 100%;
+  top: 60px;
+  position: absolute;
+`;
+
 const Span = styled.div`
   word-break: keep-all;
   font-weight: bold;
@@ -98,7 +105,11 @@ const Header = ({ logged, onLogout }) => {
           <SLink to="/category/1">
             <Span> 카테고리 </Span>
           </SLink>
-          {dropdown && <Dropdown categoryItems={categoryItems} />}
+          {dropdown && (
+            <DropdownContainer>
+              <Dropdown categoryItems={categoryItems} />
+            </DropdownContainer>
+          )}
         </NavItem>
         <NavItem>
           <SLink to="/petition">
