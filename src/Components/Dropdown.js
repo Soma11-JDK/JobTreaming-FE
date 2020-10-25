@@ -6,9 +6,9 @@ import { Link } from 'react-router-dom';
 const Container = styled.ul`
   border-radius: 10px;
   box-shadow: 0 0 9px 0 rgba(232, 232, 232, 0.25);
-  width: 169px;
-  top: 60px;
+  width: 140px;
   position: absolute;
+  z-index: 3;
   list-style: none;
   text-align: start;
   background-color: #ffffff;

@@ -27,10 +27,12 @@ const Heart = styled.img`
 
 const Image = styled.img`
   width: 100%;
+  min-height: 105px;
 `;
 
 const InfoTopContainer = styled.div`
   height: 30px;
+  max-height: 30px;
 `;
 
 const InfoContainer = styled.div`
@@ -40,7 +42,8 @@ const InfoContainer = styled.div`
 const InfoMidContainer = styled.div`
   display: flex;
   display: -webkit-flex;
-  height: 56px;
+  min-height: 80px;
+  height: fit-content;
 `;
 
 const InfoBottomContainer = styled.div`
