@@ -122,12 +122,13 @@ const Span = styled.span`
 
 const heartUrl = require('assets/Heart/Heart.png');
 
-const LecturePresenter = ({
-  // result,
-  // loading,
-  // error,
-  categoryId,
-  categoryTitle,
+const SearchPresenter = ({
+  searchResults,
+  loading,
+  error,
+  searchTerm,
+  handleSubmit,
+  updateTerm,
 }) => {
   const [dropdownCategory, setDropdown] = useState(false);
   const [dropdownSubCategory, setSubDropdown] = useState(false);
@@ -145,7 +146,7 @@ const LecturePresenter = ({
     <>
       <Container>
         <CategoryTitleContainer>
-          <Subtitle title={categoryTitle} />
+          <Subtitle title={searchTerm} />
         </CategoryTitleContainer>
         <MenuContainer>
           <ListContainer
@@ -153,7 +154,7 @@ const LecturePresenter = ({
             onMouseLeave={onMouseLeave}
           >
             <Menu>
-              <Span fontSize="16px"> {categoryTitle} </Span>
+              <Span fontSize="16px"> &apos{searchTerm}&apos 검색결과 </Span>
             </Menu>
             {dropdownCategory && <Dropdown categoryItems={categoryItems} />}
           </ListContainer>
@@ -224,8 +225,19 @@ const LecturePresenter = ({
   );
 };
 
-LecturePresenter.propTypes = {
-  categoryId: PropTypes.number.isRequired,
-  categoryTitle: PropTypes.string.isRequired,
+SearchPresenter.propTypes = {
+  searchResults: PropTypes.arrayOf(PropTypes.node),
+  loading: PropTypes.bool.isRequired,
+  searchTerm: PropTypes.string,
+  handleSubmit: PropTypes.func.isRequired,
+  updateTerm: PropTypes.func.isRequired,
+  error: PropTypes.string,
 };
-export default LecturePresenter;
+
+SearchPresenter.defaultProps = {
+  searchResults: null,
+  searchTerm: '',
+  error: null,
+};
+
+export default SearchPresenter;
