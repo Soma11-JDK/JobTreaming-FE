@@ -24,6 +24,7 @@ const HeaderLeft = styled.div`
   margin: 0 20px;
   display: flex;
   white-space: nowrap;
+  align-items: center;
 `;
 
 const smallLogo = require('assets/Logo/Logo.png');
@@ -70,12 +71,30 @@ const Span = styled.div`
   }
 `;
 
+const searchIcon = require('assets/fe:search.png');
+
+const Input = styled.input`
+  background: #e3e3e3 url(${props => props.searchIconUrl}) center right
+    no-repeat;
+  background-origin: content-box;
+  align-items: center;
+  border-radius: 66px;
+  border: 1px solid #e3e3e3;
+  padding-left: 20px;
+  padding-right: 24px;
+  width: 25vw;
+  height: 44px;
+  border-radius: 66px;
+  display: ${props => (props.current ? 'none' : 'default')};
+`;
+
 const SLink = styled(Link)`
   height: 100%;
 `;
 
-const Header = ({ logged, onLogout }) => {
+const Header = ({ location: { pathname }, logged, onLogout }) => {
   const [dropdown, setDropdown] = useState(false);
+  const [searchFocus, setSearchFocus] = useState(false);
 
   const onMouseEnter = () => {
     setDropdown(true);
@@ -83,6 +102,14 @@ const Header = ({ logged, onLogout }) => {
 
   const onMouseLeave = () => {
     setDropdown(false);
+  };
+
+  const onFocusEnter = () => {
+    setSearchFocus(true);
+  };
+
+  const onFocusOut = () => {
+    setSearchFocus(false);
   };
 
   return (
@@ -94,6 +121,14 @@ const Header = ({ logged, onLogout }) => {
             srcSet={`${smallLogo} 300w, ${mediumLogo} 768w, ${largeLogo} 1280w`}
           />
         </Link>
+        <Input
+          current={pathname === '/'}
+          type="text"
+          placeholder="검색하기"
+          onFocus={onFocusEnter}
+          onBlur={onFocusOut}
+          searchIconUrl={searchFocus ? '' : searchIcon}
+        />
       </HeaderLeft>
 
       <HeaderRight>
@@ -143,6 +178,9 @@ const Header = ({ logged, onLogout }) => {
 Header.propTypes = {
   logged: PropTypes.bool.isRequired,
   onLogout: PropTypes.func.isRequired,
+  location: PropTypes.shape({
+    pathname: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
-export default Header;
+export default withRouter(Header);
