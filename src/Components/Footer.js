@@ -3,11 +3,10 @@ import styled from 'styled-components';
 import { Link, withRouter } from 'react-router-dom';
 
 const Container = styled.footer`
-  display: flex;
   padding: 20px;
   border-top: 1px solid black;
   width: 100%;
-  height: 150px;
+  height: 100%;
   background-color: #dcecff;
 `;
 
@@ -16,36 +15,51 @@ const mediumLogo = require('assets/Logo/Logo@2x.png');
 const largeLogo = require('assets/Logo/Logo@3x.png');
 
 const Logo = styled.img`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
+  height: 25px;
   object-fit: contain;
   margin-right: 10px;
 `;
 
 const InfoContainer = styled.div`
   display: flex;
-  width: 100%;
+  width: 85%;
   flex-direction: column;
   margin-left: 10px;
 `;
 
+const InfoTopContainer = styled.div`
+  display: flex;
+`;
+
 const ShortCutContainer = styled.div`
+  width: 100%;
   height: 14px;
+  display: flex;
+  justify-content: flex-end;
 `;
 
 const ShortCut = styled.li`
   :not(:first-child) {
-    margin-left: 10px;
+    margin-left: 7px;
   }
   list-style: none;
   float: left;
   font-size: 14px;
 `;
 
+const CompanyName = styled.address`
+  margin: 20px 0px;
+  font-size: 22px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #000000;
+`;
+
 const AddressName = styled.address`
-  margin-top: 20px;
   font-size: 14px;
 `;
 
@@ -62,23 +76,60 @@ const AddressList = styled.li`
   float: left;
 `;
 
+const CopyWriteContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const smallCopyImg = require('assets/CopyWrite/CopyWrite.png');
+const mediumCopyImg = require('assets/CopyWrite/CopyWrite.png');
+const largeCopyImg = require('assets/CopyWrite/CopyWrite.png');
+
+const CopyWriteImage = styled.img`
+  object-fit: contain;
+`;
+
+const CopyWriteText = styled.span`
+  font-size: 16px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #868686;
+  margin-left: 10px;
+`;
+
 const Footer = () => {
   return (
     <Container>
-      <Link to="/">
-        <Logo
-          src={smallLogo}
-          srcSet={`${smallLogo} 300w, ${mediumLogo} 768w, ${largeLogo} 1280w`}
-        />
-      </Link>
       <InfoContainer>
-        <ShortCutContainer>
-          <ShortCut> 개인정보처리방침 </ShortCut>
-          <ShortCut> 이용약관 </ShortCut>
-          <ShortCut> FAQ </ShortCut>
-          <ShortCut> 광고 문의 </ShortCut>
-          <ShortCut> 고객 센터 </ShortCut>
-        </ShortCutContainer>
+        <InfoTopContainer>
+          <Link to="/">
+            <Logo
+              src={smallLogo}
+              srcSet={`${smallLogo} 300w, ${mediumLogo} 768w, ${largeLogo} 1280w`}
+            />
+          </Link>
+
+          <ShortCutContainer>
+            <ShortCut> 개인정보처리방침 </ShortCut>
+            <ShortCut> | </ShortCut>
+            <ShortCut> 이용약관 </ShortCut>
+            <ShortCut> | </ShortCut>
+            <ShortCut> FAQ </ShortCut>
+            <ShortCut> | </ShortCut>
+            <ShortCut> 광고 문의 </ShortCut>
+            <ShortCut> | </ShortCut>
+            <ShortCut> 고객 센터 </ShortCut>
+          </ShortCutContainer>
+        </InfoTopContainer>
+        <CompanyName>(주)잡트리밍</CompanyName>
         <AddressName>
           <AddressList>대표자명: jdk</AddressList>
           <AddressList>상호명: jdk</AddressList>
@@ -87,6 +138,13 @@ const Footer = () => {
           <AddressList>이메일: sw11jdk@jdk.com</AddressList>
         </AddressEmail>
       </InfoContainer>
+      <CopyWriteContainer>
+        <CopyWriteImage
+          src={smallCopyImg}
+          srcSet={`${smallCopyImg} 300w, ${mediumCopyImg} 768w, ${largeCopyImg} 1280w`}
+        />
+        <CopyWriteText>Jobtreaming All Rights Reserved</CopyWriteText>
+      </CopyWriteContainer>
     </Container>
   );
 };
