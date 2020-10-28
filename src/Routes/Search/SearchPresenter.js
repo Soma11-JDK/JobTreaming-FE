@@ -142,11 +142,12 @@ const SearchPresenter = ({
     setDropdown(false);
     setSubDropdown(false);
   };
+  const searchTitle = `'${searchTerm}' 검색결과`;
   return (
     <>
       <Container>
         <CategoryTitleContainer>
-          <Subtitle title={searchTerm} />
+          <Subtitle title={searchTitle} />
         </CategoryTitleContainer>
         <MenuContainer>
           <ListContainer
@@ -154,7 +155,7 @@ const SearchPresenter = ({
             onMouseLeave={onMouseLeave}
           >
             <Menu>
-              <Span fontSize="16px"> &apos{searchTerm}&apos 검색결과 </Span>
+              <Span fontSize="16px"> 카테고리 </Span>
             </Menu>
             {dropdownCategory && <Dropdown categoryItems={categoryItems} />}
           </ListContainer>

@@ -8,6 +8,10 @@ const globalStyles = createGlobalStyle`
   a{
     text-decoration:none;
     color:inherit;
+    :hover{
+      color: #5570ff;
+      text-decoration:none;
+    }
   }
   *{
     box-sizing:border-box;
