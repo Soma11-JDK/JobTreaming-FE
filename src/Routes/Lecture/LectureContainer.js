@@ -28,7 +28,6 @@ export default class LectureContainer extends Component {
   }
 
   componentDidMount() {
-    window.scrollTo(0, 0);
     const {
       match: {
         params: { id },
