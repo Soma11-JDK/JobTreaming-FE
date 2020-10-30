@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 
 import { categoryItems } from 'Components/Category';
 import { categoryApi } from 'api';
+import axios from 'axios';
 import HomePresenter from './HomePresenter';
-
 /* 추후 활용 가능성 존재
 categoryItemList.forEach((item, idx) => {
   // eslint-disable-next-line no-param-reassign
@@ -19,13 +19,13 @@ export default class HomeContainer extends Component {
 
   async componentDidMount() {
     try {
-      const { body } = await categoryApi.categoryList();
+      const { data: result } = await categoryApi.categoryList();
       this.setState({
-        result: body,
+        result: JSON.stringify({ result }),
       });
-      console.log(body);
+      console.log(`테스트: ${JSON.stringify({ result })}`);
     } catch {
-      this.setState({ error: "Can't find petition results." });
+      this.setState({ error: "Can't find category results." });
     } finally {
       this.setState({ loading: false });
     }
