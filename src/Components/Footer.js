@@ -1,9 +1,18 @@
+/*
+=============================================================
+파일명:
+프로그램명:
+설명:
+작성자:
+작성일: 
+=============================================================
+*/
 import React from 'react';
 import styled from 'styled-components';
 import { Link, withRouter } from 'react-router-dom';
 
 const Container = styled.footer`
-  padding: 20px;
+  padding: 40px;
   border-top: 1px solid black;
   width: 100%;
   height: 100%;
@@ -22,7 +31,7 @@ const Logo = styled.img`
 
 const InfoContainer = styled.div`
   display: flex;
-  width: 85%;
+  width: 100%;
   flex-direction: column;
   margin-left: 10px;
 `;

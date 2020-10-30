@@ -53,6 +53,7 @@ class Login extends Component {
       id: '',
       name: '',
       provider: '',
+      token: '',
     };
   }
 
@@ -60,7 +61,7 @@ class Login extends Component {
   handleTestLogin = async () => {
     try {
       const { history } = this.props;
-      await loginApi.socialLogin();
+      await loginApi.testLogin();
       console.log('로그인 성공입니다.');
       this.setState({
         id: 'test',
@@ -101,7 +102,7 @@ class Login extends Component {
   };
 
   render() {
-    const { id, name, provider } = this.state;
+    const { id, name, provider, token } = this.state;
     const { handleTestLogin } = this;
 
     return (

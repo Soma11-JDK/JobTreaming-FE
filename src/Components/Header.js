@@ -90,6 +90,7 @@ const Input = styled.input`
 
 const SLink = styled(Link)`
   height: 100%;
+  text-decoration: none;
 `;
 
 const Header = ({ location: { pathname }, logged, onLogout }) => {
@@ -157,7 +158,7 @@ const Header = ({ location: { pathname }, logged, onLogout }) => {
           </SLink>
         </NavItem>
         <NavItem>
-          <SLink to="/">
+          <SLink to="/write">
             <Span>알림</Span>
           </SLink>
         </NavItem>

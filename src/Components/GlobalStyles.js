@@ -5,13 +5,12 @@ import 'slick-carousel/slick/slick-theme.css';
 
 const globalStyles = createGlobalStyle`
   ${reset};
-  a{
+  a, a:hover, a:active, a:visited, a:focus {
     text-decoration:none;
     color:inherit;
     :hover{
       color: #5570ff;
-      text-decoration:none;
-    }
+     }
   }
   *{
     box-sizing:border-box;

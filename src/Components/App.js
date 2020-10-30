@@ -8,7 +8,6 @@ import Store from '../Store/Store';
 import Footer from './Footer';
 
 const Layout = styled.div`
-  display: flex;
   width: 100%;
   /* 화면 전체에서 헤더와 푸터 높이를 빼줌 */
   min-height: calc(100vh - 220px);

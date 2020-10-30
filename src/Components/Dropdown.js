@@ -14,18 +14,17 @@ const Container = styled.ul`
   background-color: #ffffff;
 `;
 
-const ListItem = styled.li`
-  &:hover {
-    background-color: #dcecff;
-  }
-`;
+const ListItem = styled.li``;
 
 const SLink = styled(Link)`
+  background-color: #ffffff;
+  &:hover {
+    background-color: #ccd9ff;
+  }
   word-break: keep-all;
   display: block;
   height: 100%;
   width: 100%;
-  text-decoration: none;
   color: #000000;
   text-align: end;
   padding: 12px;

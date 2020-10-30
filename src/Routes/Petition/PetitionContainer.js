@@ -20,10 +20,11 @@ export default class extends Component {
   async componentDidMount() {
     const { pageNumber } = this.state;
     try {
-      const { body } = await petitionApi.petitionList(pageNumber);
+      const { data: body } = await petitionApi.petitionList(pageNumber);
       this.setState({
-        result: body,
+        result: JSON.stringify(body),
       });
+      console.table(`respone: ${JSON.stringify(body)}`);
     } catch {
       this.setState({ error: "Can't find petition results." });
     } finally {
@@ -71,7 +72,7 @@ export default class extends Component {
 
   render() {
     const { pageNumber, result, error, loading, title, contents } = this.state;
-    console.log(result);
+    console.log(`결과: ${{ result }}`);
     return (
       <PetionPresenter
         pageNumber={pageNumber}
