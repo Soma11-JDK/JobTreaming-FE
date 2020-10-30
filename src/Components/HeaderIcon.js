@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import withLogin from './LoginHOC';
 
@@ -26,7 +27,6 @@ const Span = styled.div`
 
 const imgUrl = require('assets/tempProfile.png');
 
-// eslint-disable-next-line react/prop-types
 const HeaderIcon = ({ onLogout }) => {
   return (
     <Container>
@@ -36,6 +36,10 @@ const HeaderIcon = ({ onLogout }) => {
       </Link>
     </Container>
   );
+};
+
+HeaderIcon.propTypes = {
+  onLogout: PropTypes.func.isRequired,
 };
 
 export default HeaderIcon;
