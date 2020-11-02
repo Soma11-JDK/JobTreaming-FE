@@ -137,17 +137,19 @@ const LecturePreview = ({
           <Span className="title">{title}</Span>
         </Span>
       </InfoMidContainer>
-      <InfoBottomContainer>
-        <Span>
-          <Span className="price">
-            <CurrencyFormat price={price} />
+      {price !== 0 && (
+        <InfoBottomContainer>
+          <Span>
+            <Span className="price">
+              <CurrencyFormat price={price} />
+            </Span>
+            <Span className="salePercentage">{salePercentage}%</Span>
+            <Span className="salePrice">
+              <CurrencyFormat price={price} salePercentage={salePercentage} />
+            </Span>
           </Span>
-          <Span className="salePercentage">{salePercentage}%</Span>
-          <Span className="salePrice">
-            <CurrencyFormat price={price} salePercentage={salePercentage} />
-          </Span>
-        </Span>
-      </InfoBottomContainer>
+        </InfoBottomContainer>
+      )}
     </InfoContainer>
   </Container>
 );
@@ -155,13 +157,18 @@ const LecturePreview = ({
 LecturePreview.propTypes = {
   id: PropTypes.number.isRequired,
   imageUrl: PropTypes.string.isRequired,
-  heartUrl: PropTypes.string.isRequired,
+  heartUrl: PropTypes.string,
   title: PropTypes.string.isRequired,
   expert: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
   endTime: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
-  salePercentage: PropTypes.number.isRequired,
+  price: PropTypes.number,
+  salePercentage: PropTypes.number,
 };
 
+LecturePreview.defaultProps = {
+  heartUrl: '',
+  price: 0,
+  salePercentage: 0,
+};
 export default LecturePreview;

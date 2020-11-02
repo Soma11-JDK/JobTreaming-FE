@@ -5,12 +5,6 @@ import styled from 'styled-components';
 import { categoryItems } from 'Components/Category';
 import LecturePresenter from './LecturePresenter';
 
-const Container = styled.div`
-  width: 100%;
-  height: 100vh;
-  font-size: 100px;
-`;
-
 export default class LectureContainer extends Component {
   constructor(props) {
     super();

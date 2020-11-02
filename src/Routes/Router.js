@@ -9,6 +9,7 @@ import {
   Search,
   Write,
   ScrollToTop,
+  MyLecture,
 } from './index';
 
 export default () => (
@@ -20,6 +21,10 @@ export default () => (
       <Route path="/petition" component={Petition} />
       <Route path="/search" component={Search} />
       <Route path="/write" component={Write} />
+      <Route path="/mylectureroom/:mylecture" component={MyLecture} />
+      <Route path="/mylectureroom/:mylikelecture" component={MyLecture} />
+      <Route path="/mylectureroom/:myreview" component={MyLecture} />
+      <Route path="/mylectureroom/:myquestion" component={MyLecture} />
       <Redirect from="*" to="/" />
     </Switch>
   </ScrollToTop>
