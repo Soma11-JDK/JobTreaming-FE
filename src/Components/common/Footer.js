@@ -12,6 +12,7 @@ import styled from 'styled-components';
 import { Link, withRouter } from 'react-router-dom';
 
 const Container = styled.footer`
+  margin-top: 120px;
   padding: 40px;
   border-top: 1px solid black;
   width: 100%;

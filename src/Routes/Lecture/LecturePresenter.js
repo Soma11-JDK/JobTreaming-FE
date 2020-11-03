@@ -77,7 +77,7 @@ const PetitionLinkContainer = styled.div`
   display: -webkit-flex;
   width: 100%;
   height: 172px;
-  margin: 120px 0 120px 0;
+  margin-top: 120px;
   padding: 0 20px;
   background-color: #cbd3ff;
   justify-content: space-around;

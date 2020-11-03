@@ -90,7 +90,6 @@ const ReviewContainer = styled.div`
   width: 100%;
   height: 100%;
   background-color: #ccd9ff;
-  margin-bottom: 125px;
   display: flex;
   padding: 20px;
   align-items: center;
