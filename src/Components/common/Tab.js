@@ -43,6 +43,7 @@ const Span = styled.span`
   text-align: center;
   color: ${props => (props.current ? '#3918ff' : '#000000')};
   opacity: ${props => (props.current ? '1' : '0.5')};
+  word-break: keep-all;
 `;
 
 const Tab = ({ tabInfo, nowTab, nowPage }) => {

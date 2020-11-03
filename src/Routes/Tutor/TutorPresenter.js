@@ -1,5 +1,5 @@
 /* eslint-disable global-require */
-import React from 'react';
+import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 
 import Subtitle from 'Components/common/Subtitle';
@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import HorizontalLecture from 'Components/HorizontalLecture';
 import HorizontalReview from 'Components/HorizontalReview';
 import RadarChart from 'Components/RadarChart';
+import Dropdown from 'Components/common/Dropdown';
 
 import { items } from '../Home/HomePresenter';
 
@@ -197,13 +198,13 @@ const StatisticContainer = styled.div`
   ${marginRight}
 `;
 
-const statisticLeftContainer = styled.div`
+const StatisticLeftContainer = styled.div`
   display: flex;
   display: -webkit-flex;
   flex-direction: column;
   justify-content: space-around;
   height: 100%;
-  width: 60%;
+  width: 40%;
 `;
 
 const ScoreLineContainer = styled.div`
@@ -230,6 +231,46 @@ const ScoreBar = styled.div`
 `;
 
 const statisticRightContainer = styled.div``;
+
+const MenuContainer = styled.div`
+  display: flex;
+  display: -webkit-flex;
+  width: 100%;
+  ${marginTop}
+`;
+
+const ListContainer = styled.div`
+  height: 100%;
+`;
+
+const Menu = styled.div`
+  width: 140px;
+  height: 40px;
+  border: 1px solid black;
+  border-radius: 999px;
+  margin-right: 10px;
+  display: flex;
+  display: -webkit-flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  background-color: ${props => props.bgColor};
+`;
+
+const MoreContainer = styled.div`
+  width: 100%;
+  height: 80px;
+  background-color: #dfdfdf;
+  border-radius: 3px;
+  color: #5570ff;
+  font-size: 28px;
+  display: flex;
+  display: -webkit-flex;
+  font-weight: 300;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+`;
 
 const reviewItems = [
   {
@@ -294,7 +335,26 @@ const reviewItems = [
 const tempText =
   '저는 서울 3류라고 말하는 대학교를 졸업하고 벤처기업을 거쳐 삼성SDS에 신입공채를 통해 입사하였습니다.9 년의 SDS에서의 IT서비스업 경험을 토대로 디지털기업 현대카드에 경력 이직하여 다양한 개발을 하고 있습니다. 저는 삼성SDS에 재직할 당시 3년이상 삼성직업멘토링 에 참가하였고, 이후 다양한 곳(온/오프라인)에서 만난 멘티친구들과 인생의 선배와 후배로 인연을 이어가고 있습니다. 멘토라서, 멘토로서 이야기 하기 보다는 선배와 후배로서, 대한민국에서 직장생활을 하는 사람 또는 IT를 하는 사람이라는 공동체 의식속에서 이야기하고 서로가 서로에게 도움이 되면 좋겠다고 생각하는 사람입니다. 어떤 이야기든 서로의 생각을 나눌 수 있었으면 좋겠습니다. 저와 강의에서 만나 인생의 로드맵을 함께 그려보아요!';
 
+const reviewCategory = [
+  {
+    id: 1,
+    title: '최신순',
+  },
+  {
+    id: 2,
+    title: '베스트순',
+  },
+];
 const TutorPresenter = ({ name, param }) => {
+  const [dropdownCategory, setDropdown] = useState(false);
+
+  const onMouseEnter = () => {
+    setDropdown(true);
+  };
+
+  const onMouseLeave = () => {
+    setDropdown(false);
+  };
   return (
     <Container marginTopValue="80px" marginBottomValue="80px">
       <TutorContainer marginBottomValue="60px">
@@ -425,84 +485,139 @@ const TutorPresenter = ({ name, param }) => {
         </LectureViewContainer>
       )}
       {param === 'review' && (
-        <StatisticContainer
-          marginTopValue="50px"
-          marginLeftValue="auto"
-          marginRightValue="auto"
-        >
-          <statisticLeftContainer>
-            <Span>매우 추천합니다!</Span>
-            <SpanContainer marginTopValue="10px">
-              <Span marginLeftValue="5px" fontWeight="bold" fontSize="2vw">
-                4.9
-              </Span>
-              <Span
-                marginLeftValue="5px"
-                fontWeight="bold"
-                fontSize="2vw"
-                fontColor="#999999"
-              >
-                / 5.0
-              </Span>
-              <Span fontSize="1vw"> (214명)</Span>
-            </SpanContainer>
-            <SpanContainer marginTopValue="10px">
-              {Array(Math.floor(4.9))
-                .fill()
-                .map((_, i) => (
-                  <StarContainer src={star} />
-                ))}
-              {4.9 % 1 > 0 && <StarContainer src={halfStar} />}
-            </SpanContainer>
-            <ScoreLineContainer>
-              <Span fontSize="18px"> 5점 </Span>
-              <ScoreDefaultBar>
-                <ScoreBar scoreWidth={`${(128 / 214) * 100}%`} />
-              </ScoreDefaultBar>
-              <Span fontSize="16px" fontOpacity="0.7">
-                (128명)
-              </Span>
-            </ScoreLineContainer>
-            <ScoreLineContainer>
-              <Span fontSize="18px"> 4점 </Span>
-              <ScoreDefaultBar>
-                <ScoreBar scoreWidth={`${(62 / 214) * 100}%`} />
-              </ScoreDefaultBar>
-              <Span fontSize="16px" fontOpacity="0.7">
-                (62명)
-              </Span>
-            </ScoreLineContainer>
-            <ScoreLineContainer>
-              <Span fontSize="18px"> 3점 </Span>
-              <ScoreDefaultBar>
-                <ScoreBar scoreWidth={`${(16 / 214) * 100}%`} />
-              </ScoreDefaultBar>
-              <Span fontSize="16px" fontOpacity="0.7">
-                (16명)
-              </Span>
-            </ScoreLineContainer>
-            <ScoreLineContainer>
-              <Span fontSize="18px"> 2점 </Span>
-              <ScoreDefaultBar>
-                <ScoreBar scoreWidth={`${(5 / 214) * 100}%`} />
-              </ScoreDefaultBar>
-              <Span fontSize="16px" fontOpacity="0.7">
-                (5명)
-              </Span>
-            </ScoreLineContainer>
-            <ScoreLineContainer>
-              <Span fontSize="18px"> 1점 </Span>
-              <ScoreDefaultBar>
-                <ScoreBar scoreWidth={`${(3 / 214) * 100}%`} />
-              </ScoreDefaultBar>
-              <Span fontSize="16px" fontOpacity="0.7">
-                (3명)
-              </Span>
-            </ScoreLineContainer>
-          </statisticLeftContainer>
+        <>
+          <StatisticContainer
+            marginTopValue="50px"
+            marginLeftValue="auto"
+            marginRightValue="auto"
+          >
+            <StatisticLeftContainer>
+              <Span>매우 추천합니다!</Span>
+              <SpanContainer marginTopValue="10px">
+                <Span marginLeftValue="5px" fontWeight="bold" fontSize="2vw">
+                  4.9
+                </Span>
+                <Span
+                  marginLeftValue="5px"
+                  fontWeight="bold"
+                  fontSize="2vw"
+                  fontColor="#999999"
+                >
+                  / 5.0
+                </Span>
+                <Span fontSize="1vw"> (214명)</Span>
+              </SpanContainer>
+              <SpanContainer marginTopValue="10px">
+                {Array(Math.floor(4.9))
+                  .fill()
+                  .map((_, i) => (
+                    <StarContainer src={star} />
+                  ))}
+                {4.9 % 1 > 0 && <StarContainer src={halfStar} />}
+              </SpanContainer>
+              <ScoreLineContainer>
+                <Span fontSize="18px"> 5점 </Span>
+                <ScoreDefaultBar>
+                  <ScoreBar scoreWidth={`${(128 / 214) * 100}%`} />
+                </ScoreDefaultBar>
+                <Span fontSize="16px" fontOpacity="0.7">
+                  (128명)
+                </Span>
+              </ScoreLineContainer>
+              <ScoreLineContainer>
+                <Span fontSize="18px"> 4점 </Span>
+                <ScoreDefaultBar>
+                  <ScoreBar scoreWidth={`${(62 / 214) * 100}%`} />
+                </ScoreDefaultBar>
+                <Span fontSize="16px" fontOpacity="0.7">
+                  (62명)
+                </Span>
+              </ScoreLineContainer>
+              <ScoreLineContainer>
+                <Span fontSize="18px"> 3점 </Span>
+                <ScoreDefaultBar>
+                  <ScoreBar scoreWidth={`${(16 / 214) * 100}%`} />
+                </ScoreDefaultBar>
+                <Span fontSize="16px" fontOpacity="0.7">
+                  (16명)
+                </Span>
+              </ScoreLineContainer>
+              <ScoreLineContainer>
+                <Span fontSize="18px"> 2점 </Span>
+                <ScoreDefaultBar>
+                  <ScoreBar scoreWidth={`${(5 / 214) * 100}%`} />
+                </ScoreDefaultBar>
+                <Span fontSize="16px" fontOpacity="0.7">
+                  (5명)
+                </Span>
+              </ScoreLineContainer>
+              <ScoreLineContainer>
+                <Span fontSize="18px"> 1점 </Span>
+                <ScoreDefaultBar>
+                  <ScoreBar scoreWidth={`${(3 / 214) * 100}%`} />
+                </ScoreDefaultBar>
+                <Span fontSize="16px" fontOpacity="0.7">
+                  (3명)
+                </Span>
+              </ScoreLineContainer>
+            </StatisticLeftContainer>
 
-          <RadarChart title="튜터분석 그래프" />
-        </StatisticContainer>
+            <RadarChart title="튜터분석 그래프" />
+          </StatisticContainer>
+          <SpanContainer marginTopValue="50px">
+            <Span fontWeight="bold">수강생 후기</Span>
+            <Span fontOpacity="0.6">(28)</Span>
+          </SpanContainer>
+          <MenuContainer marginTopValue="30px">
+            <ListContainer
+              onMouseEnter={() => onMouseEnter()}
+              onMouseLeave={onMouseLeave}
+            >
+              <Menu>
+                <Span fontSize="16px"> 최근순 </Span>
+              </Menu>
+              {dropdownCategory && <Dropdown categoryItems={reviewCategory} />}
+            </ListContainer>
+          </MenuContainer>
+          <LectureViewContainer marginBottomValue="60px">
+            {reviewItems.map(item => {
+              const {
+                id,
+                rating,
+                date,
+                expertScore,
+                priceScore,
+                presentScore,
+                beneficialScore,
+                funScore,
+                kindScore,
+                title,
+                review,
+                url,
+              } = item;
+              return (
+                <HorizontalReview
+                  key={id}
+                  id={id}
+                  rating={rating}
+                  date={date}
+                  expertScore={expertScore}
+                  priceScore={priceScore}
+                  presentScore={presentScore}
+                  beneficialScore={beneficialScore}
+                  funScore={funScore}
+                  kindScore={kindScore}
+                  title={title}
+                  review={review}
+                  imageUrl={url}
+                  best
+                  username="취준 화이팅"
+                />
+              );
+            })}
+          </LectureViewContainer>
+          <MoreContainer> +더보기</MoreContainer>
+        </>
       )}
     </Container>
   );
