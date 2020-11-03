@@ -6,10 +6,12 @@ import Tab from 'Components/common/Tab';
 import PropTypes from 'prop-types';
 import LecturePreview from 'Components/LecturePreview';
 
+import HorizontalLecture from 'Components/HorizontalLecture';
+
 import { items } from '../Home/HomePresenter';
 
 const marginTop = css`
-  ${({ margintopValue }) => margintopValue && `margin-top : ${margintopValue};`}
+  ${({ marginTopValue }) => marginTopValue && `margin-top : ${marginTopValue};`}
 `;
 
 const marginBottom = css`
@@ -92,7 +94,7 @@ const Span = styled.span`
 const LectureViewContainer = styled.div`
   width: 100%;
   height: 100%;
-  ${marginTop}
+  ${marginBottom}
 `;
 
 const LectureGird = styled.div`
@@ -102,24 +104,24 @@ const LectureGird = styled.div`
 
 const MyLecturePresenter = ({ param }) => {
   return (
-    <Container margintopValue="80px" marginBottomValue="80px">
+    <Container marginTopValue="80px" marginBottomValue="80px">
       <ProfileContainer marginBottomValue="20px">
         <ProfileImage src={profileImageUrl} />
-        <Username margintopValue="10px">eunhye_22</Username>
+        <Username marginTopValue="10px">eunhye_22</Username>
       </ProfileContainer>
       <Subtitle title="나의 강의장" />
-      <TabContainer margintopValue="20px">
+      <TabContainer marginTopValue="20px">
         <Tab tabInfo={tabInfo} nowTab={param} />
       </TabContainer>
       {param === 'mylecture' && (
         <>
-          <SpanContainer margintopValue="40px">
+          <SpanContainer marginTopValue="40px">
             <Span textColor="#000000">오늘의 강의</Span>
             <Span textColor="#465fcc" marginLeftValue="8px">
               (02)
             </Span>
           </SpanContainer>
-          <LectureViewContainer margintopValue="20px">
+          <LectureViewContainer marginTopValue="20px">
             <LectureGird>
               {items.map(item => {
                 const { id, expert, category, endTime, title, url } = item;
@@ -137,13 +139,13 @@ const MyLecturePresenter = ({ param }) => {
               })}
             </LectureGird>
           </LectureViewContainer>
-          <SpanContainer margintopValue="40px">
+          <SpanContainer marginTopValue="40px">
             <Span textColor="#000000">수강 예정 강의</Span>
             <Span textColor="#465fcc" marginLeftValue="8px">
               (02)
             </Span>
           </SpanContainer>
-          <LectureViewContainer margintopValue="20px">
+          <LectureViewContainer>
             <LectureGird>
               {items.map(item => {
                 const { id, expert, category, endTime, title, url } = item;
@@ -165,12 +167,107 @@ const MyLecturePresenter = ({ param }) => {
       )}
       {param === 'mylikelecture' && (
         <>
-          <SpanContainer margintopValue="40px">
+          <SpanContainer marginTopValue="40px">
             <Span textColor="#000000">내가 짬한 강의</Span>
             <Span textColor="#465fcc" marginLeftValue="8px">
               (04)
             </Span>
           </SpanContainer>
+          <LectureViewContainer marginBottomValue="60px">
+            {items.map(item => {
+              const {
+                id,
+                expert,
+                category,
+                endTime,
+                title,
+                url,
+                price,
+                salePercentage,
+              } = item;
+              return (
+                <HorizontalLecture
+                  key={id}
+                  id={id}
+                  imageUrl={url}
+                  expert={expert}
+                  category={category}
+                  endTime={endTime}
+                  title={title}
+                  price={price}
+                  salePercentage={salePercentage}
+                />
+              );
+            })}
+          </LectureViewContainer>
+        </>
+      )}
+      {param === 'myreview' && (
+        <>
+          <SpanContainer marginTopValue="40px">
+            <Span textColor="#000000">작성 완료한 후기</Span>
+            <Span textColor="#465fcc" marginLeftValue="8px">
+              (02)
+            </Span>
+          </SpanContainer>
+          <LectureViewContainer marginBottomValue="60px">
+            {items.map(item => {
+              const {
+                id,
+                expert,
+                category,
+                endTime,
+                title,
+                url,
+                price,
+                salePercentage,
+              } = item;
+              return (
+                <HorizontalLecture
+                  key={id}
+                  id={id}
+                  imageUrl={url}
+                  expert={expert}
+                  category={category}
+                  endTime={endTime}
+                  title={title}
+                  price={price}
+                />
+              );
+            })}
+          </LectureViewContainer>
+          <SpanContainer marginTopValue="40px">
+            <Span textColor="#000000">작성 가능한 후기</Span>
+            <Span textColor="#465fcc" marginLeftValue="8px">
+              (04)
+            </Span>
+          </SpanContainer>
+          <LectureViewContainer marginBottomValue="60px">
+            {items.map(item => {
+              const {
+                id,
+                expert,
+                category,
+                endTime,
+                title,
+                url,
+                price,
+                salePercentage,
+              } = item;
+              return (
+                <HorizontalLecture
+                  key={id}
+                  id={id}
+                  imageUrl={url}
+                  expert={expert}
+                  category={category}
+                  endTime={endTime}
+                  title={title}
+                  price={price}
+                />
+              );
+            })}
+          </LectureViewContainer>
         </>
       )}
     </Container>

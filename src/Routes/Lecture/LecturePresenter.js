@@ -191,7 +191,6 @@ const LecturePresenter = ({
                   title={title}
                   price={price}
                   salePercentage={salePercentage}
-                  salePrice={price}
                 />
               );
             })}

@@ -110,7 +110,6 @@ export default class PopularSlider extends Component {
                 title={title}
                 price={price}
                 salePercentage={salePercentage}
-                salePrice={price}
               />
             );
           })}

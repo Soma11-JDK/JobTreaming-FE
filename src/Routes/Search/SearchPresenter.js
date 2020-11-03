@@ -197,7 +197,6 @@ const SearchPresenter = ({
                   title={title}
                   price={price}
                   salePercentage={salePercentage}
-                  salePrice={price}
                 />
               );
             })}
