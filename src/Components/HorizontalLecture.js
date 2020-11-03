@@ -171,6 +171,7 @@ const HorizontalLecture = ({
   category,
   price,
   salePercentage,
+  btnTitle,
 }) => (
   <Container marginTopValue="20px">
     <ImageContainer>
@@ -214,8 +215,8 @@ const HorizontalLecture = ({
         <CurrencyFormat price={price} salePercentage={salePercentage} />
       </SalePrice>
       <ButtonContainer marginTopValue="10px">
-        <Button btnColor="blue" btnHeight="40px">
-          후기작성하기
+        <Button btnColor="#465fcc" btnHeight="40px">
+          {btnTitle}
         </Button>
       </ButtonContainer>
     </PriceInfoContainer>
@@ -233,6 +234,7 @@ HorizontalLecture.propTypes = {
   comment: PropTypes.number,
   price: PropTypes.number,
   salePercentage: PropTypes.number,
+  btnTitle: PropTypes.string.isRequired,
 };
 
 HorizontalLecture.defaultProps = {
