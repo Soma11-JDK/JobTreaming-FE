@@ -124,7 +124,8 @@ const SpanContainer = styled.div`
   display: flex;
   display: -webkit-flex;
   align-items: center;
-  ${marginTop}
+  white-space: pre-wrap;
+  ${marginTop};
 `;
 
 const Span = styled.span`
@@ -132,6 +133,7 @@ const Span = styled.span`
   font-weight: ${props => props.fontWeight || 500};
   font-size: ${props => props.fontSize || '28px'};
   word-break: keep-all;
+  ${marginTop}
   ${marginLeft}
 `;
 
@@ -157,6 +159,20 @@ const LectureApplyContainer = styled.img`
   right: 0;
   ${marginRight}
   ${marginBottom}
+`;
+
+const polygonUrl = require('assets/Polygon 3.png');
+
+const IndexContainer = styled.div`
+  display: flex;
+  display: -webkit-flex;
+  align-items: center;
+  ${marginTop}
+`;
+
+const IndexIcon = styled.img`
+  width: 27px;
+  height: 27px;
 `;
 
 const LectureViewContainer = styled.div`
@@ -230,6 +246,9 @@ const reviewItems = [
   },
 ];
 
+const tempText =
+  '저는 서울 3류라고 말하는 대학교를 졸업하고 벤처기업을 거쳐 삼성SDS에 신입공채를 통해 입사하였습니다.9 년의 SDS에서의 IT서비스업 경험을 토대로 디지털기업 현대카드에 경력 이직하여 다양한 개발을 하고 있습니다. 저는 삼성SDS에 재직할 당시 3년이상 삼성직업멘토링 에 참가하였고, 이후 다양한 곳(온/오프라인)에서 만난 멘티친구들과 인생의 선배와 후배로 인연을 이어가고 있습니다. 멘토라서, 멘토로서 이야기 하기 보다는 선배와 후배로서, 대한민국에서 직장생활을 하는 사람 또는 IT를 하는 사람이라는 공동체 의식속에서 이야기하고 서로가 서로에게 도움이 되면 좋겠다고 생각하는 사람입니다. 어떤 이야기든 서로의 생각을 나눌 수 있었으면 좋겠습니다. 저와 강의에서 만나 인생의 로드맵을 함께 그려보아요!';
+
 const TutorPresenter = ({ name, param }) => {
   return (
     <Container marginTopValue="80px" marginBottomValue="80px">
@@ -289,163 +308,42 @@ const TutorPresenter = ({ name, param }) => {
       <TabContainer marginTopValue="20px">
         <Tab tabInfo={tabInfo} nowTab={param} nowPage="tutor" />
       </TabContainer>
-      {param === 'introduce' && (
-        <>
-          <SpanContainer marginTopValue="40px">
-            <Span>오늘의 강의</Span>
-            <Span fontColor="#465fcc" marginLeftValue="8px">
-              ({items.length})
-            </Span>
-          </SpanContainer>
-          <LectureViewContainer marginTopValue="20px">
-            <LectureGird>
-              {items.map(item => {
-                const { id, expert, category, endTime, title, url } = item;
-                return (
-                  <LecturePreview
-                    key={id}
-                    id={id}
-                    imageUrl={url}
-                    expert={expert}
-                    category={category}
-                    endTime={endTime}
-                    title={title}
-                  />
-                );
-              })}
-            </LectureGird>
-          </LectureViewContainer>
-          <SpanContainer marginTopValue="40px">
-            <Span>수강 예정 강의</Span>
-            <Span fontColor="#465fcc" marginLeftValue="8px">
-              ({items.length})
-            </Span>
-          </SpanContainer>
-          <LectureViewContainer>
-            <LectureGird>
-              {items.map(item => {
-                const { id, expert, category, endTime, title, url } = item;
-                return (
-                  <LecturePreview
-                    key={id}
-                    id={id}
-                    imageUrl={url}
-                    expert={expert}
-                    category={category}
-                    endTime={endTime}
-                    title={title}
-                  />
-                );
-              })}
-            </LectureGird>
-          </LectureViewContainer>
-        </>
-      )}
-      {param === 'proceeding' && (
-        <>
-          <SpanContainer marginTopValue="40px">
-            <Span>내가 짬한 강의</Span>
-            <Span fontColor="#465fcc" marginLeftValue="8px">
-              ({items.length})
-            </Span>
-          </SpanContainer>
-          <LectureViewContainer marginBottomValue="60px">
-            {items.map(item => {
-              const {
-                id,
-                expert,
-                category,
-                endTime,
-                title,
-                url,
-                price,
-                salePercentage,
-              } = item;
-              return (
-                <HorizontalLecture
-                  key={id}
-                  id={id}
-                  imageUrl={url}
-                  expert={expert}
-                  category={category}
-                  endTime={endTime}
-                  title={title}
-                  price={price}
-                  salePercentage={salePercentage}
-                />
-              );
-            })}
-          </LectureViewContainer>
-        </>
-      )}
-      {param === 'finish' && (
-        <>
-          <SpanContainer marginTopValue="40px">
-            <Span>작성 완료한 후기</Span>
-            <Span fontColor="#465fcc" marginLeftValue="8px">
-              ({reviewItems.length})
-            </Span>
-          </SpanContainer>
-          <LectureViewContainer marginBottomValue="60px">
-            {reviewItems.map(item => {
-              const {
-                id,
-                rating,
-                date,
-                expertScore,
-                priceScore,
-                presentScore,
-                beneficialScore,
-                funScore,
-                kindScore,
-                title,
-                review,
-                url,
-              } = item;
-              return (
-                <HorizontalReview
-                  key={id}
-                  id={id}
-                  rating={rating}
-                  date={date}
-                  expertScore={expertScore}
-                  priceScore={priceScore}
-                  presentScore={presentScore}
-                  beneficialScore={beneficialScore}
-                  funScore={funScore}
-                  kindScore={kindScore}
-                  title={title}
-                  review={review}
-                  imageUrl={url}
-                />
-              );
-            })}
-          </LectureViewContainer>
-          <SpanContainer marginTopValue="40px">
-            <Span>작성 가능한 후기</Span>
-            <Span fontColor="#465fcc" marginLeftValue="8px">
-              ({items.length})
-            </Span>
-          </SpanContainer>
-          <LectureViewContainer marginBottomValue="60px">
-            {items.map(item => {
-              const { id, expert, category, endTime, title, url, price } = item;
-              return (
-                <HorizontalLecture
-                  key={id}
-                  id={id}
-                  imageUrl={url}
-                  expert={expert}
-                  category={category}
-                  endTime={endTime}
-                  title={title}
-                  price={price}
-                />
-              );
-            })}
-          </LectureViewContainer>
-        </>
-      )}
+      <Span fontWeight="bold" marginTopValue="50px">
+        튜터 소개
+      </Span>
+      <Span fontSize="20px" marginTopValue="30px">
+        저는 서울 3류라고 말하는 대학교를 졸업하고 벤처기업을 거쳐 삼성SDS에
+        신입공채를 통해 입사하였습니다. <br />9 년의 SDS에서의 IT서비스업 경험을
+        토대로 디지털기업 현대카드에 경력 이직하여 다양한 개발을 하고 있습니다.
+        저는 삼성SDS에 재직할 당시 3년이상 삼성직업멘토링 에 참가하였고, 이후
+        다양한 곳(온/오프라인)에서 만난 멘티친구들과 인생의 선배와 후배로 인연을
+        이어가고 있습니다. 멘토라서, 멘토로서 이야기 하기 보다는 선배와
+        후배로서, 대한민국에서 직장생활을 하는 사람 또는 IT를 하는 사람이라는
+        공동체 의식속에서 이야기하고 서로가 서로에게 도움이 되면 좋겠다고
+        생각하는 사람입니다. 어떤 이야기든 서로의 생각을 나눌 수 있었으면
+        좋겠습니다. 저와 강의에서 만나 인생의 로드맵을 함께 그려보아요!
+      </Span>
+      <Span fontWeight="bold" marginTopValue="50px">
+        주요 경력
+      </Span>
+      <IndexContainer marginTopValue="30px">
+        <IndexIcon src={polygonUrl} />
+        <Span fontSize="22px" fontWeight="bold" marginLeftValue="5px">
+          학력
+        </Span>
+      </IndexContainer>
+      <IndexContainer marginTopValue="30px">
+        <IndexIcon src={polygonUrl} />
+        <Span fontSize="22px" fontWeight="bold" marginLeftValue="5px">
+          경력
+        </Span>
+      </IndexContainer>
+      <IndexContainer marginTopValue="30px">
+        <IndexIcon src={polygonUrl} />
+        <Span fontSize="22px" fontWeight="bold" marginLeftValue="5px">
+          튜터링
+        </Span>
+      </IndexContainer>
     </Container>
   );
 };
