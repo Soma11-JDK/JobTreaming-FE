@@ -6,7 +6,6 @@ import Subtitle from 'Components/common/Subtitle';
 import Tab from 'Components/common/Tab';
 import PropTypes from 'prop-types';
 
-import LecturePreview from 'Components/LecturePreview';
 import HorizontalLecture from 'Components/HorizontalLecture';
 import HorizontalReview from 'Components/HorizontalReview';
 import RadarChart from 'Components/RadarChart';
@@ -133,6 +132,7 @@ const Span = styled.span`
   font-weight: ${props => props.fontWeight || 500};
   font-size: ${props => props.fontSize || '28px'};
   word-break: keep-all;
+  opacity: ${props => props.fontOpacity || 1};
   ${marginTop}
   ${marginLeft}
 `;
@@ -142,10 +142,10 @@ const halfStar = require('assets/Star/HalfStar.png');
 
 const StarContainer = styled.img`
   @media only screen and (max-width: 768px) {
-    width: 1vw;
+    width: 1.5vw;
   }
   @media only screen and (max-width: 600px) {
-    width: 1vw;
+    width: 1.2vw;
   }
 `;
 
@@ -181,10 +181,55 @@ const LectureViewContainer = styled.div`
   ${marginBottom}
 `;
 
-const LectureGird = styled.div`
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+const StatisticContainer = styled.div`
+  display: flex;
+  display: -webkit-flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  height: 440px;
+  border-radius: 10px;
+  box-shadow: 0 0 9px 3px rgba(164, 164, 164, 0.1);
+  background-color: #ffffff;
+  padding: 60px 40px;
+  ${marginTop}
+  ${marginLeft}
+  ${marginRight}
 `;
+
+const statisticLeftContainer = styled.div`
+  display: flex;
+  display: -webkit-flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100%;
+  width: 60%;
+`;
+
+const ScoreLineContainer = styled.div`
+  display: flex;
+  display: -webkit-flex;
+  align-items: center;
+  width: 100%;
+`;
+
+const ScoreDefaultBar = styled.div`
+  height: 10px;
+  flex: 1;
+  max-width: 80px;
+  justify-content: center;
+  background-color: #f1f1f1;
+  border-radius: 3px;
+`;
+
+const ScoreBar = styled.div`
+  height: 10px;
+  border-radius: 3px;
+  background-color: #2a2a2a;
+  width: ${props => props.scoreWidth};
+`;
+
+const statisticRightContainer = styled.div``;
 
 const reviewItems = [
   {
@@ -288,12 +333,12 @@ const TutorPresenter = ({ name, param }) => {
             >
               / 5.0
             </Span>
-            {Array(Math.floor(4.5))
+            {Array(Math.floor(4.9))
               .fill()
               .map((_, i) => (
                 <StarContainer src={star} />
               ))}
-            {4.5 % 1 > 0 && <StarContainer src={halfStar} />}
+            {4.9 % 1 > 0 && <StarContainer src={halfStar} />}
           </SpanContainer>
         </ProfileInfoContainer>
         <RadarChart />
@@ -378,6 +423,86 @@ const TutorPresenter = ({ name, param }) => {
             );
           })}
         </LectureViewContainer>
+      )}
+      {param === 'review' && (
+        <StatisticContainer
+          marginTopValue="50px"
+          marginLeftValue="auto"
+          marginRightValue="auto"
+        >
+          <statisticLeftContainer>
+            <Span>매우 추천합니다!</Span>
+            <SpanContainer marginTopValue="10px">
+              <Span marginLeftValue="5px" fontWeight="bold" fontSize="2vw">
+                4.9
+              </Span>
+              <Span
+                marginLeftValue="5px"
+                fontWeight="bold"
+                fontSize="2vw"
+                fontColor="#999999"
+              >
+                / 5.0
+              </Span>
+              <Span fontSize="1vw"> (214명)</Span>
+            </SpanContainer>
+            <SpanContainer marginTopValue="10px">
+              {Array(Math.floor(4.9))
+                .fill()
+                .map((_, i) => (
+                  <StarContainer src={star} />
+                ))}
+              {4.9 % 1 > 0 && <StarContainer src={halfStar} />}
+            </SpanContainer>
+            <ScoreLineContainer>
+              <Span fontSize="18px"> 5점 </Span>
+              <ScoreDefaultBar>
+                <ScoreBar scoreWidth={`${(128 / 214) * 100}%`} />
+              </ScoreDefaultBar>
+              <Span fontSize="16px" fontOpacity="0.7">
+                (128명)
+              </Span>
+            </ScoreLineContainer>
+            <ScoreLineContainer>
+              <Span fontSize="18px"> 4점 </Span>
+              <ScoreDefaultBar>
+                <ScoreBar scoreWidth={`${(62 / 214) * 100}%`} />
+              </ScoreDefaultBar>
+              <Span fontSize="16px" fontOpacity="0.7">
+                (62명)
+              </Span>
+            </ScoreLineContainer>
+            <ScoreLineContainer>
+              <Span fontSize="18px"> 3점 </Span>
+              <ScoreDefaultBar>
+                <ScoreBar scoreWidth={`${(16 / 214) * 100}%`} />
+              </ScoreDefaultBar>
+              <Span fontSize="16px" fontOpacity="0.7">
+                (16명)
+              </Span>
+            </ScoreLineContainer>
+            <ScoreLineContainer>
+              <Span fontSize="18px"> 2점 </Span>
+              <ScoreDefaultBar>
+                <ScoreBar scoreWidth={`${(5 / 214) * 100}%`} />
+              </ScoreDefaultBar>
+              <Span fontSize="16px" fontOpacity="0.7">
+                (5명)
+              </Span>
+            </ScoreLineContainer>
+            <ScoreLineContainer>
+              <Span fontSize="18px"> 1점 </Span>
+              <ScoreDefaultBar>
+                <ScoreBar scoreWidth={`${(3 / 214) * 100}%`} />
+              </ScoreDefaultBar>
+              <Span fontSize="16px" fontOpacity="0.7">
+                (3명)
+              </Span>
+            </ScoreLineContainer>
+          </statisticLeftContainer>
+
+          <RadarChart title="튜터분석 그래프" />
+        </StatisticContainer>
       )}
     </Container>
   );

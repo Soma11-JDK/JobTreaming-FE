@@ -134,7 +134,7 @@ const categoryItems = [
 }; */
 
 class Category extends Component {
-  constructor(props) {
+  constructor() {
     super();
     this.state = {
       id: '',

@@ -1,11 +1,13 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+
+import PropTypes from 'prop-types';
+
 import ReactApexChart from 'react-apexcharts';
 
 class RadarChart extends React.Component {
   constructor(props) {
     super();
-
+    const { title } = props;
     this.state = {
       series: [
         {
@@ -38,6 +40,10 @@ class RadarChart extends React.Component {
           colors: ['#fff'],
           strokeColor: '#FF4560',
           strokeWidth: 0.5,
+        },
+        title: {
+          text: title,
+          align: 'center',
         },
         tooltip: {
           y: {
@@ -80,11 +86,19 @@ class RadarChart extends React.Component {
           options={options}
           series={series}
           type="radar"
-          height={350}
+          height={200}
         />
       </div>
     );
   }
 }
+
+RadarChart.propTypes = {
+  title: PropTypes.string,
+};
+
+RadarChart.defaultProps = {
+  title: '',
+};
 
 export default RadarChart;

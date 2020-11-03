@@ -14,7 +14,7 @@ const Layout = styled.div`
 `;
 
 class App extends Component {
-  constructor(props) {
+  constructor() {
     super();
     this.state = {
       logged: false,
