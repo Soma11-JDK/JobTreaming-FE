@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import Router from '../Routes/Router';
 import GlobalStyles from './GlobalStyles';
 
-import Header from './Header';
+import Header from './common/Header';
 import Store from '../Store/Store';
-import Footer from './Footer';
+import Footer from './common/Footer';
 
 const Layout = styled.div`
   width: 100%;

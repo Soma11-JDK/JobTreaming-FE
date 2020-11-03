@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 import LecturePreview from 'Components/LecturePreview';
-import Subtitle from 'Components/Subtitle';
+import Subtitle from 'Components/common/Subtitle';
 import { categoryItems } from 'Components/Category';
-import Dropdown from 'Components/Dropdown';
-import CustomDateRange from 'Components/CustomDateRange';
+import Dropdown from 'Components/common/Dropdown';
+import CustomDateRange from 'Components/common/CustomDateRange';
 import TestDateRange from 'Components/TestDateRange';
 import TestDatePicker from 'Components/TestDatePicker';
 import Testairbnb from 'Components/Testairbnb';
@@ -21,10 +21,6 @@ const Container = styled.div`
   display: -webkit-flex;
   flex-direction: column;
   align-items: center;
-
-  @media only screen and (max-width: 600px) {
-    height: 100%;
-  }
 `;
 
 const CategoryTitleContainer = styled.div`
@@ -195,7 +191,6 @@ const LecturePresenter = ({
                   title={title}
                   price={price}
                   salePercentage={salePercentage}
-                  salePrice={price}
                 />
               );
             })}

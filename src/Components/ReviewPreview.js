@@ -80,7 +80,7 @@ ReviewPreview.propTypes = {
   content: PropTypes.string.isRequired,
 };
 
-const defaultProfileImg = require('assets/tempProfile.png');
+const defaultProfileImg = require('assets/DefaultProfile/DefaultProfile.png');
 
 ReviewPreview.defaultProps = {
   profileImageUrl: defaultProfileImg,

@@ -65,7 +65,7 @@ const Input = styled.input`
   -webkit-appearance: none;
   ::-webkit-slider-runnable-track {
     width: fit-content;
-    height: 1vw;
+    height: 2vw;
     cursor: pointer;
     background: #e3e3e3;
     border-radius: 10px;

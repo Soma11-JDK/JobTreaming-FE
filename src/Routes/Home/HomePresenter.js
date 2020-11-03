@@ -3,12 +3,12 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-import Slider from 'Components/Slider';
+import Slider from 'Components/common/Slider';
 import Category from 'Components/Category';
 import Popular from 'Components/Popular';
 import PopularSlider from 'Components/PopularSlider';
 import Advertise from 'Components/Advertise';
-import Subtitle from 'Components/Subtitle';
+import Subtitle from 'Components/common/Subtitle';
 import ReviewSlider from '../../Components/ReviewSlider';
 
 const Container = styled.div`
@@ -226,8 +226,8 @@ const HomePresenter = () => (
       {/* 인기 강연 */}
       <DividerContainer>
         <BelowContainer>
+          <Subtitle title="오늘의 잡트리밍" />
           <TitleContainer>
-            <Subtitle title="오늘의 잡트리밍" />
             <MoreSpan>전체 보기</MoreSpan>
           </TitleContainer>
           {/* 인기 강연 포스터 */}

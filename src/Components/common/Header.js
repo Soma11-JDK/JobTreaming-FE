@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 import { categoryItems } from 'Components/Category';
-import HeaderIcon from './HeaderIcon';
+import HeaderIcon from '../HeaderIcon';
 import Dropdown from './Dropdown';
 
 const Container = styled.div`
@@ -153,7 +153,9 @@ const Header = ({ location: { pathname }, logged, onLogout }) => {
           </SLink>
         </NavItem>
         <NavItem>
-          <SLink to="/">
+          <SLink
+            to={{ pathname: '/mylectureroom/mylecture', state: 'mylecture' }}
+          >
             <Span>나의 강의장</Span>
           </SLink>
         </NavItem>
