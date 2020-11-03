@@ -226,8 +226,8 @@ const HomePresenter = () => (
       {/* 인기 강연 */}
       <DividerContainer>
         <BelowContainer>
-          <Subtitle title="오늘의 잡트리밍" />
           <TitleContainer>
+            <Subtitle title="오늘의 잡트리밍" />
             <MoreSpan>전체 보기</MoreSpan>
           </TitleContainer>
           {/* 인기 강연 포스터 */}

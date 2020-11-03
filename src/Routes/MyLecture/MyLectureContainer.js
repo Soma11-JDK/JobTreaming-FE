@@ -4,7 +4,7 @@ import MyLecture from './MyLecturePresenter';
 
 const MyLectureContainer = props => {
   const params = useParams();
-
+  console.log(`lecture${params.mylecture}`);
   return <MyLecture param={params.mylecture} />;
 };
 

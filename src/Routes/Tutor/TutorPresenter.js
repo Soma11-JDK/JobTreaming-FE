@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import LecturePreview from 'Components/LecturePreview';
 import HorizontalLecture from 'Components/HorizontalLecture';
 import HorizontalReview from 'Components/HorizontalReview';
+import RadarChart from 'Components/RadarChart';
 
 import { items } from '../Home/HomePresenter';
 
@@ -19,6 +20,11 @@ const marginTop = css`
 const marginBottom = css`
   ${({ marginBottomValue }) =>
     marginBottomValue && `margin-bottom : ${marginBottomValue};`}
+`;
+
+const marginRight = css`
+  ${({ marginRightValue }) =>
+    marginRightValue && `margin-right : ${marginRightValue};`}
 `;
 
 const marginLeft = css`
@@ -37,32 +43,70 @@ const Container = styled.div`
   ${marginTop}
 `;
 
-const ProfileContainer = styled.div`
-  width: 100%;
+const TutorContainer = styled.div`
+  height: 350px;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  ${marginBottom}
+  border-radius: 10px;
+  background-color: #f7ebff;
+  position: relative;
+  ${marginBottom};
 `;
 
-const profileImageUrl = require('assets/TestProfile/Mask Group.png');
+const unionImageUrl = require('assets/Union/Union.png');
+const profileImageUrl = require('assets/TestTutor/Tutor.png');
+
+const ImageContainer = styled.div`
+  display: flex;
+  position: relative;
+
+  height: 70%;
+  ${marginLeft}
+`;
+
+const UnionImage = styled.img`
+  width: 70%;
+  height: 70%;
+`;
 
 const ProfileImage = styled.img`
-  width: 100px;
-  height: 100px;
+  width: 100%;
+  height: 100%;
+
+  position: absolute;
+`;
+
+const ProfileInfoContainer = styled.div`
+  display: flex;
+  display: -webkit-flex;
+  flex-direction: column;
 `;
 
 const Username = styled.span`
-  font-family: Roboto;
-  font-size: 28px;
+  font-size: 3vw;
   font-weight: bold;
   font-stretch: normal;
   font-style: normal;
   line-height: normal;
   letter-spacing: normal;
-  text-align: center;
+
   color: #000000;
+  word-break: keep-all;
   ${marginTop}
+`;
+
+const instagramIcon = require('assets/Icon/Instagram.png');
+const gmailIcon = require('assets/Icon/Gmail.png');
+
+const SnsContainer = styled.div`
+  display: flex;
+  display: -webkit-flex;
+  align-items: center;
+`;
+
+const IconContainer = styled.img`
+  ${marginRight}
 `;
 
 const TabContainer = styled.div`
@@ -70,27 +114,49 @@ const TabContainer = styled.div`
 `;
 
 const tabInfo = [
-  { title: '나의 강의', state: 'mylecture' },
-  { title: '찜한 강의', state: 'mylikelecture' },
-  { title: '강의 후기', state: 'myreview' },
-  { title: '문의/기대평', state: 'myquestion' },
+  { title: '튜터 소개', state: 'introduce' },
+  { title: '진행중인 강의', state: 'proceeding' },
+  { title: '종료된 강의', state: 'finish' },
+  { title: '수강생 후기', state: 'review' },
 ];
-
-const DataContainer = styled.div`
-  width: 100%;
-  height: 100%;
-`;
 
 const SpanContainer = styled.div`
   display: flex;
+  display: -webkit-flex;
+  align-items: center;
   ${marginTop}
 `;
 
 const Span = styled.span`
-  color: ${props => props.textColor};
-  font-weight: bold;
-  font-size: 28px;
+  color: ${props => props.fontColor || '#000000'};
+  font-weight: ${props => props.fontWeight || 500};
+  font-size: ${props => props.fontSize || '28px'};
+  word-break: keep-all;
   ${marginLeft}
+`;
+
+const star = require('assets/Star/Star.png');
+const halfStar = require('assets/Star/HalfStar.png');
+
+const StarContainer = styled.img`
+  @media only screen and (max-width: 768px) {
+    width: 1vw;
+  }
+  @media only screen and (max-width: 600px) {
+    width: 1vw;
+  }
+`;
+
+const smallLectureApply = require('assets/LectureApply/LectureApply.png');
+const mediumLectureApply = require('assets/LectureApply/LectureApply@2x.png');
+const largeLectureApply = require('assets/LectureApply/LectureApply@3x.png');
+
+const LectureApplyContainer = styled.img`
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  ${marginRight}
+  ${marginBottom}
 `;
 
 const LectureViewContainer = styled.div`
@@ -164,22 +230,70 @@ const reviewItems = [
   },
 ];
 
-const MyLecturePresenter = ({ param }) => {
+const TutorPresenter = ({ name, param }) => {
   return (
     <Container marginTopValue="80px" marginBottomValue="80px">
-      <ProfileContainer marginBottomValue="20px">
-        <ProfileImage src={profileImageUrl} />
-        <Username marginTopValue="10px">eunhye_22</Username>
-      </ProfileContainer>
-      <Subtitle title="나의 강의장" />
+      <TutorContainer marginBottomValue="20px">
+        <ImageContainer marginLeftValue="10px">
+          <UnionImage src={unionImageUrl} />
+          <ProfileImage src={profileImageUrl} />
+        </ImageContainer>
+        <ProfileInfoContainer>
+          <Username>{name} 튜터</Username>
+
+          <SnsContainer>
+            <IconContainer marginRightValue="5px" src={gmailIcon} />
+            test@test.com
+          </SnsContainer>
+          <SnsContainer>
+            <IconContainer marginRightValue="5px" src={instagramIcon} />
+            test@test.com
+          </SnsContainer>
+
+          <SpanContainer marginTopValue="20px">
+            <Span fontSize="1vw">분야</Span>
+            <Span marginLeftValue="5px" fontWeight="bold" fontSize="2vw">
+              정보통신, 그로스해커
+            </Span>
+          </SpanContainer>
+          <SpanContainer>
+            <Span fontSize="1vw">평점</Span>
+            <Span marginLeftValue="5px" fontWeight="bold" fontSize="1.5vw">
+              4.9
+            </Span>
+            <Span
+              marginLeftValue="5px"
+              fontWeight="bold"
+              fontSize="1.5vw"
+              fontColor="#999999"
+            >
+              / 5.0
+            </Span>
+            {Array(Math.floor(4.5))
+              .fill()
+              .map((_, i) => (
+                <StarContainer src={star} />
+              ))}
+            {4.5 % 1 > 0 && <StarContainer src={halfStar} />}
+          </SpanContainer>
+        </ProfileInfoContainer>
+        <RadarChart />
+        <LectureApplyContainer
+          marginRightValue="20px"
+          marginBottomValue="20px"
+          src={smallLectureApply}
+          srcSet={`${smallLectureApply} 300w, ${mediumLectureApply} 768w, ${mediumLectureApply} 1280w`}
+        />
+      </TutorContainer>
+      <Subtitle title={`${name} 튜터`} />
       <TabContainer marginTopValue="20px">
-        <Tab tabInfo={tabInfo} nowTab={param} nowPage="myLecture" />
+        <Tab tabInfo={tabInfo} nowTab={param} nowPage="tutor" />
       </TabContainer>
-      {param === 'mylecture' && (
+      {param === 'introduce' && (
         <>
           <SpanContainer marginTopValue="40px">
-            <Span textColor="#000000">오늘의 강의</Span>
-            <Span textColor="#465fcc" marginLeftValue="8px">
+            <Span>오늘의 강의</Span>
+            <Span fontColor="#465fcc" marginLeftValue="8px">
               ({items.length})
             </Span>
           </SpanContainer>
@@ -202,8 +316,8 @@ const MyLecturePresenter = ({ param }) => {
             </LectureGird>
           </LectureViewContainer>
           <SpanContainer marginTopValue="40px">
-            <Span textColor="#000000">수강 예정 강의</Span>
-            <Span textColor="#465fcc" marginLeftValue="8px">
+            <Span>수강 예정 강의</Span>
+            <Span fontColor="#465fcc" marginLeftValue="8px">
               ({items.length})
             </Span>
           </SpanContainer>
@@ -227,11 +341,11 @@ const MyLecturePresenter = ({ param }) => {
           </LectureViewContainer>
         </>
       )}
-      {param === 'mylikelecture' && (
+      {param === 'proceeding' && (
         <>
           <SpanContainer marginTopValue="40px">
-            <Span textColor="#000000">내가 짬한 강의</Span>
-            <Span textColor="#465fcc" marginLeftValue="8px">
+            <Span>내가 짬한 강의</Span>
+            <Span fontColor="#465fcc" marginLeftValue="8px">
               ({items.length})
             </Span>
           </SpanContainer>
@@ -264,11 +378,11 @@ const MyLecturePresenter = ({ param }) => {
           </LectureViewContainer>
         </>
       )}
-      {param === 'myreview' && (
+      {param === 'finish' && (
         <>
           <SpanContainer marginTopValue="40px">
-            <Span textColor="#000000">작성 완료한 후기</Span>
-            <Span textColor="#465fcc" marginLeftValue="8px">
+            <Span>작성 완료한 후기</Span>
+            <Span fontColor="#465fcc" marginLeftValue="8px">
               ({reviewItems.length})
             </Span>
           </SpanContainer>
@@ -308,8 +422,8 @@ const MyLecturePresenter = ({ param }) => {
             })}
           </LectureViewContainer>
           <SpanContainer marginTopValue="40px">
-            <Span textColor="#000000">작성 가능한 후기</Span>
-            <Span textColor="#465fcc" marginLeftValue="8px">
+            <Span>작성 가능한 후기</Span>
+            <Span fontColor="#465fcc" marginLeftValue="8px">
               ({items.length})
             </Span>
           </SpanContainer>
@@ -336,7 +450,8 @@ const MyLecturePresenter = ({ param }) => {
   );
 };
 
-MyLecturePresenter.propTypes = {
+TutorPresenter.propTypes = {
   param: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
 };
-export default MyLecturePresenter;
+export default TutorPresenter;
