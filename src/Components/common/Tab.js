@@ -43,11 +43,10 @@ const Span = styled.span`
   text-align: center;
   color: ${props => (props.current ? '#3918ff' : '#000000')};
   opacity: ${props => (props.current ? '1' : '0.5')};
+  word-break: keep-all;
 `;
 
-const Tab = ({ tabInfo, nowTab }) => {
-  const location = useLocation();
-
+const Tab = ({ tabInfo, nowTab, nowPage }) => {
   const [tabTitle, setTabTitle] = useState(nowTab);
 
   const history = useHistory();
@@ -70,7 +69,11 @@ const Tab = ({ tabInfo, nowTab }) => {
             <Item key={idx} onClick={() => handleClick(state)}>
               <SLink
                 current={tabTitle === state ? 1 : 0}
-                to={`/mylectureroom/${state}`}
+                to={
+                  nowPage === 'myLecture'
+                    ? `/mylectureroom/${state}`
+                    : `/tutor/${state}`
+                }
               >
                 <Span current={tabTitle === state ? 1 : 0}>{title}</Span>
               </SLink>
@@ -85,5 +88,6 @@ const Tab = ({ tabInfo, nowTab }) => {
 Tab.propTypes = {
   tabInfo: PropTypes.arrayOf(PropTypes.object).isRequired,
   nowTab: PropTypes.string.isRequired,
+  nowPage: PropTypes.string.isRequired,
 };
 export default Tab;

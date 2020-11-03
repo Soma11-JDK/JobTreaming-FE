@@ -173,7 +173,7 @@ const MyLecturePresenter = ({ param }) => {
       </ProfileContainer>
       <Subtitle title="나의 강의장" />
       <TabContainer marginTopValue="20px">
-        <Tab tabInfo={tabInfo} nowTab={param} />
+        <Tab tabInfo={tabInfo} nowTab={param} nowPage="myLecture" />
       </TabContainer>
       {param === 'mylecture' && (
         <>
@@ -258,6 +258,7 @@ const MyLecturePresenter = ({ param }) => {
                   title={title}
                   price={price}
                   salePercentage={salePercentage}
+                  btnTitle="수강신청하기"
                 />
               );
             })}
@@ -326,6 +327,7 @@ const MyLecturePresenter = ({ param }) => {
                   endTime={endTime}
                   title={title}
                   price={price}
+                  btnTitle="후기작성하기"
                 />
               );
             })}

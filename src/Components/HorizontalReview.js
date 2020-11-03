@@ -93,6 +93,34 @@ const TitleContainer = styled.div`
   color: #000000;
 `;
 
+const BestIcon = styled.div`
+  height: 30px;
+  width: 86px;
+  border-radius: 41px;
+  background-color: #3918ff;
+  font-weight: bold;
+  font-size: 16px;
+  color: #ffffff;
+  display: flex;
+  display: -webkit-flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const ProfileContainer = styled.div`
+  display: flex;
+  display: -webkit-flex;
+  align-items: center;
+  ${marginTop}
+`;
+
+const ProfileImage = styled.img``;
+
+const UserName = styled.span`
+  font-weight: bold;
+  ${marginLeft}
+`;
+
 const HorizontalReview = ({
   id,
   rating,
@@ -106,6 +134,9 @@ const HorizontalReview = ({
   title,
   review,
   imageUrl,
+  best,
+  username,
+  profileImage,
 }) => (
   <Container marginTopValue="20px">
     <ImageContainer>
@@ -114,6 +145,7 @@ const HorizontalReview = ({
     <InfoContainer marginTopValue="10px" marginLeftValue="10px">
       <InfoScoreContainer>
         <InfoTopContainer>
+          {best && <BestIcon>Best</BestIcon>}
           <RatingContainer>
             {Array(Math.floor(rating))
               .fill()
@@ -122,8 +154,16 @@ const HorizontalReview = ({
               ))}
             {rating % 1 > 0 && <StarContainer src={halfStar} />}
           </RatingContainer>
-          <DateContainer marginLeftValue="5px">{date}</DateContainer>
         </InfoTopContainer>
+        <ProfileContainer marginTopValue="10px">
+          {username && (
+            <>
+              <ProfileImage src={profileImage} />
+              <UserName marginLeftValue="5px">{username}</UserName>
+            </>
+          )}
+          <DateContainer marginLeftValue="5px">{date}</DateContainer>
+        </ProfileContainer>
         <ScoreContainer marginTopValue="5px">
           전문성 {expertScore} / 비용 {priceScore} / 전달력 {presentScore} /
           유익함 {beneficialScore} / 흥미도 {funScore} / 친절도 {kindScore}
@@ -150,7 +190,12 @@ HorizontalReview.propTypes = {
   funScore: PropTypes.number,
   kindScore: PropTypes.number,
   imageUrl: PropTypes.string.isRequired,
+  best: PropTypes.bool,
+  username: PropTypes.string,
+  profileImage: PropTypes.string,
 };
+
+const defaultProfileImg = require('assets/DefaultProfile/DefaultProfile.png');
 
 HorizontalReview.defaultProps = {
   rating: 0,
@@ -160,6 +205,9 @@ HorizontalReview.defaultProps = {
   beneficialScore: 0,
   funScore: 0,
   kindScore: 0,
+  best: false,
+  username: '',
+  profileImage: defaultProfileImg,
 };
 
 export default HorizontalReview;
