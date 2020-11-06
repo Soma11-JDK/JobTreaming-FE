@@ -9,6 +9,11 @@ const marginTop = css`
   ${({ marginTopValue }) => marginTopValue && `margin-top : ${marginTopValue};`}
 `;
 
+const marginBottom = css`
+  ${({ marginBottomValue }) =>
+    marginBottomValue && `margin-bottom : ${marginBottomValue};`}
+`;
+
 const marginLeft = css`
   ${({ marginLeftValue }) =>
     marginLeftValue && `margin-left : ${marginLeftValue};`}
@@ -21,6 +26,8 @@ const Container = styled.div`
   display: -webkit-flex;
   align-items: center;
   cursor: pointer;
+  -webkit-filter: ${props => props.filterValue};
+  filter: gray;
   ${marginTop}
 `;
 
@@ -31,24 +38,18 @@ const ImageContainer = styled.div`
 const InfoContainer = styled.div`
   ${marginTop}
   ${marginLeft}
+  height: 100%;
+
   display: flex;
   flex-direction: column;
   flex: 1;
   justify-content: space-between;
+  align-items: space-between;
 `;
 
 const Image = styled.img`
   width: 100%;
   min-height: 105px;
-`;
-
-const PriceInfoContainer = styled.div`
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  word-break: keep-all;
 `;
 
 const TimeContainer = styled.div`
@@ -106,74 +107,90 @@ const TitleSpan = styled.span`
 const ButtonContainer = styled.div`
   width: 100%;
   display: flex;
+  display: -webkit-flex;
+  flex-direction: column;
+  align-items: center;
   ${marginTop}
 `;
 
-const heartUrl = require('assets/WhiteHeart/WhiteHeart.png');
-const commentUrl = require('assets/Comment/Comment.png');
-
 const Button = styled.button`
-  max-width: 120px;
+  max-width: 200px;
   width: 100%;
-  height: ${props => props.btnHeight};
-  object-fit: contain;
-  background-color: ${props => props.btnColor};
-  opacity: 0.8;
-  border-radius: 41px;
-  color: white;
-  margin-right: 10px;
+  height: 36px;
+  background-color: #ffffff;
+  opacity: 0.4;
+  border-radius: 22px;
+  border: solid 1px #000000;
   font-weight: bold;
   display: flex;
   justify-content: center;
   align-items: center;
-`;
-
-const ButtonInsideImage = styled.img`
-  width: 30%;
-  max-width: 20px;
-`;
-
-const BeforeSaleContainer = styled.div`
-  display: flex;
-`;
-
-const Price = styled.span`
-  font-size: 1.2vw;
-  opacity: 0.5;
-  flex: 2;
-  text-decoration: line-through;
-`;
-
-const SalePercentage = styled.span`
-  font-size: 1.2vw;
-  color: #465fcc;
-  flex: 1;
-  ${marginLeft}
-`;
-
-const SalePrice = styled.span`
-  font-size: 1.6vw;
-  font-weight: bold;
-  flex: 3;
-  justify-content: flex-end;
-  margin-right: 15px;
   ${marginTop}
 `;
 
-const HorizontalLecture = ({
+const ButtonSpan = styled.span`
+  opacity: 0.8;
+  font-weight: 500;
+  color: #000000;
+  word-break: keep-all;
+`;
+
+const PriceInfoContainer = styled.div`
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  word-break: keep-all;
+  ${marginTop}
+`;
+
+const PaymentInfo = styled.span`
+  opacity: 0.8;
+  font-size: 1.5vw;
+`;
+
+const Price = styled.span`
+  font-size: 2vw;
+  font-weight: bold;
+`;
+
+const DepositContainer = styled.div`
+  display: flex;
+  display: -webkit-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+const DepositSpan = styled.span`
+  font-size: 2vw;
+  font-weight: bold;
+  color: ${props => props.fontColor};
+`;
+
+const DeadlineSpan = styled.span`
+  font-size: 0.8vw;
+  font-weight: 500;
+  color: #000000;
+  ${marginBottom}
+`;
+
+const HorizontalPayment = ({
   id,
   imageUrl,
-  title,
-  endTime,
-  liked,
-  comment,
   expert,
   category,
+  title,
+  endTime,
   price,
-  salePercentage,
-  btnTitle,
+  payCheck,
+  payDate,
+  payDeadline,
+  finishCheck,
 }) => (
-  <Container marginTopValue="20px">
+  <Container
+    filterValue={finishCheck && 'grayscale(100%)'}
+    marginTopValue="20px"
+  >
     <ImageContainer>
       <Image src={imageUrl} />
     </ImageContainer>
@@ -182,66 +199,64 @@ const HorizontalLecture = ({
         <Emoji size="20px" label="clock" symbol="⏰" />
         <Time> &nbsp;{endTime}</Time>
       </TimeContainer>
-
       <LectureInfoContainer>
         <TutorInfoSpan marginTopValue="10px">
           {expert} . {category}
         </TutorInfoSpan>
         <TitleSpan>{title}</TitleSpan>
       </LectureInfoContainer>
-      <ButtonContainer>
-        <Button btnColor="gray" btnHeight="30px">
-          <ButtonInsideImage src={heartUrl} />
-          &nbsp;&nbsp;{liked}k
-        </Button>
-        <Button btnColor="gray" btnHeight="30px">
-          <ButtonInsideImage src={commentUrl} />
-          &nbsp;&nbsp;{comment}개
-        </Button>
-      </ButtonContainer>
+      <PriceInfoContainer marginTopValue="10px">
+        <PaymentInfo>무통장입금 {payDate}</PaymentInfo>
+        <Price>
+          <CurrencyFormat price={price} />
+        </Price>
+      </PriceInfoContainer>
     </InfoContainer>
-    <PriceInfoContainer>
-      {salePercentage !== 0 && (
-        <BeforeSaleContainer>
-          <Price>
-            <CurrencyFormat price={price} />
-          </Price>
-          <SalePercentage marginLeftValue="10px">
-            {salePercentage}%
-          </SalePercentage>
-        </BeforeSaleContainer>
+    <DepositContainer>
+      {payCheck ? (
+        <DepositSpan fontColor="#ff584d"> 결제 완료</DepositSpan>
+      ) : (
+        <>
+          <DepositSpan fontColor="#ff584d">입금 대기</DepositSpan>
+          <DeadlineSpan marginBottomValue="15px">
+            {payDeadline}까지 입금
+          </DeadlineSpan>
+        </>
       )}
-      <SalePrice marginTopValue="5px">
-        <CurrencyFormat price={price} salePercentage={salePercentage} />
-      </SalePrice>
-      <ButtonContainer marginTopValue="10px">
-        <Button btnColor="#465fcc" btnHeight="40px">
-          {btnTitle}
+
+      <ButtonContainer marginTopValue="5px">
+        <Button>
+          <ButtonSpan>{finishCheck ? '후기 작성' : '문의/기대평'}</ButtonSpan>
         </Button>
+        {payCheck && (
+          <Button marginTopValue="5px">
+            <ButtonSpan>{finishCheck ? '강의 재청원' : '강의 취소'}</ButtonSpan>
+          </Button>
+        )}
       </ButtonContainer>
-    </PriceInfoContainer>
+    </DepositContainer>
   </Container>
 );
 
-HorizontalLecture.propTypes = {
+HorizontalPayment.propTypes = {
   id: PropTypes.number.isRequired,
   imageUrl: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   expert: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
   endTime: PropTypes.string.isRequired,
-  liked: PropTypes.number,
-  comment: PropTypes.number,
+  finishCheck: PropTypes.bool,
   price: PropTypes.number,
-  salePercentage: PropTypes.number,
-  btnTitle: PropTypes.string.isRequired,
+  payDate: PropTypes.string,
+  payDeadline: PropTypes.string,
+  payCheck: PropTypes.bool.isRequired,
 };
 
-HorizontalLecture.defaultProps = {
-  liked: 0,
-  comment: 0,
+HorizontalPayment.defaultProps = {
+  finishCheck: false,
   price: 0,
-  salePercentage: 0,
+  payDate: '',
+  payDeadline: '',
 };
 
-export default HorizontalLecture;
+export default HorizontalPayment;

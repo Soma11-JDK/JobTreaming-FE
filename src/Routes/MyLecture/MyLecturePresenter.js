@@ -1,10 +1,10 @@
 /* eslint-disable global-require */
 import React from 'react';
 import styled, { css } from 'styled-components';
+import PropTypes from 'prop-types';
 
 import Subtitle from 'Components/common/Subtitle';
 import Tab from 'Components/common/Tab';
-import PropTypes from 'prop-types';
 
 import LecturePreview from 'Components/LecturePreview';
 import HorizontalLecture from 'Components/HorizontalLecture';
@@ -341,4 +341,5 @@ const MyLecturePresenter = ({ param }) => {
 MyLecturePresenter.propTypes = {
   param: PropTypes.string.isRequired,
 };
+
 export default MyLecturePresenter;

@@ -376,7 +376,7 @@ const TutorPresenter = ({ name, param }) => {
 
           <SpanContainer marginTopValue="20px">
             <Span fontSize="1vw">분야</Span>
-            <Span marginLeftValue="5px" fontWeight="bold" fontSize="2vw">
+            <Span marginLeftValue="5px" fontWeight="bold" fontSize="1.5vw">
               정보통신, 그로스해커
             </Span>
           </SpanContainer>

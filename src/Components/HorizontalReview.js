@@ -150,7 +150,8 @@ const HorizontalReview = ({
             {Array(Math.floor(rating))
               .fill()
               .map((_, i) => (
-                <StarContainer src={star} />
+                // eslint-disable-next-line react/no-array-index-key
+                <StarContainer key={i} src={star} />
               ))}
             {rating % 1 > 0 && <StarContainer src={halfStar} />}
           </RatingContainer>
