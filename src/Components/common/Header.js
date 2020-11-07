@@ -166,7 +166,9 @@ const Header = ({ location: { pathname }, logged, onLogout }) => {
         </NavItem>
         <NavItem>
           {logged ? (
-            <HeaderIcon onLogout={onLogout} />
+            <SLink to="/mypage/payment">
+              <Span> 마이페이지</Span>
+            </SLink>
           ) : (
             <SLink to="/login">
               <Span>로그인 / 회원가입</Span>
