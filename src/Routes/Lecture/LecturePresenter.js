@@ -162,10 +162,8 @@ const LecturePresenter = ({
             </Menu>
             {dropdownSubCategory && <Dropdown categoryItems={categoryItems} />}
           </ListContainer>
+          <Testairbnb />
         </MenuContainer>
-        <DateRangeContainer>
-          <CustomDateRange />
-        </DateRangeContainer>
         <LectureViewContainer>
           <LectureGird>
             {items.map(item => {

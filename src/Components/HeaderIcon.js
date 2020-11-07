@@ -30,7 +30,9 @@ const imgUrl = require('assets/tempProfile.png');
 const HeaderIcon = ({ onLogout }) => {
   return (
     <Container>
-      <Icon src={imgUrl} alt="icon" />
+      <Link to="/mypage/payment">
+        <Icon src={imgUrl} alt="icon" />
+      </Link>
       <Link to="/" onClick={onLogout}>
         <Span>로그아웃</Span>
       </Link>

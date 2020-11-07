@@ -6,4 +6,5 @@ export { default as Search } from './Search/SearchContainer';
 export { default as Write } from './Write/WriteContainer';
 export { default as MyLecture } from './MyLecture/MyLectureContainer';
 export { default as Tutor } from './Tutor/TutorContainer';
+export { default as MyPage } from './MyPage/MyPageContainer';
 export { default as ScrollToTop } from './Scroll/ScrollToTop';

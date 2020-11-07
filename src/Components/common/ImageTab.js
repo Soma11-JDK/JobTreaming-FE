@@ -5,32 +5,40 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 const TabContainer = styled.div`
-  width: 100%;
+  width: 50%;
   height: 50px;
   display: flex;
+  display: -webkit-flex;
   align-items: center;
+  justify-content: center;
 `;
 
 const List = styled.ul`
-  width: 80%;
+  width: 100%;
   display: flex;
+  display: -webkit-flex;
+  justify-content: space-evenly;
 `;
 
 const Item = styled.li`
-  width: 200px;
-  height: 50px;
   text-align: center;
   transition: border-bottom 0.5s ease-in-out;
 `;
 
 const SLink = styled(Link)`
-  width: 100%;
   height: 50px;
   display: flex;
+  display: -webkit-flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  border-bottom: 3px solid ${props => (props.current ? '#3918ff' : '#000000')};
-  opacity: ${props => (props.current ? '1' : '0.4')};
+`;
+
+const Icon = styled.img``;
+
+const SpanContainer = styled.div`
+  display: flex;
+  display: -webkit-flex;
 `;
 
 const Span = styled.span`
@@ -41,19 +49,15 @@ const Span = styled.span`
   line-height: normal;
   letter-spacing: normal;
   text-align: center;
-  color: ${props => (props.current ? '#3918ff' : '#000000')};
+  color: ${props => (props.fontColor ? props.fontColor : '#000000')};
   opacity: ${props => (props.current ? '1' : '0.5')};
   word-break: keep-all;
 `;
 
-const Tab = ({ tabInfo, nowTab, nowPage }) => {
+const ImageTab = ({ tabInfo, nowTab, nowPage }) => {
   const [tabTitle, setTabTitle] = useState(nowTab);
 
   const history = useHistory();
-
-  useEffect(() => {
-    setTabTitle(nowTab);
-  });
 
   const handleClick = state => {
     history.push({
@@ -63,27 +67,34 @@ const Tab = ({ tabInfo, nowTab, nowPage }) => {
     return setTabTitle(state);
   };
 
-  function checkPage(state) {
-    let url = '';
-    if (nowPage === 'myLecture') url = `/mylectureroom/${state}`;
-    if (nowPage === 'tutor') url = `/tutor/${state}`;
-    if (nowPage === 'notification') url = `/mypage/notification/${state}`;
-
-    return url;
-  }
   return (
     <TabContainer>
       <List>
         {tabInfo.map((info, idx) => {
-          const { title, state } = info;
-
+          const { activeIcon, noActiveIcon, title, state } = info;
           return (
             <Item key={idx} onClick={() => handleClick(state)}>
-              <SLink current={tabTitle === state ? 1 : 0} to={checkPage(state)}>
-                {console.log(
-                  `tabTitle: ${tabTitle} nowtab:${nowTab} state:${state}`,
-                )}
-                <Span current={tabTitle === state ? 1 : 0}>{title}</Span>
+              <SLink
+                current={tabTitle === state ? 1 : 0}
+                to={
+                  // eslint-disable-next-line no-nested-ternary
+                  nowPage === 'myPage'
+                    ? state === 'notification'
+                      ? `/mypage/notification/notification`
+                      : `/mypage/${state}`
+                    : '/'
+                }
+              >
+                <Icon src={tabTitle === state ? activeIcon : noActiveIcon} />
+                <SpanContainer>
+                  <Span current={tabTitle === state ? 1 : 0}>{title}</Span>
+                  <Span
+                    current={tabTitle === state ? 1 : 0}
+                    fontColor="#465fcc"
+                  >
+                    (03)
+                  </Span>
+                </SpanContainer>
               </SLink>
             </Item>
           );
@@ -93,9 +104,10 @@ const Tab = ({ tabInfo, nowTab, nowPage }) => {
   );
 };
 
-Tab.propTypes = {
+ImageTab.propTypes = {
   tabInfo: PropTypes.arrayOf(PropTypes.object).isRequired,
   nowTab: PropTypes.string.isRequired,
   nowPage: PropTypes.string.isRequired,
 };
-export default Tab;
+
+export default ImageTab;
