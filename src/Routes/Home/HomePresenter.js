@@ -9,7 +9,7 @@ import Popular from 'Components/Popular';
 import PopularSlider from 'Components/PopularSlider';
 import Advertise from 'Components/Advertise';
 import Subtitle from 'Components/common/Subtitle';
-import ReviewSlider from '../../Components/ReviewSlider';
+import ReviewSlider from 'Components/ReviewSlider';
 
 const Container = styled.div`
   width: 100%;

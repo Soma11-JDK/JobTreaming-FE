@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 
 import ImageTab from 'Components/common/ImageTab';
+import Tab from 'Components/common/Tab';
 import Testairbnb from 'Components/Testairbnb';
 import HorizontalPayment from 'Components/HorizontalPayment';
 
@@ -79,19 +80,27 @@ const noClickPaymentImageUrl = require('assets/Payment/noClickPaymentIcon.png');
 const notiImageUrl = require('assets/Notification/Noti.png');
 const noClickNotiImageUrl = require('assets/Notification/noClickNoti.png');
 
-const tabInfo = [
+const ImageTabInfo = [
   {
+    id: 0,
     activeIcon: paymentImageUrl,
     noActiveIcon: noClickPaymentImageUrl,
     title: '결제 내역',
     state: 'payment',
   },
   {
+    id: 1,
     activeIcon: notiImageUrl,
     noActiveIcon: noClickNotiImageUrl,
     title: '전체 알림',
     state: 'notification',
   },
+];
+
+const notiTabInfo = [
+  { id: 0, title: '회원 알림', state: 'notification' },
+  { id: 1, title: '이벤트', state: 'event' },
+  { id: 2, title: '공지사항', state: 'notice' },
 ];
 
 const TabContainer = styled.div`
@@ -134,7 +143,7 @@ const Span = styled.span`
   ${marginLeft}
 `;
 
-const MyPagePresenter = ({ param }) => {
+const MyPagePresenter = ({ param, state }) => {
   return (
     <Container marginTopValue="80px" marginBottomValue="80px">
       <ProfileContainer marginBottomValue="20px">
@@ -145,7 +154,7 @@ const MyPagePresenter = ({ param }) => {
         <Username marginTopValue="10px">eunhye_22</Username>
       </ProfileContainer>
       <TabContainer marginTopValue="20px">
-        <ImageTab tabInfo={tabInfo} nowTab={param} nowPage="myPage" />
+        <ImageTab tabInfo={ImageTabInfo} nowTab={param} nowPage="myPage" />
       </TabContainer>
       {param === 'payment' && (
         <>
@@ -223,12 +232,30 @@ const MyPagePresenter = ({ param }) => {
           </LectureViewContainer>
         </>
       )}
+      {param === 'notification' && (
+        <>
+          <IndexContainer marginTopValue="30px" marginBottomValue="30px">
+            <IndexIcon src={polygonUrl} />
+            <Span fontSize="36px" fontWeight="bold" marginLeftValue="5px">
+              전체 알림
+            </Span>
+          </IndexContainer>
+          <TabContainer marginTopValue="20px">
+            <Tab tabInfo={notiTabInfo} nowTab={state} nowPage="notification" />
+          </TabContainer>
+        </>
+      )}
     </Container>
   );
 };
 
 MyPagePresenter.propTypes = {
   param: PropTypes.string.isRequired,
+  state: PropTypes.string,
+};
+
+MyPagePresenter.defaultProps = {
+  state: '',
 };
 
 export default MyPagePresenter;

@@ -51,6 +51,10 @@ const Tab = ({ tabInfo, nowTab, nowPage }) => {
 
   const history = useHistory();
 
+  useEffect(() => {
+    setTabTitle(nowTab);
+  });
+
   const handleClick = state => {
     history.push({
       state,
@@ -59,6 +63,14 @@ const Tab = ({ tabInfo, nowTab, nowPage }) => {
     return setTabTitle(state);
   };
 
+  function checkPage(state) {
+    let url = '';
+    if (nowPage === 'myLecture') url = `/mylectureroom/${state}`;
+    if (nowPage === 'tutor') url = `/tutor/${state}`;
+    if (nowPage === 'notification') url = `/mypage/notification/${state}`;
+
+    return url;
+  }
   return (
     <TabContainer>
       <List>
@@ -67,14 +79,10 @@ const Tab = ({ tabInfo, nowTab, nowPage }) => {
 
           return (
             <Item key={idx} onClick={() => handleClick(state)}>
-              <SLink
-                current={tabTitle === state ? 1 : 0}
-                to={
-                  nowPage === 'myLecture'
-                    ? `/mylectureroom/${state}`
-                    : `/tutor/${state}`
-                }
-              >
+              <SLink current={tabTitle === state ? 1 : 0} to={checkPage(state)}>
+                {console.log(
+                  `tabTitle: ${tabTitle} nowtab:${nowTab} state:${state}`,
+                )}
                 <Span current={tabTitle === state ? 1 : 0}>{title}</Span>
               </SLink>
             </Item>

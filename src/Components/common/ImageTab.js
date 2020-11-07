@@ -72,12 +72,18 @@ const ImageTab = ({ tabInfo, nowTab, nowPage }) => {
       <List>
         {tabInfo.map((info, idx) => {
           const { activeIcon, noActiveIcon, title, state } = info;
-          console.log(`${tabTitle} ${state}`);
           return (
             <Item key={idx} onClick={() => handleClick(state)}>
               <SLink
                 current={tabTitle === state ? 1 : 0}
-                to={nowPage === 'myPage' ? `/mypage/${state}` : '/'}
+                to={
+                  // eslint-disable-next-line no-nested-ternary
+                  nowPage === 'myPage'
+                    ? state === 'notification'
+                      ? `/mypage/notification/notification`
+                      : `/mypage/${state}`
+                    : '/'
+                }
               >
                 <Icon src={tabTitle === state ? activeIcon : noActiveIcon} />
                 <SpanContainer>

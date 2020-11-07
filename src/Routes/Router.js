@@ -24,15 +24,9 @@ export default () => (
       <Route path="/search" component={Search} />
       <Route path="/write" component={Write} />
       <Route path="/mylectureroom/:mylecturetab" component={MyLecture} />
-      <Route path="/mylectureroom/:mylecturetab" component={MyLecture} />
-      <Route path="/mylectureroom/:mylecturetab" component={MyLecture} />
-      <Route path="/mylectureroom/:mylecturetab" component={MyLecture} />
       <Route path="/tutor/:tutortab" component={Tutor} />
-      <Route path="/tutor/:tutortab" component={Tutor} />
-      <Route path="/tutor/:tutortab" component={Tutor} />
-      <Route path="/tutor/:tutortab" component={Tutor} />
+      <Route path="/mypage/:mypagetab/:notitab" component={MyPage} />
       <Route path="/mypage/:mypagetab" component={MyPage} />
-      <Route path="/mypage/notification" component={MyPage} />
       <Redirect from="*" to="/" />
     </Switch>
   </ScrollToTop>
