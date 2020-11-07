@@ -6,6 +6,7 @@ import ImageTab from 'Components/common/ImageTab';
 import Tab from 'Components/common/Tab';
 import Testairbnb from 'Components/Testairbnb';
 import HorizontalPayment from 'Components/HorizontalPayment';
+import Notification from 'Components/common/Notification';
 
 import { items } from '../Home/HomePresenter';
 
@@ -103,6 +104,20 @@ const notiTabInfo = [
   { id: 2, title: '공지사항', state: 'notice' },
 ];
 
+const notiInfo = [
+  {
+    tag: '수강일 안내',
+    title:
+      '‘비전공자에서 10년 경력 개발자가 될 수 있었던 노하우’ 수강일이 하루 남았습니다.',
+    date: '20.09.16',
+  },
+  {
+    tag: '결제 완료',
+    title: '‘현직자가 알려주는 IT개발 A to Z’ 결제가 완료되었습니다. ',
+    date: '20.09.10',
+  },
+];
+
 const TabContainer = styled.div`
   width: 100%;
   display: flex;
@@ -189,7 +204,7 @@ const MyPagePresenter = ({ param, state }) => {
                   title={title}
                   endTime={endTime}
                   price={price}
-                  payCheck={payCheck}
+                  payCheck
                   payDeadline={payDeadline}
                   finishCheck={finishCheck}
                 />
@@ -243,6 +258,7 @@ const MyPagePresenter = ({ param, state }) => {
           <TabContainer marginTopValue="20px">
             <Tab tabInfo={notiTabInfo} nowTab={state} nowPage="notification" />
           </TabContainer>
+          <Notification notiInfo={notiInfo} />
         </>
       )}
     </Container>
