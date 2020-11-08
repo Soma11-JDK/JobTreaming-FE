@@ -12,6 +12,7 @@ import {
   MyLecture,
   Tutor,
   MyPage,
+  LectureDetail,
 } from './index';
 
 export default () => (
@@ -27,6 +28,7 @@ export default () => (
       <Route path="/tutor/:tutortab" component={Tutor} />
       <Route path="/mypage/:mypagetab/:notitab" component={MyPage} />
       <Route path="/mypage/:mypagetab" component={MyPage} />
+      <Route path="/lecturedetail/:id" component={LectureDetail} />
       <Redirect from="*" to="/" />
     </Switch>
   </ScrollToTop>
