@@ -1,15 +1,13 @@
 /* eslint-disable global-require */
 import React from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 
 import Slider from 'Components/common/Slider';
-import Category from 'Components/Category';
-import Popular from 'Components/Popular';
-import PopularSlider from 'Components/PopularSlider';
-import Advertise from 'Components/Advertise';
+import Category from 'Components/main/Category';
+import PopularSlider from 'Components/main/PopularSlider';
+import Advertise from 'Components/main/Advertise';
 import Subtitle from 'Components/common/Subtitle';
-import ReviewSlider from 'Components/ReviewSlider';
+import ReviewSlider from 'Components/main/ReviewSlider';
 
 const Container = styled.div`
   width: 100%;

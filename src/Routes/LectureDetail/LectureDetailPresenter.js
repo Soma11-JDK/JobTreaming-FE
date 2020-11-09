@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
+
 import { HashLink } from 'react-router-hash-link';
+import CustomCalendar from 'Components/common/CustomCalendar';
+import CurrencyFormat from 'Components/common/CurrencyFormat';
+import { Link } from 'react-router-dom';
 
 const marginTop = css`
   ${({ marginTopValue }) => marginTopValue && `margin-top : ${marginTopValue};`}
@@ -25,20 +29,23 @@ const marginRight = css`
 const Container = styled.div`
   display: flex;
   display: -webkit-flex;
+  justify-content: center;
   width: 100%;
   padding: 0 10%;
   ${marginTop}
 `;
 
 const LeftContainer = styled.div`
-  flex: 0.7;
-
+  width: 80%;
   ${marginRight}
 `;
 
 const RightContainer = styled.div`
-  flex: 0.3;
-  background-color: blue;
+  width: 40%;
+  box-shadow: 0 0 9px 3px rgba(164, 164, 164, 0.1);
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 10px;
 `;
 
 const TutorContainer = styled.div`
@@ -68,7 +75,7 @@ const TutorInfoContainer = styled.div`
 const Span = styled.span`
   font-size: ${props => props.fontSize};
   font-weight: ${props => props.fontWeight};
-  opacity: ${props => props.fontOpacity};
+  opacity: ${props => props.fontopacity};
   color: ${props => props.color};
   word-break: keep-all;
   ${marginTop}
@@ -79,6 +86,7 @@ const TabContainer = styled.div`
   height: 50px;
   display: flex;
   align-items: center;
+  ${marginTop}
 `;
 
 const List = styled.ul`
@@ -100,7 +108,7 @@ const SLink = styled.a`
   align-items: center;
   justify-content: center;
   border-bottom: 3px solid ${props => props.color};
-  opacity: ${props => props.fontOpacity};
+  opacity: ${props => props.fontopacity};
 `;
 
 const tabInfo = [
@@ -127,6 +135,85 @@ const Line = styled.div`
   ${marginTop}
 `;
 
+const Column = styled.div`
+  display: flex;
+  display: -webkit-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  height: 100px;
+`;
+
+const Row = styled.div`
+  display: flex;
+  display: -webkit-flex;
+  justify-content: space-around;
+  align-items: center;
+  ${marginTop}
+`;
+
+const BeforeSaleContainer = styled.div`
+  display: flex;
+  display: -webkit-flex;
+  justify-content: flex-end;
+  ${marginTop}
+`;
+
+const Price = styled.span`
+  font-size: 20px;
+  opacity: 0.6;
+  font-weight: 500;
+  text-decoration: line-through;
+`;
+
+const SalePercentage = styled.span`
+  font-size: 20px;
+  font-weight: bold;
+  color: #465fcc;
+  ${marginLeft}
+`;
+
+const SalePrice = styled.span`
+  font-size: 30px;
+  font-weight: bold;
+  display: flex;
+  display: -webkit-flex;
+  justify-content: flex-end;
+  ${marginTop}
+`;
+
+const heartUrl = require('assets/WhiteHeart/WhiteHeart.png');
+
+const HeartContainer = styled.button`
+  display: flex;
+  display: -webkit-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background-color: #dfdfdf;
+  width: 60px;
+  height: 60px;
+  ${marginRight}
+`;
+
+const HeartImage = styled.img``;
+
+const ApplyButton = styled.button`
+  border-radius: 10px;
+  background-color: #ff584d;
+  font-weight: bold;
+  color: #000000;
+  text-align: center;
+  display: flex;
+  display: -webkit-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 60px;
+  ${marginTop}
+`;
+
 const LectureDetailPresenter = ({ location }) => {
   const [tabTitle, setTabTitle] = useState('lecureintroduce');
 
@@ -146,12 +233,14 @@ const LectureDetailPresenter = ({ location }) => {
             <Span fontSize="1.5vw" fontWeight="500">
               정보통신 . 이은아 멘토
             </Span>
-            <Span fontSize="1.8vw" fontWeight="500">
-              튜터 프로필 {'>'}
-            </Span>
+            <Link to="/tutor/introduce">
+              <Span fontSize="1.8vw" fontWeight="500">
+                튜터 프로필 {'>'}
+              </Span>
+            </Link>
           </TutorInfoContainer>
         </TutorContainer>
-        <TabContainer>
+        <TabContainer marginTopValue="10px">
           <List>
             {tabInfo.map(info => {
               const { id, title, anchor } = info;
@@ -161,15 +250,15 @@ const LectureDetailPresenter = ({ location }) => {
                   <SLink
                     as={HashLink}
                     color={tabTitle === anchor ? '#3918ff' : '#000000'}
-                    fontOpacity={tabTitle === anchor ? '1' : '0.4'}
+                    fontopacity={tabTitle === anchor ? '1' : '0.4'}
                     to={`${location.pathname}#${anchor}`}
                   >
                     <Span
                       fontSize="22px"
-                      fontWeight="normal"
+                      fontWeight="bold"
                       current={tabTitle === anchor ? 1 : 0}
                       color={tabTitle === anchor ? '#3918ff' : '#000000'}
-                      fontOpacity={tabTitle === anchor ? '1' : '0.5'}
+                      fontopacity={tabTitle === anchor ? '1' : '0.5'}
                     >
                       {title}
                     </Span>
@@ -210,7 +299,45 @@ const LectureDetailPresenter = ({ location }) => {
           <Line marginTopValue="5px" />
         </Section>
       </LeftContainer>
-      <RightContainer />
+      <RightContainer>
+        <CustomCalendar />
+        <Line marginTopValue="50px" />
+        <Row marginTopValue="20px">
+          <Column>
+            <Span fontSize="18px" fontWeight="500">
+              수강 인원
+            </Span>
+            <Span fontSize="22px" fontWeight="bold">
+              8<Span fontopacity="0.4"> / 12</Span>
+            </Span>
+          </Column>
+          <Column>
+            <Span fontSize="18px" fontWeight="500">
+              진행시간
+            </Span>
+            <Span fontSize="22px" fontWeight="bold">
+              총 360분
+            </Span>
+          </Column>
+        </Row>
+        <Line marginTopValue="50px" />
+        <BeforeSaleContainer marginTopValue="40px">
+          <Price>
+            <CurrencyFormat price={280000} />
+          </Price>
+          <SalePercentage marginLeftValue="10px">{20}%</SalePercentage>
+        </BeforeSaleContainer>
+        <SalePrice marginTopValue="10px">
+          <CurrencyFormat price={280000} salePercentage={20} />
+        </SalePrice>
+        <Row marginTopValue="50px">
+          <HeartContainer marginRightValue="10px">
+            <HeartImage src={heartUrl} />
+            2.6K
+          </HeartContainer>
+          <ApplyButton>수강신청하기</ApplyButton>
+        </Row>
+      </RightContainer>
     </Container>
   );
 };

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { categoryItems } from 'Components/Category';
+import { categoryItems } from 'Components/main/Category';
 import LecturePresenter from './LecturePresenter';
 
 export default class LectureContainer extends Component {

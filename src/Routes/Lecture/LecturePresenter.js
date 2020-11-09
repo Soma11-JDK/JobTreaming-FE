@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-import LecturePreview from 'Components/LecturePreview';
+import LecturePreview from 'Components/lecture/LecturePreview';
 import Subtitle from 'Components/common/Subtitle';
-import { categoryItems } from 'Components/Category';
+import { categoryItems } from 'Components/main/Category';
 import Dropdown from 'Components/common/Dropdown';
 import CustomDateRange from 'Components/common/CustomDateRange';
 import TestDateRange from 'Components/TestDateRange';
 import TestDatePicker from 'Components/TestDatePicker';
-import Testairbnb from 'Components/Testairbnb';
+import CustomDate from 'Components/common/CustomDate';
 
 import { items } from '../Home/HomePresenter';
 
@@ -60,7 +60,7 @@ const ListContainer = styled.div`
 
 const Menu = styled.div`
   width: 140px;
-  height: 40px;
+  height: 68px;
   border: 1px solid black;
   border-radius: 999px;
   margin-right: 10px;
@@ -162,7 +162,9 @@ const LecturePresenter = ({
             </Menu>
             {dropdownSubCategory && <Dropdown categoryItems={categoryItems} />}
           </ListContainer>
-          <Testairbnb />
+          <ListContainer>
+            <CustomDate />
+          </ListContainer>
         </MenuContainer>
         <LectureViewContainer>
           <LectureGird>

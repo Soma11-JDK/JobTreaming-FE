@@ -2,8 +2,8 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 
-import Emoji from './common/Emoji';
-import CurrencyFormat from './common/CurrencyFormat';
+import Emoji from '../common/Emoji';
+import CurrencyFormat from '../common/CurrencyFormat';
 
 const marginTop = css`
   ${({ marginTopValue }) => marginTopValue && `margin-top : ${marginTopValue};`}
@@ -135,6 +135,7 @@ const ButtonInsideImage = styled.img`
 
 const BeforeSaleContainer = styled.div`
   display: flex;
+  display: -webkit-flex;
 `;
 
 const Price = styled.span`

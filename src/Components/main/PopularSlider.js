@@ -4,7 +4,7 @@ import Slider from 'react-slick';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-import LecturePreview from 'Components/LecturePreview';
+import LecturePreview from 'Components/lecture/LecturePreview';
 
 const Container = styled.div`
   width: 100%;
