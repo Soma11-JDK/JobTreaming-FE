@@ -6,9 +6,9 @@ import Subtitle from 'Components/common/Subtitle';
 import Tab from 'Components/common/Tab';
 import PropTypes from 'prop-types';
 
-import HorizontalLecture from 'Components/HorizontalLecture';
-import HorizontalReview from 'Components/HorizontalReview';
-import RadarChart from 'Components/RadarChart';
+import HorizontalLecture from 'Components/lecture/HorizontalLecture';
+import HorizontalReview from 'Components/lecture/HorizontalReview';
+import RadarChart from 'Components/common/RadarChart';
 import Dropdown from 'Components/common/Dropdown';
 
 import { items } from '../Home/HomePresenter';
@@ -133,7 +133,7 @@ const Span = styled.span`
   font-weight: ${props => props.fontWeight || 500};
   font-size: ${props => props.fontSize || '28px'};
   word-break: keep-all;
-  opacity: ${props => props.fontOpacity || 1};
+  opacity: ${props => props.fontopacity || 1};
   ${marginTop}
   ${marginLeft}
 `;
@@ -520,7 +520,7 @@ const TutorPresenter = ({ name, param }) => {
                 <ScoreDefaultBar>
                   <ScoreBar scoreWidth={`${(128 / 214) * 100}%`} />
                 </ScoreDefaultBar>
-                <Span fontSize="16px" fontOpacity="0.7">
+                <Span fontSize="16px" fontopacity="0.7">
                   (128명)
                 </Span>
               </ScoreLineContainer>
@@ -529,7 +529,7 @@ const TutorPresenter = ({ name, param }) => {
                 <ScoreDefaultBar>
                   <ScoreBar scoreWidth={`${(62 / 214) * 100}%`} />
                 </ScoreDefaultBar>
-                <Span fontSize="16px" fontOpacity="0.7">
+                <Span fontSize="16px" fontopacity="0.7">
                   (62명)
                 </Span>
               </ScoreLineContainer>
@@ -538,7 +538,7 @@ const TutorPresenter = ({ name, param }) => {
                 <ScoreDefaultBar>
                   <ScoreBar scoreWidth={`${(16 / 214) * 100}%`} />
                 </ScoreDefaultBar>
-                <Span fontSize="16px" fontOpacity="0.7">
+                <Span fontSize="16px" fontopacity="0.7">
                   (16명)
                 </Span>
               </ScoreLineContainer>
@@ -547,7 +547,7 @@ const TutorPresenter = ({ name, param }) => {
                 <ScoreDefaultBar>
                   <ScoreBar scoreWidth={`${(5 / 214) * 100}%`} />
                 </ScoreDefaultBar>
-                <Span fontSize="16px" fontOpacity="0.7">
+                <Span fontSize="16px" fontopacity="0.7">
                   (5명)
                 </Span>
               </ScoreLineContainer>
@@ -556,7 +556,7 @@ const TutorPresenter = ({ name, param }) => {
                 <ScoreDefaultBar>
                   <ScoreBar scoreWidth={`${(3 / 214) * 100}%`} />
                 </ScoreDefaultBar>
-                <Span fontSize="16px" fontOpacity="0.7">
+                <Span fontSize="16px" fontopacity="0.7">
                   (3명)
                 </Span>
               </ScoreLineContainer>
@@ -566,7 +566,7 @@ const TutorPresenter = ({ name, param }) => {
           </StatisticContainer>
           <SpanContainer marginTopValue="50px">
             <Span fontWeight="bold">수강생 후기</Span>
-            <Span fontOpacity="0.6">(28)</Span>
+            <Span fontopacity="0.6">(28)</Span>
           </SpanContainer>
           <MenuContainer marginTopValue="30px">
             <ListContainer

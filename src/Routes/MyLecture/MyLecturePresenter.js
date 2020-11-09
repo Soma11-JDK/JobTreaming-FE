@@ -6,9 +6,9 @@ import PropTypes from 'prop-types';
 import Subtitle from 'Components/common/Subtitle';
 import Tab from 'Components/common/Tab';
 
-import LecturePreview from 'Components/LecturePreview';
-import HorizontalLecture from 'Components/HorizontalLecture';
-import HorizontalReview from 'Components/HorizontalReview';
+import LecturePreview from 'Components/lecture/LecturePreview';
+import HorizontalLecture from 'Components/lecture/HorizontalLecture';
+import HorizontalReview from 'Components/lecture/HorizontalReview';
 
 import { items } from '../Home/HomePresenter';
 

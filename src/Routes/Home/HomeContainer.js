@@ -1,7 +1,7 @@
 /* eslint-disable global-require */
 import React, { Component } from 'react';
 
-import { categoryItems } from 'Components/Category';
+import { categoryItems } from 'Components/main/Category';
 import { categoryApi } from 'api';
 import axios from 'axios';
 import HomePresenter from './HomePresenter';

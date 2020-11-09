@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 
 import ImageTab from 'Components/common/ImageTab';
 import Tab from 'Components/common/Tab';
-import Testairbnb from 'Components/Testairbnb';
-import HorizontalPayment from 'Components/HorizontalPayment';
-import Notification from 'Components/common/Notification';
+import CustomDate from 'Components/common/CustomDate';
+import HorizontalPayment from 'Components/lecture/HorizontalPayment';
+import Notification from 'Components/mypage/Notification';
 
 import { items } from '../Home/HomePresenter';
 
@@ -179,7 +179,7 @@ const MyPagePresenter = ({ param, state }) => {
               결제 내역
             </Span>
           </IndexContainer>
-          <Testairbnb />
+          <CustomDate />
           <LectureViewContainer marginBottomValue="60px">
             {items.map(item => {
               const {

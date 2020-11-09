@@ -20,12 +20,12 @@ const InfoContainer = styled.li`
 
 const TagSpan = styled.span`
   font-weight: bold;
-  opacity: ${props => props.fontOpacity};
+  opacity: ${props => props.fontopacity};
   font-size: 24px;
 `;
 
 const TitleSpan = styled.span`
-  opacity: ${props => props.fontOpacity};
+  opacity: ${props => props.fontopacity};
   font-size: 22px;
   display: flex;
   display: -webkit-flex;
@@ -35,7 +35,7 @@ const TitleSpan = styled.span`
 
 const DateSpan = styled.span`
   font-weight: 500;
-  opacity: ${props => props.fontOpacity};
+  opacity: ${props => props.fontopacity};
   font-size: 18px;
 `;
 
@@ -52,13 +52,13 @@ const Notification = ({ notiInfo }) => {
     <NotificationContainer>
       {notiInfo.map(item => {
         const { tag, title, date } = item;
-        const fontOpacity = title.length > 40 ? 1 : 0.6;
+        const fontopacity = title.length > 40 ? 1 : 0.6;
         return (
           <>
             <InfoContainer>
-              <TagSpan fontOpacity={fontOpacity}>[{tag}]</TagSpan>
-              <TitleSpan fontOpacity={fontOpacity}>{title}</TitleSpan>
-              <DateSpan fontOpacity={fontOpacity}>{date}</DateSpan>
+              <TagSpan fontopacity={fontopacity}>[{tag}]</TagSpan>
+              <TitleSpan fontopacity={fontopacity}>{title}</TitleSpan>
+              <DateSpan fontopacity={fontopacity}>{date}</DateSpan>
             </InfoContainer>
             <Line />
           </>

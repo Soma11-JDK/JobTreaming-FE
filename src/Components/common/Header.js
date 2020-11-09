@@ -3,7 +3,7 @@ import { Link, withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-import { categoryItems } from 'Components/Category';
+import { categoryItems } from 'Components/main/Category';
 import HeaderIcon from '../HeaderIcon';
 import Dropdown from './Dropdown';
 
