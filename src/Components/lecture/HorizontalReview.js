@@ -190,7 +190,7 @@ HorizontalReview.propTypes = {
   beneficialScore: PropTypes.number,
   funScore: PropTypes.number,
   kindScore: PropTypes.number,
-  imageUrl: PropTypes.string.isRequired,
+  imageUrl: PropTypes.string,
   best: PropTypes.bool,
   username: PropTypes.string,
   profileImage: PropTypes.string,
@@ -209,6 +209,7 @@ HorizontalReview.defaultProps = {
   best: false,
   username: '',
   profileImage: defaultProfileImg,
+  imageUrl: '',
 };
 
 export default HorizontalReview;

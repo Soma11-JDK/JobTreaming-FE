@@ -12,6 +12,7 @@ import RadarChart from 'Components/common/RadarChart';
 import Dropdown from 'Components/common/Dropdown';
 
 import { items } from '../Home/HomePresenter';
+import Statistic from '../../Components/review/Statistic';
 
 const marginTop = css`
   ${({ marginTopValue }) => marginTopValue && `margin-top : ${marginTopValue};`}
@@ -181,56 +182,6 @@ const LectureViewContainer = styled.div`
   height: 100%;
   ${marginBottom}
 `;
-
-const StatisticContainer = styled.div`
-  display: flex;
-  display: -webkit-flex;
-  justify-content: center;
-  align-items: center;
-  width: 80%;
-  height: 440px;
-  border-radius: 10px;
-  box-shadow: 0 0 9px 3px rgba(164, 164, 164, 0.1);
-  background-color: #ffffff;
-  padding: 60px 40px;
-  ${marginTop}
-  ${marginLeft}
-  ${marginRight}
-`;
-
-const StatisticLeftContainer = styled.div`
-  display: flex;
-  display: -webkit-flex;
-  flex-direction: column;
-  justify-content: space-around;
-  height: 100%;
-  width: 40%;
-`;
-
-const ScoreLineContainer = styled.div`
-  display: flex;
-  display: -webkit-flex;
-  align-items: center;
-  width: 100%;
-`;
-
-const ScoreDefaultBar = styled.div`
-  height: 10px;
-  flex: 1;
-  max-width: 80px;
-  justify-content: center;
-  background-color: #f1f1f1;
-  border-radius: 3px;
-`;
-
-const ScoreBar = styled.div`
-  height: 10px;
-  border-radius: 3px;
-  background-color: #2a2a2a;
-  width: ${props => props.scoreWidth};
-`;
-
-const statisticRightContainer = styled.div``;
 
 const MenuContainer = styled.div`
   display: flex;
@@ -486,84 +437,7 @@ const TutorPresenter = ({ name, param }) => {
       )}
       {param === 'review' && (
         <>
-          <StatisticContainer
-            marginTopValue="50px"
-            marginLeftValue="auto"
-            marginRightValue="auto"
-          >
-            <StatisticLeftContainer>
-              <Span>매우 추천합니다!</Span>
-              <SpanContainer marginTopValue="10px">
-                <Span marginLeftValue="5px" fontWeight="bold" fontSize="2vw">
-                  4.9
-                </Span>
-                <Span
-                  marginLeftValue="5px"
-                  fontWeight="bold"
-                  fontSize="2vw"
-                  fontColor="#999999"
-                >
-                  / 5.0
-                </Span>
-                <Span fontSize="1vw"> (214명)</Span>
-              </SpanContainer>
-              <SpanContainer marginTopValue="10px">
-                {Array(Math.floor(4.9))
-                  .fill()
-                  .map((_, i) => (
-                    <StarContainer src={star} />
-                  ))}
-                {4.9 % 1 > 0 && <StarContainer src={halfStar} />}
-              </SpanContainer>
-              <ScoreLineContainer>
-                <Span fontSize="18px"> 5점 </Span>
-                <ScoreDefaultBar>
-                  <ScoreBar scoreWidth={`${(128 / 214) * 100}%`} />
-                </ScoreDefaultBar>
-                <Span fontSize="16px" fontopacity="0.7">
-                  (128명)
-                </Span>
-              </ScoreLineContainer>
-              <ScoreLineContainer>
-                <Span fontSize="18px"> 4점 </Span>
-                <ScoreDefaultBar>
-                  <ScoreBar scoreWidth={`${(62 / 214) * 100}%`} />
-                </ScoreDefaultBar>
-                <Span fontSize="16px" fontopacity="0.7">
-                  (62명)
-                </Span>
-              </ScoreLineContainer>
-              <ScoreLineContainer>
-                <Span fontSize="18px"> 3점 </Span>
-                <ScoreDefaultBar>
-                  <ScoreBar scoreWidth={`${(16 / 214) * 100}%`} />
-                </ScoreDefaultBar>
-                <Span fontSize="16px" fontopacity="0.7">
-                  (16명)
-                </Span>
-              </ScoreLineContainer>
-              <ScoreLineContainer>
-                <Span fontSize="18px"> 2점 </Span>
-                <ScoreDefaultBar>
-                  <ScoreBar scoreWidth={`${(5 / 214) * 100}%`} />
-                </ScoreDefaultBar>
-                <Span fontSize="16px" fontopacity="0.7">
-                  (5명)
-                </Span>
-              </ScoreLineContainer>
-              <ScoreLineContainer>
-                <Span fontSize="18px"> 1점 </Span>
-                <ScoreDefaultBar>
-                  <ScoreBar scoreWidth={`${(3 / 214) * 100}%`} />
-                </ScoreDefaultBar>
-                <Span fontSize="16px" fontopacity="0.7">
-                  (3명)
-                </Span>
-              </ScoreLineContainer>
-            </StatisticLeftContainer>
-
-            <RadarChart title="튜터분석 그래프" />
-          </StatisticContainer>
+          <Statistic chartTitle="튜터분석 그래프" />
           <SpanContainer marginTopValue="50px">
             <Span fontWeight="bold">수강생 후기</Span>
             <Span fontopacity="0.6">(28)</Span>

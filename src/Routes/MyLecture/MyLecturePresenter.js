@@ -343,3 +343,4 @@ MyLecturePresenter.propTypes = {
 };
 
 export default MyLecturePresenter;
+export { reviewItems };
