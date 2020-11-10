@@ -10,6 +10,7 @@ import LecturePreview from 'Components/lecture/LecturePreview';
 import HorizontalLecture from 'Components/lecture/HorizontalLecture';
 import HorizontalReview from 'Components/lecture/HorizontalReview';
 
+import Question from 'Components/lecture/Question';
 import { items } from '../Home/HomePresenter';
 
 const marginTop = css`
@@ -328,6 +329,44 @@ const MyLecturePresenter = ({ param }) => {
                   title={title}
                   price={price}
                   btnTitle="후기작성하기"
+                />
+              );
+            })}
+          </LectureViewContainer>
+        </>
+      )}
+      {param === 'myquestion' && (
+        <>
+          <SpanContainer marginTopValue="40px">
+            <Span textColor="#000000">작성 완료한 문의/기대평</Span>
+            <Span textColor="#465fcc" marginLeftValue="8px">
+              ({items.length})
+            </Span>
+          </SpanContainer>
+          <LectureViewContainer marginBottomValue="60px">
+            {items.map(item => {
+              const {
+                id,
+                expert,
+                category,
+                endTime,
+                title,
+                url,
+                price,
+                salePercentage,
+              } = item;
+              return (
+                <Question
+                  key={id}
+                  id={id}
+                  imageUrl={url}
+                  expert={expert}
+                  category={category}
+                  endTime={endTime}
+                  title={title}
+                  price={price}
+                  salePercentage={salePercentage}
+                  btnTitle="수강신청하기"
                 />
               );
             })}
