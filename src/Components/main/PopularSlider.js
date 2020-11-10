@@ -4,6 +4,7 @@ import Slider from 'react-slick';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
+import { Link } from 'react-router-dom';
 import LecturePreview from 'Components/lecture/LecturePreview';
 
 const Container = styled.div`
@@ -20,8 +21,8 @@ const StyledSlider = styled(Slider)`
 
 const SliderArrow = styled.div`
   position: absolute;
-  z-index: 3;
-  width: 95%;
+
+  width: 100%;
   padding: 5% 0;
   right: 0;
   left: 0;

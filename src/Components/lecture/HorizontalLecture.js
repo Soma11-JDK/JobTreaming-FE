@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import Emoji from '../common/Emoji';
 import CurrencyFormat from '../common/CurrencyFormat';
@@ -174,54 +175,56 @@ const HorizontalLecture = ({
   salePercentage,
   btnTitle,
 }) => (
-  <Container marginTopValue="20px">
-    <ImageContainer>
-      <Image src={imageUrl} />
-    </ImageContainer>
-    <InfoContainer marginTopValue="10px" marginLeftValue="10px">
-      <TimeContainer>
-        <Emoji size="20px" label="clock" symbol="⏰" />
-        <Time> &nbsp;{endTime}</Time>
-      </TimeContainer>
+  <Link to={`/lecturedetail/${id}`}>
+    <Container marginTopValue="20px">
+      <ImageContainer>
+        <Image src={imageUrl} />
+      </ImageContainer>
+      <InfoContainer marginTopValue="10px" marginLeftValue="10px">
+        <TimeContainer>
+          <Emoji size="20px" label="clock" symbol="⏰" />
+          <Time> &nbsp;{endTime}</Time>
+        </TimeContainer>
 
-      <LectureInfoContainer>
-        <TutorInfoSpan marginTopValue="10px">
-          {expert} . {category}
-        </TutorInfoSpan>
-        <TitleSpan>{title}</TitleSpan>
-      </LectureInfoContainer>
-      <ButtonContainer>
-        <Button btnColor="gray" btnHeight="30px">
-          <ButtonInsideImage src={heartUrl} />
-          &nbsp;&nbsp;{liked}k
-        </Button>
-        <Button btnColor="gray" btnHeight="30px">
-          <ButtonInsideImage src={commentUrl} />
-          &nbsp;&nbsp;{comment}개
-        </Button>
-      </ButtonContainer>
-    </InfoContainer>
-    <PriceInfoContainer>
-      {salePercentage !== 0 && (
-        <BeforeSaleContainer>
-          <Price>
-            <CurrencyFormat price={price} />
-          </Price>
-          <SalePercentage marginLeftValue="10px">
-            {salePercentage}%
-          </SalePercentage>
-        </BeforeSaleContainer>
-      )}
-      <SalePrice marginTopValue="5px">
-        <CurrencyFormat price={price} salePercentage={salePercentage} />
-      </SalePrice>
-      <ButtonContainer marginTopValue="10px">
-        <Button btnColor="#465fcc" btnHeight="40px">
-          {btnTitle}
-        </Button>
-      </ButtonContainer>
-    </PriceInfoContainer>
-  </Container>
+        <LectureInfoContainer>
+          <TutorInfoSpan marginTopValue="10px">
+            {expert} . {category}
+          </TutorInfoSpan>
+          <TitleSpan>{title}</TitleSpan>
+        </LectureInfoContainer>
+        <ButtonContainer>
+          <Button btnColor="gray" btnHeight="30px">
+            <ButtonInsideImage src={heartUrl} />
+            &nbsp;&nbsp;{liked}k
+          </Button>
+          <Button btnColor="gray" btnHeight="30px">
+            <ButtonInsideImage src={commentUrl} />
+            &nbsp;&nbsp;{comment}개
+          </Button>
+        </ButtonContainer>
+      </InfoContainer>
+      <PriceInfoContainer>
+        {salePercentage !== 0 && (
+          <BeforeSaleContainer>
+            <Price>
+              <CurrencyFormat price={price} />
+            </Price>
+            <SalePercentage marginLeftValue="10px">
+              {salePercentage}%
+            </SalePercentage>
+          </BeforeSaleContainer>
+        )}
+        <SalePrice marginTopValue="5px">
+          <CurrencyFormat price={price} salePercentage={salePercentage} />
+        </SalePrice>
+        <ButtonContainer marginTopValue="10px">
+          <Button btnColor="#465fcc" btnHeight="40px">
+            {btnTitle}
+          </Button>
+        </ButtonContainer>
+      </PriceInfoContainer>
+    </Container>
+  </Link>
 );
 
 HorizontalLecture.propTypes = {

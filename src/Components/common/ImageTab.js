@@ -57,6 +57,9 @@ const Span = styled.span`
 const ImageTab = ({ tabInfo, nowTab, nowPage }) => {
   const [tabTitle, setTabTitle] = useState(nowTab);
 
+  useEffect(() => {
+    setTabTitle(nowTab);
+  });
   const history = useHistory();
 
   const handleClick = state => {
@@ -74,6 +77,7 @@ const ImageTab = ({ tabInfo, nowTab, nowPage }) => {
           const { activeIcon, noActiveIcon, title, state } = info;
           return (
             <Item key={idx} onClick={() => handleClick(state)}>
+              {console.log(`tabtitle: ${tabTitle} state: ${state}`)}
               <SLink
                 current={tabTitle === state ? 1 : 0}
                 to={

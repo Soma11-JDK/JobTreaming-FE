@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import { Link } from 'react-router-dom';
 import CurrencyFormat from '../common/CurrencyFormat';
 
 const Container = styled.div`
@@ -114,44 +115,46 @@ const LecturePreview = ({
   price,
   salePercentage,
 }) => (
-  <Container>
-    <ImageContainer>
-      <Heart src={heartUrl} />
-      <Image src={imageUrl} />
-    </ImageContainer>
-    <InfoContainer>
-      <InfoTopContainer>
-        <Span>
-          <Span className="expert">
-            {expert} . {category}
-          </Span>
-          <Span className="endTime">
-            <span role="img" aria-label="time">
-              ⏰ {endTime}
-            </span>
-          </Span>
-        </Span>
-      </InfoTopContainer>
-      <InfoMidContainer>
-        <Span>
-          <Span className="title">{title}</Span>
-        </Span>
-      </InfoMidContainer>
-      {price !== 0 && (
-        <InfoBottomContainer>
+  <Link to={`/lecturedetail/${id}`}>
+    <Container>
+      <ImageContainer>
+        <Heart src={heartUrl} />
+        <Image src={imageUrl} />
+      </ImageContainer>
+      <InfoContainer>
+        <InfoTopContainer>
           <Span>
-            <Span className="price">
-              <CurrencyFormat price={price} />
+            <Span className="expert">
+              {expert} . {category}
             </Span>
-            <Span className="salePercentage">{salePercentage}%</Span>
-            <Span className="salePrice">
-              <CurrencyFormat price={price} salePercentage={salePercentage} />
+            <Span className="endTime">
+              <span role="img" aria-label="time">
+                ⏰ {endTime}
+              </span>
             </Span>
           </Span>
-        </InfoBottomContainer>
-      )}
-    </InfoContainer>
-  </Container>
+        </InfoTopContainer>
+        <InfoMidContainer>
+          <Span>
+            <Span className="title">{title}</Span>
+          </Span>
+        </InfoMidContainer>
+        {price !== 0 && (
+          <InfoBottomContainer>
+            <Span>
+              <Span className="price">
+                <CurrencyFormat price={price} />
+              </Span>
+              <Span className="salePercentage">{salePercentage}%</Span>
+              <Span className="salePrice">
+                <CurrencyFormat price={price} salePercentage={salePercentage} />
+              </Span>
+            </Span>
+          </InfoBottomContainer>
+        )}
+      </InfoContainer>
+    </Container>
+  </Link>
 );
 
 LecturePreview.propTypes = {

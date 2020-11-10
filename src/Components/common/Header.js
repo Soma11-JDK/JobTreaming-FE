@@ -160,7 +160,12 @@ const Header = ({ location: { pathname }, logged, onLogout }) => {
           </SLink>
         </NavItem>
         <NavItem>
-          <SLink to="/write">
+          <SLink
+            to={{
+              pathname: '/mypage/notification/notification',
+              state: 'notification',
+            }}
+          >
             <Span>알림</Span>
           </SLink>
         </NavItem>

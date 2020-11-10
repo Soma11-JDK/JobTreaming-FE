@@ -164,6 +164,14 @@ const Row = styled.div`
   ${marginTop}
 `;
 
+const SpanContainer = styled.div`
+  width: 100%;
+  display: flex;
+  display: -webkit-flex;
+  justify-content: space-between;
+  align-items: flex-end;
+`;
+
 const BeforeSaleContainer = styled.div`
   display: flex;
   display: -webkit-flex;
@@ -391,9 +399,14 @@ const LectureDetailPresenter = ({ location }) => {
           </Span>
         </Section>
         <Section id={tabInfo[1].anchor} marginTopValue="80px">
-          <Span fontWeight="bold" paddingValue="10px" fontSize="28px">
-            튜터 소개
-          </Span>
+          <SpanContainer>
+            <Span fontWeight="bold" paddingValue="10px" fontSize="28px">
+              튜터 소개
+            </Span>
+            <Link to="/tutor/introduce">
+              <Span fontSize="22px">더보기</Span>
+            </Link>
+          </SpanContainer>
           <Line marginTopValue="5px" />
           <Span
             marginTopValue="10px"
