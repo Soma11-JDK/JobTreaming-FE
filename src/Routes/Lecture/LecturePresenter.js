@@ -126,16 +126,13 @@ const LecturePresenter = ({
   categoryTitle,
 }) => {
   const [dropdownCategory, setDropdown] = useState(false);
-  const [dropdownSubCategory, setSubDropdown] = useState(false);
 
-  const onMouseEnter = type => {
-    if (type === 1) setDropdown(true);
-    else if (type === 2) setSubDropdown(true);
+  const onMouseEnter = () => {
+    setDropdown(true);
   };
 
   const onMouseLeave = () => {
     setDropdown(false);
-    setSubDropdown(false);
   };
   return (
     <>
@@ -145,22 +142,15 @@ const LecturePresenter = ({
         </CategoryTitleContainer>
         <MenuContainer>
           <ListContainer
-            onMouseEnter={() => onMouseEnter(1)}
+            onMouseEnter={() => onMouseEnter()}
             onMouseLeave={onMouseLeave}
           >
             <Menu>
               <Span fontSize="16px"> {categoryTitle} </Span>
             </Menu>
-            {dropdownCategory && <Dropdown categoryItems={categoryItems} />}
-          </ListContainer>
-          <ListContainer
-            onMouseEnter={() => onMouseEnter(2)}
-            onMouseLeave={onMouseLeave}
-          >
-            <Menu>
-              <Span fontSize="16px"> 세부 카테고리 </Span>
-            </Menu>
-            {dropdownSubCategory && <Dropdown categoryItems={categoryItems} />}
+            {dropdownCategory && (
+              <Dropdown categoryItems={categoryItems} nowPage="category" />
+            )}
           </ListContainer>
           <ListContainer>
             <CustomDate />

@@ -143,7 +143,7 @@ const Header = ({ location: { pathname }, logged, onLogout }) => {
           </SLink>
           {dropdown && (
             <DropdownContainer>
-              <Dropdown categoryItems={categoryItems} />
+              <Dropdown categoryItems={categoryItems} nowPage="category" />
             </DropdownContainer>
           )}
         </NavItem>
