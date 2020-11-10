@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import Emoji from '../common/Emoji';
 import CurrencyFormat from '../common/CurrencyFormat';
@@ -187,55 +188,59 @@ const HorizontalPayment = ({
   payDeadline,
   finishCheck,
 }) => (
-  <Container
-    filterValue={finishCheck && 'grayscale(100%)'}
-    marginTopValue="20px"
-  >
-    <ImageContainer>
-      <Image src={imageUrl} />
-    </ImageContainer>
-    <InfoContainer marginTopValue="10px" marginLeftValue="10px">
-      <TimeContainer>
-        <Emoji size="20px" label="clock" symbol="⏰" />
-        <Time> &nbsp;{endTime}</Time>
-      </TimeContainer>
-      <LectureInfoContainer>
-        <TutorInfoSpan marginTopValue="10px">
-          {expert} . {category}
-        </TutorInfoSpan>
-        <TitleSpan>{title}</TitleSpan>
-      </LectureInfoContainer>
-      <PriceInfoContainer marginTopValue="10px">
-        <PaymentInfo>무통장입금 {payDate}</PaymentInfo>
-        <Price>
-          <CurrencyFormat price={price} />
-        </Price>
-      </PriceInfoContainer>
-    </InfoContainer>
-    <DepositContainer>
-      {payCheck ? (
-        <DepositSpan fontColor="#ff584d"> 결제 완료</DepositSpan>
-      ) : (
-        <>
-          <DepositSpan fontColor="#ff584d">입금 대기</DepositSpan>
-          <DeadlineSpan marginBottomValue="15px">
-            {payDeadline}까지 입금
-          </DeadlineSpan>
-        </>
-      )}
-
-      <ButtonContainer marginTopValue="5px">
-        <Button>
-          <ButtonSpan>{finishCheck ? '후기 작성' : '문의/기대평'}</ButtonSpan>
-        </Button>
-        {payCheck && (
-          <Button marginTopValue="5px">
-            <ButtonSpan>{finishCheck ? '강의 재청원' : '강의 취소'}</ButtonSpan>
-          </Button>
+  <Link to={`/lecturedetail/${id}`}>
+    <Container
+      filterValue={finishCheck && 'grayscale(100%)'}
+      marginTopValue="20px"
+    >
+      <ImageContainer>
+        <Image src={imageUrl} />
+      </ImageContainer>
+      <InfoContainer marginTopValue="10px" marginLeftValue="10px">
+        <TimeContainer>
+          <Emoji size="20px" label="clock" symbol="⏰" />
+          <Time> &nbsp;{endTime}</Time>
+        </TimeContainer>
+        <LectureInfoContainer>
+          <TutorInfoSpan marginTopValue="10px">
+            {expert} . {category}
+          </TutorInfoSpan>
+          <TitleSpan>{title}</TitleSpan>
+        </LectureInfoContainer>
+        <PriceInfoContainer marginTopValue="10px">
+          <PaymentInfo>무통장입금 {payDate}</PaymentInfo>
+          <Price>
+            <CurrencyFormat price={price} />
+          </Price>
+        </PriceInfoContainer>
+      </InfoContainer>
+      <DepositContainer>
+        {payCheck ? (
+          <DepositSpan fontColor="#ff584d"> 결제 완료</DepositSpan>
+        ) : (
+          <>
+            <DepositSpan fontColor="#ff584d">입금 대기</DepositSpan>
+            <DeadlineSpan marginBottomValue="15px">
+              {payDeadline}까지 입금
+            </DeadlineSpan>
+          </>
         )}
-      </ButtonContainer>
-    </DepositContainer>
-  </Container>
+
+        <ButtonContainer marginTopValue="5px">
+          <Button>
+            <ButtonSpan>{finishCheck ? '후기 작성' : '문의/기대평'}</ButtonSpan>
+          </Button>
+          {payCheck && (
+            <Button marginTopValue="5px">
+              <ButtonSpan>
+                {finishCheck ? '강의 재청원' : '강의 취소'}
+              </ButtonSpan>
+            </Button>
+          )}
+        </ButtonContainer>
+      </DepositContainer>
+    </Container>
+  </Link>
 );
 
 HorizontalPayment.propTypes = {
