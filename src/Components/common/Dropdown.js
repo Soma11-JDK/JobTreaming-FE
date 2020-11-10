@@ -32,7 +32,7 @@ const SLink = styled(Link)`
   font-weight: 500;
 `;
 
-const Dropdown = ({ categoryItems }) => {
+const Dropdown = ({ categoryItems, nowPage }) => {
   const [click, setClick] = useState(false);
 
   const handleClick = () => setClick(!click);
@@ -44,7 +44,7 @@ const Dropdown = ({ categoryItems }) => {
     >
       {categoryItems.map(category => {
         const { title, id } = category;
-        const path = `/category/${id}`;
+        const path = `/${nowPage}/${id}`;
         // const path = '/category/1';
         return (
           <ListItem key={id} type="button">
@@ -60,5 +60,6 @@ const Dropdown = ({ categoryItems }) => {
 
 Dropdown.propTypes = {
   categoryItems: PropTypes.arrayOf(PropTypes.objectOf).isRequired,
+  nowPage: PropTypes.string.isRequired,
 };
 export default Dropdown;
