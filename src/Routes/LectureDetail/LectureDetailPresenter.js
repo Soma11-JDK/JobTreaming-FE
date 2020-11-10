@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom';
 import Statistic from 'Components/review/Statistic';
 import { reviewItems } from 'Routes/MyLecture/MyLecturePresenter';
 import HorizontalReview from 'Components/lecture/HorizontalReview';
+import DetailReply from 'Components/lecture/DetailReply';
 
 const marginTop = css`
   ${({ marginTopValue }) => marginTopValue && `margin-top : ${marginTopValue};`}
@@ -33,6 +34,7 @@ const marginRight = css`
 const padding = css`
   ${({ paddingValue }) => paddingValue && `padding : ${paddingValue}`}
 `;
+
 const Container = styled.div`
   display: flex;
   display: -webkit-flex;
@@ -83,9 +85,11 @@ const Span = styled.span`
   font-size: ${props => props.fontSize};
   font-weight: ${props => props.fontWeight};
   opacity: ${props => props.fontopacity};
-  color: ${props => props.color};
+  color: ${props => props.fontColor};
   word-break: keep-all;
   ${marginTop}
+  ${marginBottom}
+  ${marginLeft}
   ${padding}
 `;
 
@@ -220,6 +224,53 @@ const ApplyButton = styled.button`
   width: 100%;
   height: 60px;
   ${marginTop}
+`;
+
+const defaultProfileImg = require('assets/DefaultProfile/DefaultProfile.png');
+
+const ProfileImage = styled.img`
+  width: 50px;
+  height: 50px;
+`;
+
+const QuestionContainer = styled.div`
+  display: flex;
+  display: -webkit-flex;
+  ${marginTop}
+`;
+
+const QuestionWriteContainer = styled.div`
+  display: flex;
+  display: -webkit-flex;
+  flex-direction: column;
+  width: 100%;
+`;
+
+const WriteInfoContainer = styled.div`
+  display: flex;
+  display: -webkit-flex;
+  align-items: center;
+  width: 100%;
+  ${marginBottom}
+`;
+
+const Form = styled.form`
+  display: flex;
+  display: -webkit-flex;
+  align-items: center;
+  width: 100%;
+  padding: 21px 24px 20px;
+  border-radius: 39px;
+  background-color: #f1f1f1;
+  ${marginTop}
+`;
+
+const Input = styled.input`
+  all: unset;
+  opacity: 0.8;
+  color: #000000;
+  font-size: 16px;
+  width: 100%;
 `;
 
 const LectureDetailPresenter = ({ location }) => {
@@ -399,12 +450,49 @@ const LectureDetailPresenter = ({ location }) => {
             );
           })}
         </Section>
-        <Section id={tabInfo[3].anchor} marginTopValue="80px">
+        <Section
+          id={tabInfo[3].anchor}
+          marginTopValue="80px"
+          marginBottomValue="50px"
+        >
           <Span fontWeight="bold" paddingValue="10px" fontSize="28px">
             문의/기대평{' '}
           </Span>
           <Line marginTopValue="5px" />
+          <QuestionContainer marginTopValue="30px">
+            <ProfileImage src={defaultProfileImg} />
+            <QuestionWriteContainer>
+              <WriteInfoContainer marginBottomValue="10px">
+                <Span
+                  fontopacity="0.8"
+                  fontSize="18px"
+                  fontWeight="bold"
+                  fontColor="#000000"
+                  marginLeftValue="10px"
+                >
+                  eunhye_22
+                </Span>
+                <Span
+                  fontopacity="0.5"
+                  fontColor="#000000"
+                  marginLeftValue="10px"
+                >
+                  2020.09.28
+                </Span>
+              </WriteInfoContainer>
+              <Form>
+                <Input placeholder="문의 및 기대평을 작성해 주세요." />
+                <Span fontopacity="0.8" fontWeight="bold">
+                  등록
+                </Span>
+              </Form>
+            </QuestionWriteContainer>
+          </QuestionContainer>
         </Section>
+        <Span fontWeight="bold" fontSize="20px">
+          전체보기
+        </Span>
+        <DetailReply />
       </LeftContainer>
       <RightContainer>
         <CustomCalendar />
