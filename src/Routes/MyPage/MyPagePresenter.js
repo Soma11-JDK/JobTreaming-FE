@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import ImageTab from 'Components/common/ImageTab';
 import Tab from 'Components/common/Tab';
@@ -164,7 +165,9 @@ const MyPagePresenter = ({ param, state }) => {
       <ProfileContainer marginBottomValue="20px">
         <ProfileImageContainer>
           <ProfileImage src={profileImageUrl} />
-          <SettingImage src={settingImageUrl} />
+          <Link to="/setting">
+            <SettingImage src={settingImageUrl} />
+          </Link>
         </ProfileImageContainer>
         <Username marginTopValue="10px">eunhye_22</Username>
       </ProfileContainer>
