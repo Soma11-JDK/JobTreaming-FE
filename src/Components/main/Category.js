@@ -2,6 +2,8 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { baseURL } from 'api';
 
 const Container = styled.div`
   width: 50%;
@@ -48,56 +50,6 @@ const CategoryName = styled.span`
   font-size: 21px;
 `;
 
-const categoryItems = [
-  {
-    id: 1,
-    title: '경영·회계·사무',
-    url: require('assets/Categories/cate_1.png'),
-    hover: false,
-  },
-  {
-    id: 2,
-    title: '영업판매',
-    url: require('assets/Categories/cate_2.png'),
-    hover: false,
-  },
-  {
-    id: 3,
-    title: '보건·의료',
-    url: require('assets/Categories/cate_3.png'),
-    hover: false,
-  },
-  {
-    id: 4,
-    title: '음식 서비스',
-    url: require('assets/Categories/cate_4.png'),
-    hover: false,
-  },
-  {
-    id: 5,
-    title: '기계',
-    url: require('assets/Categories/cate_5.png'),
-    hover: false,
-  },
-  {
-    id: 6,
-    title: '화학',
-    url: require('assets/Categories/cate_6.png'),
-    hover: false,
-  },
-  {
-    id: 7,
-    title: '전기·전자',
-    url: require('assets/Categories/cate_7.png'),
-    hover: false,
-  },
-  {
-    id: 8,
-    title: '정보통신',
-    url: require('assets/Categories/cate_8.png'),
-    hover: false,
-  },
-];
 // const hoverId = ``;
 // 이 방식으로 해결 불가능한지 궁금합니다!
 /* const Category = ({ categoryItems }) => {
@@ -134,10 +86,12 @@ const categoryItems = [
 }; */
 
 class Category extends Component {
-  constructor() {
+  constructor(props) {
     super();
+    const { categoryItems } = props;
     this.state = {
       id: '',
+      categoryItems,
     };
   }
 
@@ -150,17 +104,23 @@ class Category extends Component {
   }
 
   render() {
-    const { id } = this.state;
+    const { categoryItems, id } = this.state;
+
     return (
       <Container>
         <Grid>
-          {categoryItems.map(category => (
-            <Link key={category.id} to={`category/${category.id}`}>
+          {categoryItems.map((category, idx) => (
+            <Link key={category.id} to={`category/${idx}`}>
               <CategoryContainer
+                key={category.id}
                 onMouseEnter={() => this.handleHover(category.id)}
                 onMouseLeave={() => this.handleUnHover()}
               >
-                <CategoryImage url={category.url} alt={category.title} />
+                <CategoryImage
+                  key={category.id}
+                  url={`${baseURL}/images/category/${category.code}.png`}
+                  alt={category.title}
+                />
                 <CategoryName key={category.id}>{category.title}</CategoryName>
               </CategoryContainer>
             </Link>
@@ -171,5 +131,8 @@ class Category extends Component {
   }
 }
 
+Category.propTypes = {
+  categoryItems: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
+
 export default Category;
-export { categoryItems };

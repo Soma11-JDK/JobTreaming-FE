@@ -42,12 +42,12 @@ const Dropdown = ({ categoryItems, nowPage }) => {
       onClick={handleClick}
       style={{ display: click ? 'none' : 'block' }}
     >
-      {categoryItems.map(category => {
-        const { title, id } = category;
-        const path = `/${nowPage}/${id}`;
+      {categoryItems.map((category, idx) => {
+        const { code, title } = category;
+        const path = `/${nowPage}/${idx}`;
         // const path = '/category/1';
         return (
-          <ListItem key={id} type="button">
+          <ListItem key={code} type="button">
             <SLink to={path} onClick={() => setClick(false)}>
               {title}
             </SLink>
@@ -59,7 +59,7 @@ const Dropdown = ({ categoryItems, nowPage }) => {
 };
 
 Dropdown.propTypes = {
-  categoryItems: PropTypes.arrayOf(PropTypes.objectOf).isRequired,
+  categoryItems: PropTypes.arrayOf(PropTypes.object).isRequired,
   nowPage: PropTypes.string.isRequired,
 };
 export default Dropdown;

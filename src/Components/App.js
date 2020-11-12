@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { categoryApi } from 'api';
 import Router from '../Routes/Router';
 import GlobalStyles from './GlobalStyles';
 
 import Header from './common/Header';
 import Store from '../Store/Store';
 import Footer from './common/Footer';
+
+import CategoryContext from './CategoryContext';
 
 const Layout = styled.div`
   width: 100%;
@@ -20,6 +23,9 @@ class App extends Component {
       logged: false,
       onLogin: this.onLogin,
       onLogout: this.onLogout,
+      categoryItems: null,
+      error: null,
+      isLoading: true,
     };
   }
 
@@ -30,7 +36,23 @@ class App extends Component {
     } else {
       this.onLogout();
     }
+    this.getCategories();
   }
+
+  getCategories = async () => {
+    try {
+      const { data } = await categoryApi.categoryList();
+
+      this.setState({
+        categoryItems: data,
+      });
+      console.log(`테스트3: ${JSON.stringify(data)}`);
+    } catch {
+      this.setState({ error: "Can't find category results." });
+    } finally {
+      this.setState({ isLoading: false });
+    }
+  };
 
   // Login Func
   onLogin = () => {
@@ -59,15 +81,31 @@ class App extends Component {
   };
 
   render() {
-    const { logged, onLogin, onLogout } = this.state;
+    const {
+      categoryItems,
+      error,
+      isLoading,
+      logged,
+      onLogin,
+      onLogout,
+    } = this.state;
     return (
       <Store.Provider value={this.state}>
-        <Header logged={logged} onLogout={onLogout} />
-        <Layout>
-          <Router />
-          <GlobalStyles />
-        </Layout>
-        <Footer />
+        {isLoading ? (
+          'Loading...'
+        ) : (
+          <>
+            {console.log(`help: ${JSON.stringify(categoryItems)}`)}
+            <CategoryContext.Provider value={categoryItems}>
+              <Header logged={logged} onLogout={onLogout} />
+              <Layout>
+                <Router />
+                <GlobalStyles />
+              </Layout>
+              <Footer />
+            </CategoryContext.Provider>
+          </>
+        )}
       </Store.Provider>
     );
   }

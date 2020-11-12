@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 
 import LecturePreview from 'Components/lecture/LecturePreview';
 import Subtitle from 'Components/common/Subtitle';
-import { categoryItems } from 'Components/main/Category';
 import Dropdown from 'Components/common/Dropdown';
 import CustomDateRange from 'Components/common/CustomDateRange';
 import TestDateRange from 'Components/TestDateRange';
@@ -124,6 +123,7 @@ const LecturePresenter = ({
   // error,
   categoryId,
   categoryTitle,
+  categoryItems,
 }) => {
   const [dropdownCategory, setDropdown] = useState(false);
 
@@ -212,5 +212,6 @@ const LecturePresenter = ({
 LecturePresenter.propTypes = {
   categoryId: PropTypes.number.isRequired,
   categoryTitle: PropTypes.string.isRequired,
+  categoryItems: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 export default LecturePresenter;

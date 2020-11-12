@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-import { categoryItems } from 'Components/main/Category';
+import Store from 'Store/Store';
+import { categoryApi } from 'api';
 import HeaderIcon from '../HeaderIcon';
 import Dropdown from './Dropdown';
+import CategoryContext from '../CategoryContext';
 
 const Container = styled.div`
   width: 100%;
@@ -94,6 +96,26 @@ const SLink = styled(Link)`
 `;
 
 const Header = ({ location: { pathname }, logged, onLogout }) => {
+  /* const [categoryItems, setCategory] = useState([]);
+  const [isError, setIsError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchCategoryItems = async () => {
+      setIsError(false);
+      setIsLoading(true);
+      try {
+        const { data: result } = await categoryApi.categoryList();
+        setCategory(JSON.stringify({ result }));
+      } catch (error) {
+        setIsError(true);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchCategoryItems();
+  }, []); */
+  const categoryItems = useContext(CategoryContext);
   const [dropdown, setDropdown] = useState(false);
   const [searchFocus, setSearchFocus] = useState(false);
 
@@ -131,7 +153,6 @@ const Header = ({ location: { pathname }, logged, onLogout }) => {
           searchIconUrl={searchFocus ? '' : searchIcon}
         />
       </HeaderLeft>
-
       <HeaderRight>
         <NavItem
           onClick={onMouseLeave}
@@ -148,13 +169,16 @@ const Header = ({ location: { pathname }, logged, onLogout }) => {
           )}
         </NavItem>
         <NavItem>
-          <SLink to="/petition">
+          <SLink to="/petition/0">
             <Span>청원하기</Span>
           </SLink>
         </NavItem>
         <NavItem>
           <SLink
-            to={{ pathname: '/mylectureroom/mylecture', state: 'mylecture' }}
+            to={{
+              pathname: '/mylectureroom/mylecture',
+              state: 'mylecture',
+            }}
           >
             <Span>나의 강의장</Span>
           </SLink>
