@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
 import Subtitle from 'Components/common/Subtitle';
 import Dropdown from 'Components/common/Dropdown';
 import HorizontalPetition from 'Components/petition/HorizontalPetition';
-import { categoryItems } from 'Components/main/Category';
 import { Button } from 'reactstrap';
 
 const marginTop = css`
@@ -158,12 +157,19 @@ const Menu = styled.div`
 
 const PetitionPresenter = ({
   title,
+  categoryIdx,
   contents,
   handleSubmit,
   updateTitle,
   updateContents,
+  categoryItems,
 }) => {
   const [dropdownCategory, setDropdown] = useState(false);
+  const [categoryId, setCategory] = useState(parseInt(categoryIdx, 10));
+
+  useEffect(() => {
+    setCategory(categoryIdx);
+  });
 
   const onMouseEnter = () => {
     setDropdown(true);
@@ -216,7 +222,7 @@ const PetitionPresenter = ({
           onMouseLeave={onMouseLeave}
         >
           <Menu>
-            <Span fontSize="16px"> {categoryItems[0].title} </Span>
+            <Span fontSize="16px"> {categoryItems[categoryId].title} </Span>
           </Menu>
           {dropdownCategory && (
             <Dropdown categoryItems={categoryItems} nowPage="petition" />
@@ -230,9 +236,11 @@ const PetitionPresenter = ({
 
 PetitionPresenter.propTypes = {
   title: PropTypes.string.isRequired,
+  categoryIdx: PropTypes.number.isRequired,
   contents: PropTypes.string.isRequired,
   updateTitle: PropTypes.func.isRequired,
   updateContents: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
+  categoryItems: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 export default PetitionPresenter;

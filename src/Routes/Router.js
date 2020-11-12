@@ -22,9 +22,9 @@ export default () => (
       <Route path="/" exact component={Home} />
       <Route path="/login" component={Login} />
       <Route path="/category/:id" component={Lecture} />
-      <Route path="/petition" component={Petition} />
+      <Route path="/petition/:id" component={Petition} />
       <Route path="/search" component={Search} />
-      <Route path="/write" component={Write} />
+      <Route path="/write/:id" component={Write} />
       <Route path="/mylectureroom/:mylecturetab" component={MyLecture} />
       <Route path="/tutor/:tutortab" component={Tutor} />
       <Route path="/mypage/:mypagetab/:notitab" component={MyPage} />

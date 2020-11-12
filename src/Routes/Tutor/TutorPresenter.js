@@ -222,6 +222,13 @@ const MoreContainer = styled.div`
   cursor: pointer;
 `;
 
+const AddButton = styled.button`
+  width: 100%;
+  height: 100px;
+  background-color: #778dff;
+  border-radius: 36px;
+`;
+
 const reviewItems = [
   {
     id: 1,
@@ -432,6 +439,11 @@ const TutorPresenter = ({ name, param }) => {
               />
             );
           })}
+          <AddButton>
+            <Span fontSize="30px" fontColor="#ffffff" fontWeight="bold">
+              + 강의 개설하기
+            </Span>
+          </AddButton>
         </LectureViewContainer>
       )}
       {param === 'review' && (

@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 
 import LecturePreview from 'Components/lecture/LecturePreview';
 import Subtitle from 'Components/common/Subtitle';
-import { categoryItems } from 'Components/main/Category';
 import Dropdown from 'Components/common/Dropdown';
 import CustomDateRange from 'Components/common/CustomDateRange';
 import TestDateRange from 'Components/TestDateRange';
@@ -129,6 +128,7 @@ const SearchPresenter = ({
   searchTerm,
   handleSubmit,
   updateTerm,
+  categoryItems,
 }) => {
   const [dropdownCategory, setDropdown] = useState(false);
   const [dropdownSubCategory, setSubDropdown] = useState(false);
@@ -232,6 +232,7 @@ SearchPresenter.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   updateTerm: PropTypes.func.isRequired,
   error: PropTypes.string,
+  categoryItems: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 SearchPresenter.defaultProps = {

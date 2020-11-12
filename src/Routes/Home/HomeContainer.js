@@ -1,9 +1,9 @@
 /* eslint-disable global-require */
 import React, { Component } from 'react';
 
-import { categoryItems } from 'Components/main/Category';
 import { categoryApi } from 'api';
 import axios from 'axios';
+import CategoryContext from 'Components/CategoryContext';
 import HomePresenter from './HomePresenter';
 /* 추후 활용 가능성 존재
 categoryItemList.forEach((item, idx) => {
@@ -14,16 +14,19 @@ categoryItemList.forEach((item, idx) => {
 export default class HomeContainer extends Component {
   constructor(props) {
     super();
-    this.state = { result: null, error: null, loading: true };
+    this.state = { url: '', result: null, error: null, loading: true };
   }
 
   async componentDidMount() {
     try {
-      const { data: result } = await categoryApi.categoryList();
-      this.setState({
-        result: JSON.stringify({ result }),
-      });
-      console.log(`테스트: ${JSON.stringify({ result })}`);
+      /* const { data } = await categoryApi.categoryImage('FOOD');
+      const b64Data = btoa(
+        new Uint8Array(data).reduce((dataArray, byte) => {
+          return dataArray + String.fromCharCode(byte);
+        }, ''),
+      );
+      this.setState({ url: data });
+      console.log(`테스트: ${b64Data}`); */
     } catch {
       this.setState({ error: "Can't find category results." });
     } finally {
@@ -32,7 +35,10 @@ export default class HomeContainer extends Component {
   }
 
   render() {
-    const { result, error, loading } = this.state;
-    return <HomePresenter categoryItems={categoryItems} />;
+    const categoryItems = this.context;
+    const { result, error, loading, url } = this.state;
+    return <HomePresenter categoryItems={categoryItems} url={url} />;
   }
 }
+
+HomeContainer.contextType = CategoryContext;

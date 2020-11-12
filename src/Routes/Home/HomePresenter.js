@@ -1,6 +1,7 @@
 /* eslint-disable global-require */
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 import Slider from 'Components/common/Slider';
 import Category from 'Components/main/Category';
@@ -205,7 +206,7 @@ const reviewTestItems = [
   },
 ];
 
-const HomePresenter = () => (
+const HomePresenter = ({ categoryItems }) => (
   <>
     <Container>
       <Slider />
@@ -216,7 +217,7 @@ const HomePresenter = () => (
       <DividerContainer>
         {/* 카테고리 이미지 */}
         <CategoryContainer>
-          <Category />
+          <Category categoryItems={categoryItems} />
         </CategoryContainer>
       </DividerContainer>
 
@@ -252,6 +253,10 @@ const HomePresenter = () => (
     </Container>
   </>
 );
+
+HomePresenter.propTypes = {
+  categoryItems: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
 
 export default HomePresenter;
 export { items };

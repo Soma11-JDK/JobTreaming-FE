@@ -1,7 +1,8 @@
 import React from 'react';
+import CategoryContext from 'Components/CategoryContext';
 import SearchPresenter from './SearchPresenter';
 
-export default class extends React.Component {
+export default class SearchContainer extends React.Component {
   constructor(props) {
     super();
     this.state = {
@@ -52,6 +53,7 @@ export default class extends React.Component {
   };
 
   render() {
+    const categoryItems = this.context;
     const { searchResults, searchTerm, error, loading } = this.state;
     return (
       <SearchPresenter
@@ -61,7 +63,10 @@ export default class extends React.Component {
         searchTerm={searchTerm}
         handleSubmit={this.handleSubmit}
         updateTerm={this.updateTerm}
+        categoryItems={categoryItems}
       />
     );
   }
 }
+
+SearchContainer.contextType = CategoryContext;

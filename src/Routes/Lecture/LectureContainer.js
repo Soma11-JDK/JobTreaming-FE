@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { categoryItems } from 'Components/main/Category';
+import CategoryContext from 'Components/CategoryContext';
 import LecturePresenter from './LecturePresenter';
 
 export default class LectureContainer extends Component {
@@ -63,15 +63,19 @@ export default class LectureContainer extends Component {
   }
 
   render() {
+    const categoryItems = this.context;
     const { result, error, loading, categoryId } = this.state;
     return (
       <LecturePresenter
         categoryId={categoryId}
-        categoryTitle={categoryItems[categoryId - 1].title}
+        categoryTitle={categoryItems[categoryId].title}
+        categoryItems={categoryItems}
       />
     );
   }
 }
+
+LectureContainer.contextType = CategoryContext;
 
 LectureContainer.propTypes = {
   match: PropTypes.shape({

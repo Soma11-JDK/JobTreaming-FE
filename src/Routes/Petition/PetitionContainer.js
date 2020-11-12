@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 import { petitionApi } from 'api';
+import CategoryContext from 'Components/CategoryContext';
 import PetionPresenter from './PetitionPresenter';
 
-export default class extends Component {
+export default class PetitionContainer extends Component {
   constructor(props) {
     super();
     this.state = {
@@ -71,17 +73,44 @@ export default class extends Component {
   };
 
   render() {
+    const categoryItems = this.context;
+    const {
+      match: {
+        params: { id },
+      },
+    } = this.props;
+    const parsedId = parseInt(id, 10);
     const { pageNumber, result, error, loading, title, contents } = this.state;
-    console.log(`결과: ${{ result }}`);
+
     return (
       <PetionPresenter
+        categoryIdx={parsedId}
         pageNumber={pageNumber}
         title={title}
         contents={contents}
         handleSubmit={this.handleSubmit}
         updateTitle={this.updateTitle}
         updateContents={this.updateContents}
+        categoryItems={categoryItems}
       />
     );
   }
 }
+
+PetitionContainer.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string,
+    }),
+  }),
+};
+
+PetitionContainer.defaultProps = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: '0',
+    }),
+  }),
+};
+
+PetitionContainer.contextType = CategoryContext;
