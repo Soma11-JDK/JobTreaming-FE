@@ -1,5 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 const marginTop = css`
   ${({ marginTopValue }) => marginTopValue && `margin-top : ${marginTopValue};`}
@@ -114,10 +116,16 @@ const Input = styled.input`
   font-size: 20px;
   padding: 20px;
 `;
+const ButtonContainer = styled.div`
+  display: flex;
+  display: -webkit-flex;
+  justify-content: space-between;
+  width: 500px;
+`;
 
 const Button = styled.button`
-  width: 500px;
   height: 70px;
+  width: 30%;
   opacity: 0.8;
   border-radius: 66px;
   box-shadow: 0 0 9px 3px rgba(0, 0, 0, 0.1);
@@ -125,9 +133,15 @@ const Button = styled.button`
   ${marginTop}
 `;
 
-const SettingPresenter = () => {
+const SettingPresenter = ({ store }) => {
+  // Logout Func
+  function onLogout() {
+    store.onLogout();
+  }
+
   return (
     <Container marginTopValue="80px" marginBottomValue="80px">
+      {console.log(`store: ${JSON.stringify(store)}`)}
       <ProfileContainer marginBottomValue="20px">
         <ProfileImageContainer>
           <ProfileImage src={profileImageUrl} />
@@ -175,14 +189,36 @@ const SettingPresenter = () => {
             관심 키워드
           </Span>
         </InterestingContainer>
-        <Button marginTopValue="20px">
-          <Span fontWeight="900" fontSize="20px">
-            수정 완료
-          </Span>
-        </Button>
+        <ButtonContainer>
+          <Button marginTopValue="20px">
+            <Link to="/" onClick={onLogout}>
+              <Span fontWeight="900" fontSize="20px">
+                로그 아웃
+              </Span>
+            </Link>
+          </Button>
+          <Button marginTopValue="20px">
+            <Span fontWeight="900" fontSize="20px">
+              수정 취소
+            </Span>
+          </Button>
+          <Button marginTopValue="20px">
+            <Span fontWeight="900" fontSize="20px">
+              수정 완료
+            </Span>
+          </Button>
+        </ButtonContainer>
       </InfoContainer>
     </Container>
   );
+};
+
+SettingPresenter.propTypes = {
+  store: PropTypes.objectOf(
+    PropTypes.shape({
+      onLogout: PropTypes.func.isRequired,
+    }),
+  ).isRequired,
 };
 
 export default SettingPresenter;

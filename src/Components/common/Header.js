@@ -95,7 +95,7 @@ const SLink = styled(Link)`
   text-decoration: none;
 `;
 
-const Header = ({ location: { pathname }, logged, onLogout }) => {
+const Header = ({ location: { pathname }, logged }) => {
   /* const [categoryItems, setCategory] = useState([]);
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -137,6 +137,7 @@ const Header = ({ location: { pathname }, logged, onLogout }) => {
 
   return (
     <Container>
+      {console.log(`logged: ${logged}`)}
       <HeaderLeft>
         <Link to="/">
           <Logo
@@ -211,7 +212,6 @@ const Header = ({ location: { pathname }, logged, onLogout }) => {
 
 Header.propTypes = {
   logged: PropTypes.bool.isRequired,
-  onLogout: PropTypes.func.isRequired,
   location: PropTypes.shape({
     pathname: PropTypes.string.isRequired,
   }).isRequired,

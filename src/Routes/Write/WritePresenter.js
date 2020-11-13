@@ -70,8 +70,7 @@ const MyBlock = styled.div`
     padding: 5px !important;
     border-radius: 2px !important;
     margin-top: 20px !important;
-  }import CustomSingleDate from '../../Components/common/CustomSingleDate';
-
+  }
 `;
 // editorState, handleChange, handleSubmit prop 추가
 // editorState는 리액트드래프트위지윅에 입력된 내용을 저장하기 위한 prop
@@ -168,7 +167,7 @@ const WritePresenter = ({
   const [pictures, setPictures] = useState([]);
   const [dropdownCategory, setDropdown] = useState(false);
   const [categoryId, setCategory] = useState(-1);
-  const [test, setTest] = useState(false);
+
   const onMouseEnter = () => {
     setDropdown(true);
   };
@@ -178,10 +177,12 @@ const WritePresenter = ({
   };
 
   const changeCategory = () => {
-    setTest(!test);
+    setCategory(parseInt(match.params.id, 10));
   };
 
-  useEffect(() => setCategory(match.params.id), [match.params.id]);
+  useEffect(() => setCategory(parseInt(match.params.id, 10)), [
+    parseInt(match.params.id, 10),
+  ]);
 
   const onDrop = picture => {
     // https://github.com/JakeHartnell/react-images-upload/issues/109 참고

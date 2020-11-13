@@ -5,6 +5,7 @@ import styled, { css } from 'styled-components';
 import Subtitle from 'Components/common/Subtitle';
 import Tab from 'Components/common/Tab';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import HorizontalLecture from 'Components/lecture/HorizontalLecture';
 import HorizontalReview from 'Components/lecture/HorizontalReview';
@@ -439,11 +440,13 @@ const TutorPresenter = ({ name, param }) => {
               />
             );
           })}
-          <AddButton>
-            <Span fontSize="30px" fontColor="#ffffff" fontWeight="bold">
-              + 강의 개설하기
-            </Span>
-          </AddButton>
+          <Link to="/write/-1">
+            <AddButton>
+              <Span fontSize="30px" fontColor="#ffffff" fontWeight="bold">
+                + 강의 개설하기
+              </Span>
+            </AddButton>
+          </Link>
         </LectureViewContainer>
       )}
       {param === 'review' && (

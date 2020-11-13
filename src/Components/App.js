@@ -72,7 +72,7 @@ class App extends Component {
     // Kakao AccessToken Remove
     if (provider === 'kakao') {
       window.Kakao.Auth.logout(function logout() {
-        console.log('Kakao Logout');
+        console.log('home Kakao Logout');
       });
     }
 
