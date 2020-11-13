@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { categoryApi } from 'api';
+import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 import Router from '../Routes/Router';
 import GlobalStyles from './GlobalStyles';
-
 import Header from './common/Header';
 import Store from '../Store/Store';
 import Footer from './common/Footer';
@@ -66,15 +67,14 @@ class App extends Component {
     this.setState({
       logged: false,
     });
-
     const provider = window.localStorage.getItem('provider');
 
     // Kakao AccessToken Remove
-    if (provider === 'kakao') {
+    /* if (provider === 'kakao') {
       window.Kakao.Auth.logout(function logout() {
         console.log('home Kakao Logout');
       });
-    }
+    } */
 
     // localStorage Clear
     window.localStorage.clear();

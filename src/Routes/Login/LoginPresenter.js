@@ -97,6 +97,7 @@ class Login extends Component {
     window.localStorage.setItem('id', id);
     window.localStorage.setItem('name', name);
     window.localStorage.setItem('provider', provider);
+    console.log('카카오 로그인 성공입니다.');
     onLogin();
     history.push('/');
   };

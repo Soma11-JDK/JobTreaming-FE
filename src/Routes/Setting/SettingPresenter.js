@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 const marginTop = css`
   ${({ marginTopValue }) => marginTopValue && `margin-top : ${marginTopValue};`}
@@ -116,6 +116,7 @@ const Input = styled.input`
   font-size: 20px;
   padding: 20px;
 `;
+
 const ButtonContainer = styled.div`
   display: flex;
   display: -webkit-flex;
@@ -135,7 +136,9 @@ const Button = styled.button`
 
 const SettingPresenter = ({ store }) => {
   // Logout Func
+  const history = useHistory();
   function onLogout() {
+    history.push('/');
     store.onLogout();
   }
 
@@ -190,14 +193,17 @@ const SettingPresenter = ({ store }) => {
           </Span>
         </InterestingContainer>
         <ButtonContainer>
-          <Button marginTopValue="20px">
-            <Link to="/" onClick={onLogout}>
-              <Span fontWeight="900" fontSize="20px">
-                로그 아웃
-              </Span>
-            </Link>
+          <Button onClick={onLogout} marginTopValue="20px">
+            <Span fontWeight="900" fontSize="20px">
+              로그 아웃
+            </Span>
           </Button>
-          <Button marginTopValue="20px">
+
+          <Button
+            type="button"
+            onClick={() => history.goBack()}
+            marginTopValue="20px"
+          >
             <Span fontWeight="900" fontSize="20px">
               수정 취소
             </Span>
