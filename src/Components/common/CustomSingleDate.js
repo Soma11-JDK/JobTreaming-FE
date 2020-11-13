@@ -6,18 +6,28 @@ import 'react-dates/lib/css/_datepicker.css';
 import moment from 'moment';
 import 'moment/locale/ko';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const Wrapper = styled.div`
-  .DateRangePicker {
+  .SingleDatePicker {
+    width: 100%;
     border-radius: 66px;
-    border: solid 1px #000000;
-    padding: 10px 0px 10px 30px;
+    opacity: 0.8;
+    border: solid 2px #000000;
+    font-size: 20px;
+    padding: 20px;
+    height: 68px;
   }
-  .DateRangePickerInput {
+  .SingleDatePickerInput {
+    align-items: center;
     border-radius: 66px;
+    border: none;
+    height: 100%;
+    display: flex;
   }
   .DateInput_input {
     border-radius: 66px;
+    border: none;
   }
 `;
 
@@ -27,8 +37,8 @@ export default class CustomSingleDate extends Component {
     moment.locale('ko');
 
     this.state = {
-      startDate: null,
-      focused: true,
+      date: null,
+      focused: props.autoFocus,
     };
 
     this.onDateChange = this.onDateChange.bind(this);
@@ -39,8 +49,8 @@ export default class CustomSingleDate extends Component {
     this.setState({ date });
   }
 
-  onFocusChange() {
-    this.setState({ focused: true });
+  onFocusChange({ focused }) {
+    this.setState({ focused });
   }
 
   alertPickedData = () => {
@@ -57,11 +67,11 @@ export default class CustomSingleDate extends Component {
         <SingleDatePicker
           withPortal
           displayFormat="yyyy.MM.DD"
-          startDate={this.state.startDate} // momentPropTypes.momentObj or null,
-          startDateId="your_unique_start_date_id" // PropTypes.string.isRequired,
-          onDatesChange={({ startDate }) => this.setState({ startDate })} // PropTypes.func.isRequired,
-          focusedInput={this.state.focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
-          onFocusChange={focusedInput => this.setState({ focusedInput })} // PropTypes.func.isRequired,
+          date={date} // momentPropTypes.momentObj or null,
+          id="your_unique_start_date_id" // PropTypes.string.isRequired,
+          focused={focused}
+          onDateChange={this.onDateChange} // PropTypes.func.isRequired,
+          onFocusChange={this.onFocusChange} // PropTypes.func.isRequired,
           regular
           numberOfMonths={1}
         />
@@ -69,3 +79,11 @@ export default class CustomSingleDate extends Component {
     );
   }
 }
+
+CustomSingleDate.propTypes = {
+  autoFocus: PropTypes.bool,
+};
+
+CustomSingleDate.defaultProps = {
+  autoFocus: false,
+};

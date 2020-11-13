@@ -1,5 +1,6 @@
 import React from 'react';
 import { useParams, useLocation } from 'react-router-dom';
+import withLogin from 'Components/LoginHOC';
 import MyPage from './MyPagePresenter';
 
 const MyPageContainer = props => {
@@ -13,4 +14,4 @@ const MyPageContainer = props => {
   return <MyPage param={params.mypagetab} state={params.notitab} />;
 };
 
-export default MyPageContainer;
+export default withLogin(MyPageContainer);

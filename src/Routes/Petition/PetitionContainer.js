@@ -26,7 +26,7 @@ export default class PetitionContainer extends Component {
       this.setState({
         result: JSON.stringify(body),
       });
-      console.table(`respone: ${JSON.stringify(body)}`);
+      console.log(`response: ${JSON.stringify(body)}`);
     } catch {
       this.setState({ error: "Can't find petition results." });
     } finally {
