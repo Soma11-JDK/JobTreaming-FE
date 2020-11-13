@@ -134,17 +134,17 @@ const Button = styled.button`
   ${marginTop}
 `;
 
-const SettingPresenter = ({ store }) => {
+const SettingPresenter = props => {
   // Logout Func
   const history = useHistory();
   function onLogout() {
     history.push('/');
-    store.onLogout();
+
+    props.onLogout();
   }
 
   return (
     <Container marginTopValue="80px" marginBottomValue="80px">
-      {console.log(`store: ${JSON.stringify(store)}`)}
       <ProfileContainer marginBottomValue="20px">
         <ProfileImageContainer>
           <ProfileImage src={profileImageUrl} />
@@ -220,11 +220,7 @@ const SettingPresenter = ({ store }) => {
 };
 
 SettingPresenter.propTypes = {
-  store: PropTypes.objectOf(
-    PropTypes.shape({
-      onLogout: PropTypes.func.isRequired,
-    }),
-  ).isRequired,
+  onLogout: PropTypes.func.isRequired,
 };
 
 export default SettingPresenter;
