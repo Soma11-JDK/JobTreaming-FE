@@ -18,6 +18,9 @@ const Wrapper = styled.div`
   }
   .DateInput_input {
     border-radius: 66px;
+    border: none;
+  }
+  .lecture_start_date {
   }
 `;
 
@@ -59,9 +62,9 @@ export default class CustomDate extends Component {
           withPortal
           displayFormat="yyyy.MM.DD"
           startDate={this.state.startDate} // momentPropTypes.momentObj or null,
-          startDateId="your_unique_start_date_id" // PropTypes.string.isRequired,
+          startDateId="lecture_start_date" // PropTypes.string.isRequired,
           endDate={this.state.endDate} // momentPropTypes.momentObj or null,
-          endDateId="your_unique_end_date_id" // PropTypes.string.isRequired,
+          endDateId="lecture_end_date" // PropTypes.string.isRequired,
           onDatesChange={({ startDate, endDate }) =>
             this.setState({ startDate, endDate })
           } // PropTypes.func.isRequired,
