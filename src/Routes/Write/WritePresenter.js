@@ -152,6 +152,10 @@ const Button = styled.button`
   ${marginRight}
 `;
 
+const DateContainer = styled.div`
+  ${marginTop}
+`;
+
 const WritePresenter = ({
   editorState,
   handleTitle,
@@ -249,7 +253,9 @@ const WritePresenter = ({
       <Span fontSize="16px" fontWeight="500" fontColor="#000000">
         강의 날짜
       </Span>
-      <CustomSingleDate />
+      <DateContainer marginTopValue="20px">
+        <CustomSingleDate placeholder="강의 날짜를 설정해주세요." />
+      </DateContainer>
       <Input
         marginTopValue="20px"
         marginBottomValue="20px"
@@ -268,7 +274,7 @@ const WritePresenter = ({
         type="text"
         name="title"
         id="title"
-        placeholder="모집 정원"
+        placeholder="모집 정원(숫자로 입력해주세요.)"
         onChange={handleCount}
       />
       <Span fontSize="16px" fontWeight="500" fontColor="#000000">
@@ -334,7 +340,7 @@ const WritePresenter = ({
           marginTopValue="20px"
           marginRightValue="10px"
           type="button"
-          onClick={() => history.goBack()}
+          onClick={() => history.push('/tutor/proceeding')}
         >
           <Span fontWeight="900" fontColor="#000000">
             글작성 취소
@@ -364,7 +370,7 @@ WritePresenter.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   handleEditorStateChange: PropTypes.func.isRequired,
   history: PropTypes.shape({
-    goBack: PropTypes.func.isRequired,
+    push: PropTypes.func.isRequired,
   }).isRequired,
   categoryItems: PropTypes.arrayOf(PropTypes.object).isRequired,
   match: PropTypes.shape({
