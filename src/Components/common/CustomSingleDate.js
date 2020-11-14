@@ -12,7 +12,6 @@ const Wrapper = styled.div`
   .SingleDatePicker {
     width: 100%;
     border-radius: 66px;
-    opacity: 0.8;
     border: solid 2px #000000;
     font-size: 20px;
     padding: 20px;
@@ -23,9 +22,16 @@ const Wrapper = styled.div`
     border-radius: 66px;
     border: none;
     height: 100%;
+    width: 100%;
     display: flex;
+    background-color: red;
+  }
+  .DateInput {
+    width: 100%;
   }
   .DateInput_input {
+    display: flex;
+    flex: 1;
     border-radius: 66px;
     border: none;
   }
@@ -61,19 +67,21 @@ export default class CustomSingleDate extends Component {
 
   render() {
     const { focused, date } = this.state;
-
+    const { placeholder } = this.props;
     return (
       <Wrapper>
         <SingleDatePicker
           withPortal
           displayFormat="yyyy.MM.DD"
           date={date} // momentPropTypes.momentObj or null,
-          id="your_unique_start_date_id" // PropTypes.string.isRequired,
+          id="inputPick" // PropTypes.string.isRequired,
           focused={focused}
           onDateChange={this.onDateChange} // PropTypes.func.isRequired,
           onFocusChange={this.onFocusChange} // PropTypes.func.isRequired,
           regular
+          placeholder={placeholder}
           numberOfMonths={1}
+          isOutsideRange={() => false}
         />
       </Wrapper>
     );
@@ -82,6 +90,7 @@ export default class CustomSingleDate extends Component {
 
 CustomSingleDate.propTypes = {
   autoFocus: PropTypes.bool,
+  placeholder: PropTypes.string.isRequired,
 };
 
 CustomSingleDate.defaultProps = {

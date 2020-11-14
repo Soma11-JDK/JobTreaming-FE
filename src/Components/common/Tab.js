@@ -11,6 +11,13 @@ const TabContainer = styled.div`
   align-items: center;
 `;
 
+const Line = styled.div`
+  width: 100%;
+  height: 50px;
+  border-bottom: 0.8px solid #000000;
+  opacity: 0.4;
+`;
+
 const List = styled.ul`
   width: 80%;
   display: flex;
@@ -29,7 +36,8 @@ const SLink = styled(Link)`
   display: flex;
   align-items: center;
   justify-content: center;
-  border-bottom: 3px solid ${props => (props.current ? '#3918ff' : '#000000')};
+  border-bottom: ${props => (props.current ? '2px' : '0.8px')} solid
+    ${props => (props.current ? '#3918ff' : '#000000')};
   opacity: ${props => (props.current ? '1' : '0.4')};
 `;
 
@@ -42,7 +50,7 @@ const Span = styled.span`
   letter-spacing: normal;
   text-align: center;
   color: ${props => (props.current ? '#3918ff' : '#000000')};
-  opacity: ${props => (props.current ? '1' : '0.5')};
+  opacity: ${props => (props.current ? '1' : '0.9')};
   word-break: keep-all;
 `;
 
@@ -89,6 +97,7 @@ const Tab = ({ tabInfo, nowTab, nowPage }) => {
           );
         })}
       </List>
+      <Line />
     </TabContainer>
   );
 };

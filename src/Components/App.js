@@ -40,6 +40,7 @@ class App extends Component {
     this.getCategories();
   }
 
+  // 카테고리 정보를 가져오는 부분
   getCategories = async () => {
     try {
       const { data } = await categoryApi.categoryList();

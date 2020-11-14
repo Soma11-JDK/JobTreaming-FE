@@ -70,7 +70,6 @@ export default class CustomDate extends Component {
           } // PropTypes.func.isRequired,
           focusedInput={this.state.focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
           onFocusChange={focusedInput => this.setState({ focusedInput })} // PropTypes.func.isRequired,
-          customArrowIcon="-"
           showClearDates
           regular
           noBorder
