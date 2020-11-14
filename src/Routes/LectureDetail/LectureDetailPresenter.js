@@ -281,7 +281,7 @@ const Input = styled.input`
   width: 100%;
 `;
 
-const LectureDetailPresenter = ({ location }) => {
+const LectureDetailPresenter = ({ location, joinLecture }) => {
   const [tabTitle, setTabTitle] = useState('lecureintroduce');
 
   const handleClick = anchor => {
@@ -543,7 +543,7 @@ const LectureDetailPresenter = ({ location }) => {
             <HeartImage src={heartUrl} />
             2.6K
           </HeartContainer>
-          <ApplyButton>수강신청하기</ApplyButton>
+          <ApplyButton onClick={joinLecture}>깅의 수강하기</ApplyButton>
         </Row>
       </RightContainer>
     </Container>
@@ -554,6 +554,7 @@ LectureDetailPresenter.propTypes = {
   location: PropTypes.shape({
     pathname: PropTypes.string,
   }).isRequired,
+  joinLecture: PropTypes.func.isRequired,
 };
 
 export default LectureDetailPresenter;
