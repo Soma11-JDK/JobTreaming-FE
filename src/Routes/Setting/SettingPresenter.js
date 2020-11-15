@@ -45,6 +45,7 @@ const ProfileImageContainer = styled.div`
 const ProfileImage = styled.img`
   width: 100px;
   height: 100px;
+  border-radius: 999px;
 `;
 
 const Username = styled.span`
@@ -153,12 +154,6 @@ const SettingPresenter = props => {
         <Username marginTopValue="10px">eunhye_22</Username>
       </ProfileContainer>
       <InfoContainer>
-        <Section>
-          <Span fontSize="20px" fontopacity="0.8" fontWeight="500">
-            회원이름
-          </Span>
-          <Input type="text" fontopacity="0.8" fontWeight="bold" />
-        </Section>
         <Section>
           <Span fontSize="20px" fontopacity="0.8" fontWeight="500">
             닉네임

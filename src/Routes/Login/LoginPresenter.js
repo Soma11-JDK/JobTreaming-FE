@@ -51,9 +51,11 @@ class Login extends Component {
     super(props);
     this.state = {
       id: '',
-      name: '',
+      username: '',
       provider: '',
       token: '',
+      profileImage: '',
+      email: '',
     };
   }
 
@@ -65,7 +67,7 @@ class Login extends Component {
       console.log('로그인 성공입니다.');
       this.setState({
         id: 'test',
-        name: 'test',
+        username: 'test',
         provider: 'test',
       });
       this.doSignUp();
@@ -75,13 +77,34 @@ class Login extends Component {
   };
 
   // Kakao Login
-  responseKakao = res => {
+  responseKakao = async res => {
+    console.log(`kakao: ${JSON.stringify(res)}`);
+
     this.setState({
       id: res.profile.id,
-      name: res.profile.properties.nickname,
+      username: res.profile.properties.nickname,
+      profileImage: res.profile.properties.profile_image,
       provider: 'kakao',
+      email: res.profile.kakao_account.email,
     });
-    this.doSignUp();
+
+    const { id, username, provider, profileImage, email } = this.state;
+
+    try {
+      const { data } = await loginApi.socialLogin(email);
+      console.log(`kakao data: ${data}`);
+      const { onLogin } = this.props;
+
+      onLogin();
+      window.localStorage.setItem('id', id);
+      window.localStorage.setItem('username', username);
+      window.localStorage.setItem('provider', provider);
+      window.localStorage.setItem('profileImage', profileImage);
+      window.localStorage.setItem('email', email);
+    } catch {
+      console.log('회원 정보가 없습니다.');
+      this.doSignUp();
+    }
   };
 
   // Login Fail
@@ -90,20 +113,16 @@ class Login extends Component {
   };
 
   // 로그인 정보 저장
+  // TODO 로그인 정보를 계속 저장하는게 맞는건지?
   doSignUp = () => {
-    const { onLogin, history } = this.props;
-    const { id, name, provider } = this.state;
-
-    window.localStorage.setItem('id', id);
-    window.localStorage.setItem('name', name);
-    window.localStorage.setItem('provider', provider);
     console.log('카카오 로그인 성공입니다.');
-    onLogin();
-    history.push('/');
+    const { history } = this.props;
+    history.push('/register');
   };
 
   render() {
-    const { id, name, provider, token } = this.state;
+    const { id, username, provider, token, profileImage, email } = this.state;
+
     const { handleTestLogin } = this;
 
     return (

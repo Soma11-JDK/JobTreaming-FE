@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { categoryApi } from 'api';
 import PropTypes from 'prop-types';
-import { useHistory } from 'react-router-dom';
 import Router from '../Routes/Router';
 import GlobalStyles from './GlobalStyles';
 import Header from './common/Header';
@@ -58,9 +57,11 @@ class App extends Component {
 
   // Login Func
   onLogin = () => {
+    const { history } = this.props;
     this.setState({
       logged: true,
     });
+    history.push('/');
   };
 
   // Logout Func
@@ -111,5 +112,11 @@ class App extends Component {
     );
   }
 }
+
+App.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+};
 
 export default App;
