@@ -7,7 +7,11 @@ const MyPageContainer = props => {
   const params = useParams();
   const location = useLocation();
 
-  return <Store.Consumer>{store => <Setting store={store} />}</Store.Consumer>;
+  return (
+    <Store.Consumer>
+      {store => <Setting onLogout={store.onLogout} />}
+    </Store.Consumer>
+  );
 };
 
 export default MyPageContainer;

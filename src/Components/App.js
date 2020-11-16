@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { categoryApi } from 'api';
 import PropTypes from 'prop-types';
-import { useHistory } from 'react-router-dom';
 import Router from '../Routes/Router';
 import GlobalStyles from './GlobalStyles';
 import Header from './common/Header';
@@ -10,6 +9,7 @@ import Store from '../Store/Store';
 import Footer from './common/Footer';
 
 import CategoryContext from './CategoryContext';
+import storage from '../lib/storage';
 
 const Layout = styled.div`
   width: 100%;
@@ -31,7 +31,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const id = window.localStorage.getItem('id');
+    const id = window.localStorage.getItem('loggedInfo');
     if (id) {
       this.onLogin();
     } else {
@@ -40,6 +40,7 @@ class App extends Component {
     this.getCategories();
   }
 
+  // 카테고리 정보를 가져오는 부분
   getCategories = async () => {
     try {
       const { data } = await categoryApi.categoryList();
@@ -57,6 +58,7 @@ class App extends Component {
 
   // Login Func
   onLogin = () => {
+    const { history } = this.props;
     this.setState({
       logged: true,
     });
@@ -64,10 +66,10 @@ class App extends Component {
 
   // Logout Func
   onLogout = () => {
+    const { history } = this.props;
     this.setState({
       logged: false,
     });
-    const provider = window.localStorage.getItem('provider');
 
     // Kakao AccessToken Remove
     /* if (provider === 'kakao') {
@@ -77,6 +79,7 @@ class App extends Component {
     } */
 
     // localStorage Clear
+    storage.remove('loggedInfo');
     window.localStorage.clear();
   };
 
@@ -110,5 +113,11 @@ class App extends Component {
     );
   }
 }
+
+App.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+};
 
 export default App;

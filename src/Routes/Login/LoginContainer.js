@@ -6,7 +6,7 @@ import Login from './LoginPresenter';
 const LoginContainer = () => {
   return (
     <Store.Consumer>
-      {store => <Login onLogin={store.onLogin} />}
+      {store => <Login value={store.value} onLogin={store.onLogin} />}
     </Store.Consumer>
   );
 };

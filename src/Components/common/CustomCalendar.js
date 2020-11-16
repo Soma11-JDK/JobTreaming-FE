@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import React, { useState } from 'react';
 import Calendar from 'react-calendar';
 
@@ -107,9 +108,10 @@ function CustomCalendar() {
               const isGrayed =
                 current.format('MM') === today.format('MM') ? '' : 'grayed';
               return (
-                // eslint-disable-next-line react/no-array-index-key
                 <Box className={`box  ${isSelected} ${isGrayed}`} key={i}>
-                  <Day className="text">{current.format('D')}</Day>
+                  <Day className="text" key={n + i}>
+                    {current.format('D')}
+                  </Day>
                 </Box>
               );
             })}

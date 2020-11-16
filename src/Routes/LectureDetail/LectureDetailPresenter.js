@@ -124,10 +124,10 @@ const SLink = styled.a`
 `;
 
 const tabInfo = [
-  { id: 0, title: '강의 소개', anchor: 'lecureintroduce' },
-  { id: 1, title: '튜터 소개', anchor: 'tutorintroduce' },
-  { id: 2, title: '수강생 후기', anchor: 'review' },
-  { id: 3, title: '문의/기대평', anchor: 'question' },
+  { id: 0, tabName: '강의 소개', anchor: 'lecureintroduce' },
+  { id: 1, tabName: '튜터 소개', anchor: 'tutorintroduce' },
+  { id: 2, tabName: '수강생 후기', anchor: 'review' },
+  { id: 3, tabName: '문의/기대평', anchor: 'question' },
 ];
 
 const Section = styled.section`
@@ -281,9 +281,9 @@ const Input = styled.input`
   width: 100%;
 `;
 
-const LectureDetailPresenter = ({ location }) => {
+const LectureDetailPresenter = ({ location, joinLecture, lecture }) => {
   const [tabTitle, setTabTitle] = useState('lecureintroduce');
-
+  const { expertName, title, category, maxNum, contents } = lecture;
   const handleClick = anchor => {
     return setTabTitle(anchor);
   };
@@ -295,10 +295,10 @@ const LectureDetailPresenter = ({ location }) => {
           <TutorImage marginTop="50px" src={tutorImageUrl} />
           <TutorInfoContainer>
             <Span fontWeight="bold" fontSize="2vw">
-              직장인을 위한 실용 파이썬 첫 걸음을 향해
+              {title}
             </Span>
             <Span fontSize="1.5vw" fontWeight="500">
-              정보통신 . 이은아 멘토
+              {category} . {expertName}
             </Span>
             <Link to="/tutor/introduce">
               <Span fontSize="1.8vw" fontWeight="500">
@@ -310,7 +310,7 @@ const LectureDetailPresenter = ({ location }) => {
         <TabContainer marginTopValue="10px">
           <List>
             {tabInfo.map(info => {
-              const { id, title, anchor } = info;
+              const { id, tabName, anchor } = info;
 
               return (
                 <Item key={id} onClick={() => handleClick(anchor)}>
@@ -327,7 +327,7 @@ const LectureDetailPresenter = ({ location }) => {
                       color={tabTitle === anchor ? '#3918ff' : '#000000'}
                       fontopacity={tabTitle === anchor ? '1' : '0.5'}
                     >
-                      {title}
+                      {tabName}
                     </Span>
                   </SLink>
                 </Item>
@@ -441,7 +441,7 @@ const LectureDetailPresenter = ({ location }) => {
               beneficialScore,
               funScore,
               kindScore,
-              title,
+              reviewTitle,
               review,
             } = item;
             return (
@@ -456,7 +456,7 @@ const LectureDetailPresenter = ({ location }) => {
                 beneficialScore={beneficialScore}
                 funScore={funScore}
                 kindScore={kindScore}
-                title={title}
+                title={reviewTitle}
                 review={review}
                 username="취준 화이팅"
               />
@@ -543,7 +543,7 @@ const LectureDetailPresenter = ({ location }) => {
             <HeartImage src={heartUrl} />
             2.6K
           </HeartContainer>
-          <ApplyButton>수강신청하기</ApplyButton>
+          <ApplyButton onClick={joinLecture}>깅의 수강하기</ApplyButton>
         </Row>
       </RightContainer>
     </Container>
@@ -553,6 +553,14 @@ const LectureDetailPresenter = ({ location }) => {
 LectureDetailPresenter.propTypes = {
   location: PropTypes.shape({
     pathname: PropTypes.string,
+  }).isRequired,
+  joinLecture: PropTypes.func.isRequired,
+  lecture: PropTypes.arrayOf({
+    expertName: PropTypes.string,
+    title: PropTypes.string,
+    maxNum: PropTypes.number,
+    category: PropTypes.string,
+    contents: PropTypes.string,
   }).isRequired,
 };
 

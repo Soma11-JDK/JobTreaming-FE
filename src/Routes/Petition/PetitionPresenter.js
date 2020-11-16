@@ -5,7 +5,6 @@ import styled, { css } from 'styled-components';
 import Subtitle from 'Components/common/Subtitle';
 import Dropdown from 'Components/common/Dropdown';
 import HorizontalPetition from 'Components/petition/HorizontalPetition';
-import { Button } from 'reactstrap';
 
 const marginTop = css`
   ${({ marginTopValue }) => marginTopValue && `margin-top : ${marginTopValue};`}
@@ -52,17 +51,21 @@ const ImageContainer = styled.div`
   position: relative;
   height: 100%;
   ${marginLeft}
+  align-items: center;
 `;
 
 const UnionImage = styled.img`
   width: 100%;
-  height: 100%;
+  height: 60%;
   transform: translate(-30%, -30%);
 `;
 
 const PetitionInfoImage = styled.img`
   width: 100%;
-  height: 100%;
+  height: 80%;
+  @media only screen and (max-width: 600px) {
+    height: 60%;
+  }
   position: absolute;
 `;
 

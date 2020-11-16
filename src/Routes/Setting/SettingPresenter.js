@@ -45,6 +45,7 @@ const ProfileImageContainer = styled.div`
 const ProfileImage = styled.img`
   width: 100px;
   height: 100px;
+  border-radius: 999px;
 `;
 
 const Username = styled.span`
@@ -134,17 +135,17 @@ const Button = styled.button`
   ${marginTop}
 `;
 
-const SettingPresenter = ({ store }) => {
+const SettingPresenter = props => {
   // Logout Func
   const history = useHistory();
   function onLogout() {
     history.push('/');
-    store.onLogout();
+
+    props.onLogout();
   }
 
   return (
     <Container marginTopValue="80px" marginBottomValue="80px">
-      {console.log(`store: ${JSON.stringify(store)}`)}
       <ProfileContainer marginBottomValue="20px">
         <ProfileImageContainer>
           <ProfileImage src={profileImageUrl} />
@@ -153,12 +154,6 @@ const SettingPresenter = ({ store }) => {
         <Username marginTopValue="10px">eunhye_22</Username>
       </ProfileContainer>
       <InfoContainer>
-        <Section>
-          <Span fontSize="20px" fontopacity="0.8" fontWeight="500">
-            회원이름
-          </Span>
-          <Input type="text" fontopacity="0.8" fontWeight="bold" />
-        </Section>
         <Section>
           <Span fontSize="20px" fontopacity="0.8" fontWeight="500">
             닉네임
@@ -220,11 +215,7 @@ const SettingPresenter = ({ store }) => {
 };
 
 SettingPresenter.propTypes = {
-  store: PropTypes.objectOf(
-    PropTypes.shape({
-      onLogout: PropTypes.func.isRequired,
-    }),
-  ).isRequired,
+  onLogout: PropTypes.func.isRequired,
 };
 
 export default SettingPresenter;
