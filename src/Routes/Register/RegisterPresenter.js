@@ -9,6 +9,8 @@ import CustomSingleDate from 'Components/common/CustomSingleDate';
 import { isEmail, isLength, isNumeric } from 'validator';
 import AuthError from 'Components/auth/AuthError';
 import debounce from 'lodash/debounce';
+import * as userActions from 'redux/modules/user';
+import storage from 'lib/storage';
 
 const marginTop = css`
   ${({ marginTopValue }) => marginTopValue && `margin-top : ${marginTopValue};`}
@@ -42,8 +44,6 @@ const ProfileContainer = styled.div`
   align-items: center;
   ${marginBottom}
 `;
-
-const profileImageUrl = require('assets/TestProfile/Mask Group.png');
 
 const ProfileImageContainer = styled.div`
   position: relative;
@@ -209,8 +209,8 @@ class RegisterPresenter extends Component {
   };
 
   handleRegister = async () => {
-    const { form, AuthActions, error, imageURL, history } = this.props;
-    const { email, nickname, phone } = form.toJS();
+    const { form, AuthActions, UserActions, error, history } = this.props;
+    const { email, nickname, imageURL, phone } = form.toJS();
 
     const { validate } = this;
 
@@ -235,6 +235,9 @@ class RegisterPresenter extends Component {
       });
       const { result } = this.props;
       const loggedInfo = result.toJS();
+      storage.set('loggedInfo', loggedInfo);
+      UserActions.setLoggedInfo(loggedInfo);
+
       console.log(`가입 정보: ${loggedInfo}`);
       // TODO: 로그인 정보 저장 (로컬스토리지/스토어)
       history.push('/'); // 회원가입 성공시 홈페이지로 이동
@@ -254,8 +257,8 @@ class RegisterPresenter extends Component {
   render() {
     const { error } = this.props;
     const { form } = this.props;
-    const { imageURL } = this.props;
-    const { email, nickname, phone } = form.toJS();
+
+    const { email, imageURL, nickname, phone } = form.toJS();
 
     const { handleChange, handleRegister } = this;
 
@@ -325,6 +328,7 @@ class RegisterPresenter extends Component {
 
 RegisterPresenter.propTypes = {
   AuthActions: PropTypes.shape().isRequired,
+  UserActions: PropTypes.shape().isRequired,
   form: ImmutablePropTypes.mapContains({
     email: PropTypes.string,
   }),
@@ -335,8 +339,7 @@ RegisterPresenter.propTypes = {
   error: PropTypes.string,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
-  }).isRequired,
-  imageURL: PropTypes.string,
+  }),
 };
 
 const defaultProfileImg = require('assets/DefaultProfile/DefaultProfile.png');
@@ -350,7 +353,10 @@ RegisterPresenter.defaultProps = {
     get: false,
   }),
   error: '',
-  imageURL: defaultProfileImg,
+
+  history: PropTypes.shape({
+    push: '',
+  }),
 };
 
 export default connect(
@@ -362,5 +368,6 @@ export default connect(
   }),
   dispatch => ({
     AuthActions: bindActionCreators(authActions, dispatch),
+    UserActions: bindActionCreators(userActions, dispatch),
   }),
 )(RegisterPresenter);

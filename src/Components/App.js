@@ -9,6 +9,7 @@ import Store from '../Store/Store';
 import Footer from './common/Footer';
 
 import CategoryContext from './CategoryContext';
+import storage from '../lib/storage';
 
 const Layout = styled.div`
   width: 100%;
@@ -30,7 +31,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const id = window.localStorage.getItem('id');
+    const id = window.localStorage.getItem('loggedInfo');
     if (id) {
       this.onLogin();
     } else {
@@ -61,15 +62,14 @@ class App extends Component {
     this.setState({
       logged: true,
     });
-    history.push('/');
   };
 
   // Logout Func
   onLogout = () => {
+    const { history } = this.props;
     this.setState({
       logged: false,
     });
-    const provider = window.localStorage.getItem('provider');
 
     // Kakao AccessToken Remove
     /* if (provider === 'kakao') {
@@ -79,6 +79,7 @@ class App extends Component {
     } */
 
     // localStorage Clear
+    storage.remove('loggedInfo');
     window.localStorage.clear();
   };
 
