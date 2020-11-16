@@ -1,6 +1,20 @@
 # JobTreaming
 
+## 프로젝트 접속 주소: http://data.jobtreaming.com.s3-website.ap-northeast-2.amazonaws.com/register
 
+<br/>
+<br/>
+
+## 테스트 방법
+1) http://data.jobtreaming.com.s3-website.ap-northeast-2.amazonaws.com/register 에 접속
+2) 로그인 -> 테스트 계정으로 접속(전문가는 화면을 킬 수 있고 사용자는 시청만 가능합니다.)
+3) 나의 강의장 -> 오늘의 강의에서 강의 클릭
+4) 강의 수강하기 클릭(임시로 데이터에 등록된 강의는 바로 수강할 수 있게 구현했습니다.)
+5) 전문가는 강연을 진행할 수 있고 사용자는 강연을 시청할 수 있습니다.
+   1) 채팅, 질문, 파일 공유, 화면 공유등의 기능을 사용할 수 있습니다.
+
+
+<br/>
 
 # 1. 프로젝트 소개
 
