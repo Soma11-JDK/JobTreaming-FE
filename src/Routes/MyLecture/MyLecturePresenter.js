@@ -116,7 +116,7 @@ const reviewItems = [
     beneficialScore: 4.6,
     funScore: 5.0,
     kindScore: 5.0,
-    title: '한 큐에 끝내는 파이썬3 마스터 Vol.2 [고급자용]',
+    reviewTitle: '한 큐에 끝내는 파이썬3 마스터 Vol.2 [고급자용]',
     review:
       '지불한 비용 이상으로 높은 가치의 수업을 들었습니다. 친절하고 디테일한 내용도 좋았지만 자신의 진솔한 경험을 녹여내서 더 좋았습니다.',
     url: require('assets/test1.png'),
@@ -130,7 +130,7 @@ const reviewItems = [
     presentScore: 4.2,
     beneficialScore: 4.6,
     funScore: 5.0,
-    title: '현직자가 알려주는 IT개발 A to Z',
+    reviewTitle: '현직자가 알려주는 IT개발 A to Z',
     review:
       '튜터님께서 채팅으로 질문도 바로 받아서 답변해주시고 좋은 조언들 많이 해주셨습니다! 그리고 회사에서 실제로 어떤 일을 하는지 등 쉽게 들을 수 없었던 이야기들도 많이 해주셨습니다. 감사합니다!!',
     url: require('assets/test2.png'),
@@ -144,7 +144,7 @@ const reviewItems = [
     presentScore: 4.2,
     beneficialScore: 4.6,
     funScore: 5.0,
-    title: '현직자가 알려주는 IT개발 A to Z',
+    reviewTitle: '현직자가 알려주는 IT개발 A to Z',
     review:
       '튜터님께서 채팅으로 질문도 바로 받아서 답변해주시고 좋은 조언들 많이 해주셨습니다! 그리고 회사에서 실제로 어떤 일을 하는지 등 쉽게 들을 수 없었던 이야기들도 많이 해주셨습니다. 감사합니다!! 튜터님께서 채팅으로 질문도 바로 받아서 답변해주시고 좋은 조언들 많이 해주셨습니다! 그리고 회사에서 실제로 어떤 일을 하는지 등 쉽게 들을 수 없었던 이야기들도 많이 해주셨습니다. 감사합니다!!',
     url: require('assets/test3.png'),
@@ -158,14 +158,14 @@ const reviewItems = [
     presentScore: 4.2,
     beneficialScore: 4.6,
     funScore: 5.0,
-    title: '현직자가 알려주는 IT개발 A to Z',
+    reviewTitle: '현직자가 알려주는 IT개발 A to Z',
     review:
       '튜터님께서 채팅으로 질문도 바로 받아서 답변해주시고 좋은 조언들 많이 해주셨습니다! ',
     url: require('assets/test4.png'),
   },
 ];
 
-const MyLecturePresenter = ({ param }) => {
+const MyLecturePresenter = ({ param, myLectureList }) => {
   return (
     <Container marginTopValue="80px" marginBottomValue="80px">
       <ProfileContainer marginBottomValue="20px">
@@ -181,21 +181,28 @@ const MyLecturePresenter = ({ param }) => {
           <SpanContainer marginTopValue="40px">
             <Span textColor="#000000">오늘의 강의</Span>
             <Span textColor="#465fcc" marginLeftValue="8px">
-              ({items.length})
+              ({myLectureList.length})
             </Span>
           </SpanContainer>
           <LectureViewContainer marginTopValue="20px">
             <LectureGird>
-              {items.map(item => {
-                const { id, expert, category, endTime, title, url } = item;
+              {myLectureList.map(item => {
+                const {
+                  id,
+                  expertName,
+                  category,
+                  endedAt,
+                  title,
+                  fileName,
+                } = item;
                 return (
                   <LecturePreview
                     key={id}
                     id={id}
-                    imageUrl={url}
-                    expert={expert}
+                    imageUrl={fileName}
+                    expert={expertName}
                     category={category}
-                    endTime={endTime}
+                    endTime={endedAt}
                     title={title}
                   />
                 );
@@ -379,6 +386,11 @@ const MyLecturePresenter = ({ param }) => {
 
 MyLecturePresenter.propTypes = {
   param: PropTypes.string.isRequired,
+  myLectureList: PropTypes.arrayOf(),
+};
+
+MyLecturePresenter.defaultProps = {
+  myLectureList: null,
 };
 
 export default MyLecturePresenter;

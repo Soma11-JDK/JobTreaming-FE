@@ -10,24 +10,28 @@ const MyLectureContainer = props => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    const fetchCategoryItems = async () => {
+    const fetchMyLectureList = async () => {
       setIsError(false);
       setIsLoading(true);
       try {
         const { data: result } = await lectureApi.myLectureList();
-        setLecture(JSON.stringify({ result }));
-        console.log(`lectureList ${JSON.stringify(result)}`);
+        console.log(`lectureListResult ${JSON.stringify(result.data)}`);
+
+        setLecture(result);
+
+        console.log(`lectureList ${lectureList}`);
       } catch (error) {
         setIsError(true);
       } finally {
         setIsLoading(false);
       }
     };
-    fetchCategoryItems();
+
+    fetchMyLectureList();
   }, []);
 
   const params = useParams();
-  return <MyLecture param={params.mylecturetab} />;
+  return <MyLecture param={params.mylecturetab} myLectureList={lectureList} />;
 };
 
 export default withLogin(MyLectureContainer);

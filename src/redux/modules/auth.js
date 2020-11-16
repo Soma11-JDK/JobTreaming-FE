@@ -24,11 +24,13 @@ export const initializeForm = createAction(INITIALIZE_FORM); // form
 
 export const setError = createAction(SET_ERROR); // { form, message }
 
+const defaultProfileImg = require('assets/DefaultProfile/DefaultProfile.png');
+
 const initialState = Map({
   register: Map({
     form: Map({
       email: '',
-      imageURL: '',
+      imageURL: defaultProfileImg,
       username: '',
       phone: '',
     }),

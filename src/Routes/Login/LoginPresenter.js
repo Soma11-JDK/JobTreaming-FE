@@ -96,11 +96,28 @@ class Login extends Component {
     };
   }
 
-  // Test Login
-  handleTestLogin = async () => {
+  // Test Expert Login
+  handleTestExpertLogin = async () => {
     try {
       const { onLogin, history, UserActions } = this.props;
       const { data } = await loginApi.socialLogin('test@test.test');
+
+      // console.log(`테스트 로그인 ${data}`);
+      storage.set('loggedInfo', data);
+      UserActions.setLoggedInfo(data);
+
+      onLogin();
+      history.push('/');
+    } catch {
+      console.log('로그인 에러입니다.');
+    }
+  };
+
+  // Test User Login
+  handleTestUserLogin = async () => {
+    try {
+      const { onLogin, history, UserActions } = this.props;
+      const { data } = await loginApi.socialLogin('test1@test.test');
 
       // console.log(`테스트 로그인 ${data}`);
       storage.set('loggedInfo', data);
@@ -180,7 +197,7 @@ class Login extends Component {
   render() {
     const { id, username, provider, token, profileImage, email } = this.state;
 
-    const { handleTestLogin } = this;
+    const { handleTestExpertLogin, handleTestUserLogin } = this;
 
     return (
       <Conatainer>
@@ -200,8 +217,11 @@ class Login extends Component {
           getProfile="true"
           marginTopValue="60px"
         />
-        <TestLoginButton onClick={handleTestLogin}>
-          테스트 로그인
+        <TestLoginButton onClick={handleTestExpertLogin}>
+          테스트 전문가 로그인
+        </TestLoginButton>
+        <TestLoginButton onClick={handleTestUserLogin}>
+          테스트 사용자 로그인
         </TestLoginButton>
       </Conatainer>
     );
