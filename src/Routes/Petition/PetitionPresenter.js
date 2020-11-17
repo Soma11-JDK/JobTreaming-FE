@@ -6,6 +6,10 @@ import Subtitle from 'Components/common/Subtitle';
 import Dropdown from 'Components/common/Dropdown';
 import HorizontalPetition from 'Components/petition/HorizontalPetition';
 
+import { connect, useSelector } from 'react-redux';
+import * as userActions from 'redux/modules/user';
+import { bindActionCreators } from 'redux';
+
 const marginTop = css`
   ${({ marginTopValue }) => marginTopValue && `margin-top : ${marginTopValue};`}
 `;
@@ -169,7 +173,9 @@ const PetitionPresenter = ({
 }) => {
   const [dropdownCategory, setDropdown] = useState(false);
   const [categoryId, setCategory] = useState(parseInt(categoryIdx, 10));
-
+  const user = useSelector(state => state.user);
+  // const userData = user.get('loggedInfo').get('user');
+  const userData = user.get('loggedInfo').get('user');
   useEffect(() => {
     setCategory(categoryIdx);
   });
@@ -184,6 +190,8 @@ const PetitionPresenter = ({
 
   return (
     <Container>
+      {console.log(`petitionTest: ${JSON.stringify(user)}`)}
+      {console.log(`petitionTest2: ${JSON.stringify(userData)}`)}
       <PetitionInfoContainer>
         <ImageContainer marginLeftValue="10px">
           <UnionImage src={unionImageUrl} />
@@ -201,9 +209,9 @@ const PetitionPresenter = ({
       </PetitionInfoContainer>
       <PetitionWriteContainer>
         <ProfileContainer>
-          <ProfileImage src={profileUrl} />
+          <ProfileImage src={userData.imageURL} />
           <Span marginTopValue="10px" fontWeight="bold">
-            eunhye_22
+            {userData.name}
           </Span>
         </ProfileContainer>
         <PetitionInputForm onSubmit={handleSubmit}>
@@ -246,4 +254,8 @@ PetitionPresenter.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   categoryItems: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
-export default PetitionPresenter;
+// export default PetitionPresenter;
+
+export default connect(null, dispatch => ({
+  UserActions: bindActionCreators(userActions, dispatch),
+}))(PetitionPresenter);

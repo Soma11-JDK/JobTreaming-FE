@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 import { petitionApi } from 'api';
 import CategoryContext from 'Components/CategoryContext';
+import { useSelector } from 'react-redux';
 import PetionPresenter from './PetitionPresenter';
 
 export default class PetitionContainer extends Component {
@@ -74,6 +75,7 @@ export default class PetitionContainer extends Component {
 
   render() {
     const categoryItems = this.context;
+
     const {
       match: {
         params: { id },

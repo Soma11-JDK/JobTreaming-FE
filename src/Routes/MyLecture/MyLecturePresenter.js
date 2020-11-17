@@ -165,12 +165,13 @@ const reviewItems = [
   },
 ];
 
-const MyLecturePresenter = ({ param, myLectureList }) => {
+const MyLecturePresenter = ({ param, myLectureList, user }) => {
+  const userData = user.get('user');
   return (
     <Container marginTopValue="80px" marginBottomValue="80px">
       <ProfileContainer marginBottomValue="20px">
-        <ProfileImage src={profileImageUrl} />
-        <Username marginTopValue="10px">eunhye_22</Username>
+        <ProfileImage src={userData.imageURL} />
+        <Username marginTopValue="10px">{userData.name}</Username>
       </ProfileContainer>
       <Subtitle title="나의 강의장" />
       <TabContainer marginTopValue="20px">
@@ -182,7 +183,7 @@ const MyLecturePresenter = ({ param, myLectureList }) => {
             <Span textColor="#000000">오늘의 강의</Span>
             <Span textColor="#465fcc" marginLeftValue="8px">
               ({myLectureList.length})
-              {console.log(JSON.stringify(myLectureList))}
+              {console.log(`myLectureList: ${JSON.stringify(myLectureList)}`)}
             </Span>
           </SpanContainer>
           <LectureViewContainer marginTopValue="20px">
@@ -390,10 +391,13 @@ const MyLecturePresenter = ({ param, myLectureList }) => {
 MyLecturePresenter.propTypes = {
   param: PropTypes.string.isRequired,
   myLectureList: PropTypes.arrayOf(),
+  user: PropTypes.shape({
+    get: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 MyLecturePresenter.defaultProps = {
-  myLectureList: null,
+  myLectureList: {},
 };
 
 export default MyLecturePresenter;

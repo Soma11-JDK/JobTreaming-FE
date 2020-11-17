@@ -95,17 +95,49 @@ class Login extends Component {
       token: '',
       profileImage: '',
       email: '',
+      phone: '',
     };
   }
 
   // Test Expert Login
   handleTestExpertLogin = async () => {
     try {
-      const { onLogin, history, UserActions } = this.props;
+      const { onLogin, history, UserActions, AuthActions } = this.props;
       const { data } = await loginApi.socialLogin('test@test.test');
 
       data.user.imageURL =
         data.user.imageURL === ' ' ? defaultProfileImg : data.user.imagerURL;
+
+      this.setState({
+        id: data.user.id,
+        username: data.user.name,
+        phone: data.user.phone,
+        profileImage: data.user.imageURL,
+        email: data.user.email,
+      });
+
+      const { id, username, phone, profileImage, email } = this.state;
+
+      AuthActions.changeInput({
+        name: 'email',
+        value: email,
+        form: 'register',
+      });
+      AuthActions.changeInput({
+        name: 'nickname',
+        value: username,
+        form: 'register',
+      });
+      AuthActions.changeInput({
+        name: 'imageURL',
+        value: profileImage,
+        form: 'register',
+      });
+      AuthActions.changeInput({
+        name: 'phone',
+        value: phone,
+        form: 'register',
+      });
       // console.log(`테스트 로그인 ${data}`);
       storage.set('loggedInfo', data);
       UserActions.setLoggedInfo(data);
@@ -120,12 +152,43 @@ class Login extends Component {
   // Test User Login
   handleTestUserLogin = async () => {
     try {
-      const { onLogin, history, UserActions } = this.props;
+      const { onLogin, history, UserActions, AuthActions } = this.props;
       const { data } = await loginApi.socialLogin('test1@test.test');
 
       data.user.imageURL =
         data.user.imageURL === ' ' ? defaultProfileImg : data.user.imagerURL;
       // console.log(`테스트 로그인 ${data}`);
+
+      this.setState({
+        id: data.user.id,
+        username: data.user.name,
+        phone: data.user.phone,
+        profileImage: data.user.imageURL,
+        email: data.user.email,
+      });
+
+      const { id, username, phone, profileImage, email } = this.state;
+
+      AuthActions.changeInput({
+        name: 'email',
+        value: email,
+        form: 'register',
+      });
+      AuthActions.changeInput({
+        name: 'nickname',
+        value: username,
+        form: 'register',
+      });
+      AuthActions.changeInput({
+        name: 'imageURL',
+        value: profileImage,
+        form: 'register',
+      });
+      AuthActions.changeInput({
+        name: 'phone',
+        value: phone,
+        form: 'register',
+      });
       storage.set('loggedInfo', data);
       UserActions.setLoggedInfo(data);
 
@@ -194,7 +257,15 @@ class Login extends Component {
   };
 
   render() {
-    const { id, username, provider, token, profileImage, email } = this.state;
+    const {
+      id,
+      username,
+      provider,
+      token,
+      profileImage,
+      email,
+      phone,
+    } = this.state;
 
     const { handleTestExpertLogin, handleTestUserLogin } = this;
 
@@ -241,7 +312,6 @@ export default connect(
     form: state.auth.getIn(['register', 'form']),
     error: state.auth.getIn(['register', 'error']),
     exists: state.auth.getIn(['register', 'exists']),
-    result: state.auth.get('result'),
   }),
   dispatch => ({
     AuthActions: bindActionCreators(authActions, dispatch),

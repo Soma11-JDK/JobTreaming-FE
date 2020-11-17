@@ -10,6 +10,8 @@ const CHECK_EMAIL_EXISTS = 'auth/CHECK_EMAIL_EXISTS'; // 이메일 중복 확인
 const SERVER_REGISTER = 'auth/SERVER_REGISTER'; // 이메일 가입
 const SET_ERROR = 'auth/SET_ERROR'; // 오류 설정
 
+const USER_MODIFY = 'auth/USER_MODIFY'; // 유저 수정
+
 export const checkEmailExists = createAction(
   CHECK_EMAIL_EXISTS,
   AuthAPI.checkEmailExists,
@@ -18,6 +20,8 @@ export const serverRegister = createAction(
   SERVER_REGISTER,
   AuthAPI.serverRegister,
 ); // { email, imageURL, username, phone }
+
+export const userModify = createAction(USER_MODIFY, AuthAPI.userModify); // { email, imageURL, username, phone }
 
 export const changeInput = createAction(CHANGE_INPUT); //  { form, name, value }
 export const initializeForm = createAction(INITIALIZE_FORM); // form
@@ -62,6 +66,11 @@ export default handleActions(
     }),
     ...pender({
       type: SERVER_REGISTER,
+      onSuccess: (state, action) =>
+        state.set('result', Map(action.payload.data)),
+    }),
+    ...pender({
+      type: USER_MODIFY,
       onSuccess: (state, action) =>
         state.set('result', Map(action.payload.data)),
     }),

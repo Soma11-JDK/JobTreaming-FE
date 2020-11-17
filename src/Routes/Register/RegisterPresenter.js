@@ -4,12 +4,12 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as authActions from 'redux/modules/auth';
+import * as userActions from 'redux/modules/user';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import CustomSingleDate from 'Components/common/CustomSingleDate';
 import { isEmail, isLength, isNumeric } from 'validator';
 import AuthError from 'Components/auth/AuthError';
 import debounce from 'lodash/debounce';
-import * as userActions from 'redux/modules/user';
 import storage from 'lib/storage';
 
 const marginTop = css`
@@ -277,6 +277,7 @@ class RegisterPresenter extends Component {
 
     return (
       <Container marginTopValue="80px" marginBottomValue="80px">
+        {console.log(`등록테스트: ${JSON.stringify(this.props)}`)}
         <ProfileContainer marginBottomValue="20px">
           <ProfileImageContainer>
             <ProfileImage src={imageURL} />
