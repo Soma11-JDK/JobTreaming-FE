@@ -1,13 +1,13 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-import Store from 'Store/Store';
-import { categoryApi } from 'api';
-import HeaderIcon from '../HeaderIcon';
-import Dropdown from './Dropdown';
+import { connect } from 'react-redux';
+import * as userActions from 'redux/modules/user';
+import { bindActionCreators } from 'redux';
 import CategoryContext from '../CategoryContext';
+import Dropdown from './Dropdown';
 
 const Container = styled.div`
   width: 100%;
@@ -95,7 +95,7 @@ const SLink = styled(Link)`
   text-decoration: none;
 `;
 
-const Header = ({ location: { pathname }, logged }) => {
+const Header = props => {
   /* const [categoryItems, setCategory] = useState([]);
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -135,9 +135,10 @@ const Header = ({ location: { pathname }, logged }) => {
     setSearchFocus(false);
   };
 
+  const { user, location } = props;
+
   return (
     <Container>
-      {console.log(`logged: ${logged}`)}
       <HeaderLeft>
         <Link to="/">
           <Logo
@@ -146,7 +147,7 @@ const Header = ({ location: { pathname }, logged }) => {
           />
         </Link>
         <Input
-          current={pathname === '/'}
+          current={location.pathname === '/'}
           type="text"
           placeholder="검색하기"
           onFocus={onFocusEnter}
@@ -169,6 +170,12 @@ const Header = ({ location: { pathname }, logged }) => {
             </DropdownContainer>
           )}
         </NavItem>
+        <NavItem>
+          <SLink to="/petition/0">
+            <Span>강연추천</Span>
+          </SLink>
+        </NavItem>
+
         <NavItem>
           <SLink to="/petition/0">
             <Span>청원하기</Span>
@@ -195,7 +202,8 @@ const Header = ({ location: { pathname }, logged }) => {
           </SLink>
         </NavItem>
         <NavItem>
-          {logged ? (
+          {console.log(`user: ${user.get('logged')}`)}
+          {user.get('logged') ? (
             <SLink to="/mypage/payment">
               <Span> 마이페이지</Span>
             </SLink>
@@ -211,10 +219,19 @@ const Header = ({ location: { pathname }, logged }) => {
 };
 
 Header.propTypes = {
-  logged: PropTypes.bool.isRequired,
   location: PropTypes.shape({
     pathname: PropTypes.string.isRequired,
   }).isRequired,
+  user: PropTypes.shape({
+    get: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
-export default withRouter(Header);
+export default connect(
+  state => ({
+    user: state.user,
+  }),
+  dispatch => ({
+    UserActions: bindActionCreators(userActions, dispatch),
+  }),
+)(withRouter(Header));

@@ -182,6 +182,7 @@ const MyLecturePresenter = ({ param, myLectureList }) => {
             <Span textColor="#000000">오늘의 강의</Span>
             <Span textColor="#465fcc" marginLeftValue="8px">
               ({myLectureList.length})
+              {console.log(JSON.stringify(myLectureList))}
             </Span>
           </SpanContainer>
           <LectureViewContainer marginTopValue="20px">
@@ -194,16 +195,18 @@ const MyLecturePresenter = ({ param, myLectureList }) => {
                   endedAt,
                   title,
                   fileName,
+                  price,
                 } = item;
                 return (
                   <LecturePreview
                     key={id}
                     id={id}
                     imageUrl={fileName}
-                    expert={expertName}
+                    expert={expertName === null ? '전문가' : expertName}
                     category={category}
                     endTime={endedAt}
                     title={title}
+                    price={price}
                   />
                 );
               })}

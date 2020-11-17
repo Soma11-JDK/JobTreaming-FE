@@ -83,6 +83,8 @@ const Span = styled.span`
   ${marginLeft}
 `;
 
+const defaultProfileImg = require('assets/DefaultProfile/DefaultProfile.png');
+
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -102,6 +104,8 @@ class Login extends Component {
       const { onLogin, history, UserActions } = this.props;
       const { data } = await loginApi.socialLogin('test@test.test');
 
+      data.user.imageURL =
+        data.user.imageURL === ' ' ? defaultProfileImg : data.user.imagerURL;
       // console.log(`테스트 로그인 ${data}`);
       storage.set('loggedInfo', data);
       UserActions.setLoggedInfo(data);
@@ -119,6 +123,8 @@ class Login extends Component {
       const { onLogin, history, UserActions } = this.props;
       const { data } = await loginApi.socialLogin('test1@test.test');
 
+      data.user.imageURL =
+        data.user.imageURL === ' ' ? defaultProfileImg : data.user.imagerURL;
       // console.log(`테스트 로그인 ${data}`);
       storage.set('loggedInfo', data);
       UserActions.setLoggedInfo(data);
@@ -132,10 +138,6 @@ class Login extends Component {
 
   // Kakao Login
   responseKakao = async res => {
-    console.log(`kakao: ${JSON.stringify(res)}`);
-
-    storage.set('loggedInfo', res);
-
     this.setState({
       id: res.profile.id,
       username: res.profile.properties.nickname,
@@ -145,7 +147,7 @@ class Login extends Component {
     });
 
     const { id, username, provider, profileImage, email } = this.state;
-    const { AuthActions } = this.props;
+    const { AuthActions, UserActions } = this.props;
 
     AuthActions.changeInput({
       name: 'email',
@@ -164,18 +166,15 @@ class Login extends Component {
     });
     try {
       const { data } = await loginApi.socialLogin(email);
-      console.log(`kakao data: ${data}`);
 
-      const { onLogin } = this.props;
+      const { history, onLogin } = this.props;
+
+      storage.set('loggedInfo', data);
+      UserActions.setLoggedInfo(data);
 
       onLogin();
-      window.localStorage.setItem('id', id);
-      window.localStorage.setItem('username', username);
-      window.localStorage.setItem('provider', provider);
-      window.localStorage.setItem('profileImage', profileImage);
-      window.localStorage.setItem('email', email);
+      history.push('/');
     } catch {
-      console.log(`profile data: ${profileImage}`);
       console.log('회원 정보가 없습니다.');
       this.doSignUp();
     }

@@ -127,6 +127,7 @@ const Button = styled.button`
   background-color: #5570ff;
   ${marginTop}
 `;
+
 class RegisterPresenter extends Component {
   validate = {
     email: value => {
@@ -221,24 +222,36 @@ class RegisterPresenter extends Component {
       !validate.phone(phone)
     ) {
       // 하나라도 실패하면 진행하지 않음
+      return;
     }
 
     console.log(
       `email: ${email} nickname: ${nickname} phone: ${phone} image: ${imageURL}`,
     );
     try {
-      await AuthActions.serverRegister({
+      const body = {
         email,
         imageURL,
-        nickname,
+        name: nickname,
         phone,
+      };
+
+      await AuthActions.serverRegister({
+        ...body,
       });
+
       const { result } = this.props;
-      const loggedInfo = result.toJS();
+
+      // const { data } = await loginApi.signUp(body);
+      console.log(`result: ${result}`);
+      const loggedInfo = result;
       storage.set('loggedInfo', loggedInfo);
       UserActions.setLoggedInfo(loggedInfo);
 
-      console.log(`가입 정보: ${loggedInfo}`);
+      console.log(`가입 정보1: ${JSON.stringify(loggedInfo)}`);
+      console.log(`가입 정보2: ${loggedInfo}`);
+      const loggedInfo2 = result.toJS();
+      console.log(`가입 정보3: ${loggedInfo2}`);
       // TODO: 로그인 정보 저장 (로컬스토리지/스토어)
       history.push('/'); // 회원가입 성공시 홈페이지로 이동
     } catch (e) {
@@ -339,10 +352,8 @@ RegisterPresenter.propTypes = {
   error: PropTypes.string,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
-  }),
+  }).isRequired,
 };
-
-const defaultProfileImg = require('assets/DefaultProfile/DefaultProfile.png');
 
 RegisterPresenter.defaultProps = {
   form: ImmutablePropTypes.mapContains({
@@ -353,10 +364,6 @@ RegisterPresenter.defaultProps = {
     get: false,
   }),
   error: '',
-
-  history: PropTypes.shape({
-    push: '',
-  }),
 };
 
 export default connect(

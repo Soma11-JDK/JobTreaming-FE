@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { categoryApi } from 'api';
 import PropTypes from 'prop-types';
+import storage from 'lib/storage';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as userActions from 'redux/modules/user';
 import Router from '../Routes/Router';
 import GlobalStyles from './GlobalStyles';
 import Header from './common/Header';
@@ -9,7 +13,6 @@ import Store from '../Store/Store';
 import Footer from './common/Footer';
 
 import CategoryContext from './CategoryContext';
-import storage from '../lib/storage';
 
 const Layout = styled.div`
   width: 100%;
@@ -31,14 +34,18 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const id = window.localStorage.getItem('loggedInfo');
-    if (id) {
-      this.onLogin();
-    } else {
-      this.onLogout();
-    }
+    this.initializeUserInfo();
+
     this.getCategories();
   }
+
+  initializeUserInfo = async () => {
+    const loggedInfo = storage.get('loggedInfo'); // 로그인 정보를 로컬스토리지에서 가져옵니다.
+    if (!loggedInfo) return; // 로그인 정보가 없다면 여기서 멈춥니다.
+
+    const { UserActions } = this.props;
+    UserActions.setLoggedInfo(loggedInfo);
+  };
 
   // 카테고리 정보를 가져오는 부분
   getCategories = async () => {
@@ -58,7 +65,6 @@ class App extends Component {
 
   // Login Func
   onLogin = () => {
-    const { history } = this.props;
     this.setState({
       logged: true,
     });
@@ -92,6 +98,7 @@ class App extends Component {
       onLogin,
       onLogout,
     } = this.state;
+    const { location } = this.props;
     return (
       <Store.Provider value={this.state}>
         {isLoading ? (
@@ -100,7 +107,7 @@ class App extends Component {
           <>
             {console.log(`help: ${JSON.stringify(categoryItems)}`)}
             <CategoryContext.Provider value={categoryItems}>
-              <Header logged={logged} onLogout={onLogout} />
+              <Header location={location} />
               <Layout>
                 <Router />
                 <GlobalStyles />
@@ -118,6 +125,10 @@ App.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
+  UserActions: PropTypes.shape().isRequired,
+  location: PropTypes.shape({}).isRequired,
 };
 
-export default App;
+export default connect(null, dispatch => ({
+  UserActions: bindActionCreators(userActions, dispatch),
+}))(App);

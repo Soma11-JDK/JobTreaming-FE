@@ -16,11 +16,12 @@ const initialState = Map({
   loggedInfo: Map({
     // 현재 로그인중인 유저의 정보
     token: null,
-    user: null,
-    email: null,
-    imageURL: defaultProfileImg,
-    nickname: null,
-    phone: null,
+    user: Map({
+      email: null,
+      imageURL: defaultProfileImg,
+      name: null,
+      phone: null,
+    }),
   }),
   logged: false, // 현재 로그인중인지 알려준다
 });
