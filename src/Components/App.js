@@ -6,6 +6,7 @@ import storage from 'lib/storage';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as userActions from 'redux/modules/user';
+import * as authActions from 'redux/modules/auth';
 import Router from '../Routes/Router';
 import GlobalStyles from './GlobalStyles';
 import Header from './common/Header';
@@ -43,7 +44,27 @@ class App extends Component {
     const loggedInfo = storage.get('loggedInfo'); // 로그인 정보를 로컬스토리지에서 가져옵니다.
     if (!loggedInfo) return; // 로그인 정보가 없다면 여기서 멈춥니다.
 
-    const { UserActions } = this.props;
+    const { UserActions, AuthActions } = this.props;
+    AuthActions.changeInput({
+      name: 'email',
+      value: loggedInfo.user.email,
+      form: 'register',
+    });
+    AuthActions.changeInput({
+      name: 'nickname',
+      value: loggedInfo.user.name,
+      form: 'register',
+    });
+    AuthActions.changeInput({
+      name: 'imageURL',
+      value: loggedInfo.user.imageURL,
+      form: 'register',
+    });
+    AuthActions.changeInput({
+      name: 'phone',
+      value: loggedInfo.user.phone,
+      form: 'register',
+    });
     UserActions.setLoggedInfo(loggedInfo);
   };
 
@@ -126,9 +147,11 @@ App.propTypes = {
     push: PropTypes.func.isRequired,
   }).isRequired,
   UserActions: PropTypes.shape().isRequired,
+  AuthActions: PropTypes.shape().isRequired,
   location: PropTypes.shape({}).isRequired,
 };
 
 export default connect(null, dispatch => ({
+  AuthActions: bindActionCreators(authActions, dispatch),
   UserActions: bindActionCreators(userActions, dispatch),
 }))(App);
