@@ -71,6 +71,7 @@ const Span = styled.span.attrs(props => ({
   .title {
     margin-right: 10px;
     font-size: 1.5vw;
+    font-weight: bold;
   }
   .price {
     font-size: 1.2vw;
@@ -129,7 +130,7 @@ const LecturePreview = ({
             </Span>
             <Span className="endTime">
               <span role="img" aria-label="time">
-                ⏰ {endTime}
+                ⏰ {endTime.substring(0, 10)}
               </span>
             </Span>
           </Span>

@@ -53,6 +53,7 @@ const ProfileImageContainer = styled.div`
 const ProfileImage = styled.img`
   width: 100px;
   height: 100px;
+  border-radius: 999px;
 `;
 
 const Username = styled.span`
@@ -159,21 +160,23 @@ const Span = styled.span`
   ${marginLeft}
 `;
 
-const MyPagePresenter = ({ param, state }) => {
+const MyPagePresenter = ({ param, state, user }) => {
+  const userData = user.get('user');
   return (
     <Container marginTopValue="80px" marginBottomValue="80px">
       <ProfileContainer marginBottomValue="20px">
         <ProfileImageContainer>
-          <ProfileImage src={profileImageUrl} />
+          <ProfileImage src={userData.imageURL} />
           <Link to="/setting">
             <SettingImage src={settingImageUrl} />
           </Link>
         </ProfileImageContainer>
-        <Username marginTopValue="10px">eunhye_22</Username>
+        <Username marginTopValue="10px">{userData.name}</Username>
       </ProfileContainer>
       <TabContainer marginTopValue="20px">
         <ImageTab tabInfo={ImageTabInfo} nowTab={param} nowPage="myPage" />
       </TabContainer>
+
       {param === 'payment' && (
         <>
           <IndexContainer marginTopValue="30px" marginBottomValue="30px">
@@ -271,6 +274,9 @@ const MyPagePresenter = ({ param, state }) => {
 MyPagePresenter.propTypes = {
   param: PropTypes.string.isRequired,
   state: PropTypes.string,
+  user: PropTypes.shape({
+    get: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 MyPagePresenter.defaultProps = {

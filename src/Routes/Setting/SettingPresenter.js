@@ -2,6 +2,10 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 import { Link, useHistory } from 'react-router-dom';
+import { connect } from 'react-redux';
+import * as userActions from 'redux/modules/user';
+import { bindActionCreators } from 'redux';
+import storage from 'lib/storage';
 
 const marginTop = css`
   ${({ marginTopValue }) => marginTopValue && `margin-top : ${marginTopValue};`}
@@ -138,11 +142,17 @@ const Button = styled.button`
 const SettingPresenter = props => {
   // Logout Func
   const history = useHistory();
-  function onLogout() {
-    history.push('/');
+  const handleLogout = async () => {
+    const { UserActions } = props;
+    try {
+      await UserActions.logout();
+    } catch (e) {
+      console.log(e);
+    }
 
-    props.onLogout();
-  }
+    storage.remove('loggedInfo');
+    window.location.href = '/'; // 홈페이지로 새로고침
+  };
 
   return (
     <Container marginTopValue="80px" marginBottomValue="80px">
@@ -188,7 +198,7 @@ const SettingPresenter = props => {
           </Span>
         </InterestingContainer>
         <ButtonContainer>
-          <Button onClick={onLogout} marginTopValue="20px">
+          <Button onClick={handleLogout} marginTopValue="20px">
             <Span fontWeight="900" fontSize="20px">
               로그 아웃
             </Span>
@@ -215,7 +225,9 @@ const SettingPresenter = props => {
 };
 
 SettingPresenter.propTypes = {
-  onLogout: PropTypes.func.isRequired,
+  UserActions: PropTypes.shape().isRequired,
 };
 
-export default SettingPresenter;
+export default connect(null, dispatch => ({
+  UserActions: bindActionCreators(userActions, dispatch),
+}))(SettingPresenter);

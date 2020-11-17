@@ -10,8 +10,12 @@ class RegisterContainer extends Component {
   }
 
   render() {
-    return <Register />;
+    const { history } = this.props;
+    return <Register history={history} />;
   }
 }
 
+RegisterContainer.propTypes = {
+  history: PropTypes.shape({}).isRequired,
+};
 export default RegisterContainer;
