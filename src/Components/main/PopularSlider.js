@@ -67,6 +67,7 @@ export default class PopularSlider extends Component {
 
   render() {
     const { items } = this.props;
+    console.log(`slideItems ${JSON.stringify(items)}`);
     // 슬라이더 세팅
     const settings = {
       dots: false,
@@ -91,23 +92,24 @@ export default class PopularSlider extends Component {
           {items.map(item => {
             const {
               id,
-              expert,
+              expertName,
               category,
-              endTime,
+              endedAt,
               title,
               price,
               salePercentage,
-              url,
+              fileName,
             } = item;
             return (
               <LecturePreview
+                type="getImage"
                 key={id}
                 id={id}
-                imageUrl={url}
+                imageUrl={fileName}
                 heartUrl={heartUrl}
-                expert={expert}
+                expert={expertName}
                 category={category}
-                endTime={endTime}
+                endedAt={endedAt}
                 title={title}
                 price={price}
                 salePercentage={salePercentage}

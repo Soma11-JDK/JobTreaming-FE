@@ -6,11 +6,12 @@ import LecturePreview from 'Components/lecture/LecturePreview';
 import Subtitle from 'Components/common/Subtitle';
 import Dropdown from 'Components/common/Dropdown';
 import CustomDateRange from 'Components/common/CustomDateRange';
+import { connect, useSelector } from 'react-redux';
+import * as searchActions from 'redux/modules/search';
+import { bindActionCreators } from 'redux';
 import TestDateRange from 'Components/TestDateRange';
 import TestDatePicker from 'Components/TestDatePicker';
 import CustomDate from 'Components/common/CustomDate';
-
-import { items } from '../Home/HomePresenter';
 
 const Container = styled.div`
   width: 100%;
@@ -121,85 +122,48 @@ const Span = styled.span`
 
 const heartUrl = require('assets/Heart/Heart.png');
 
-const SearchPresenter = ({
-  searchResults,
-  loading,
-  error,
-  searchTerm,
-  handleSubmit,
-  updateTerm,
-  categoryItems,
-}) => {
-  const [dropdownCategory, setDropdown] = useState(false);
-  const [dropdownSubCategory, setSubDropdown] = useState(false);
-
-  const onMouseEnter = type => {
-    if (type === 1) setDropdown(true);
-    else if (type === 2) setSubDropdown(true);
-  };
-
-  const onMouseLeave = () => {
-    setDropdown(false);
-    setSubDropdown(false);
-  };
-  const searchTitle = `'${searchTerm}' 검색결과`;
+const SearchPresenter = ({ searchResults, searchTerm, categoryItems }) => {
+  const searchTitle = `${
+    searchTerm === '' ? '모든' : `'${searchTerm}'`
+  } 검색결과`;
   return (
     <>
       <Container>
         <CategoryTitleContainer>
           <Subtitle title={searchTitle} />
         </CategoryTitleContainer>
-        <MenuContainer>
-          <ListContainer
-            onMouseEnter={() => onMouseEnter(1)}
-            onMouseLeave={onMouseLeave}
-          >
-            <Menu>
-              <Span fontSize="16px"> 카테고리 </Span>
-            </Menu>
-            {dropdownCategory && <Dropdown categoryItems={categoryItems} />}
-          </ListContainer>
-          <ListContainer
-            onMouseEnter={() => onMouseEnter(2)}
-            onMouseLeave={onMouseLeave}
-          >
-            <Menu>
-              <Span fontSize="16px"> 세부 카테고리 </Span>
-            </Menu>
-            {dropdownSubCategory && <Dropdown categoryItems={categoryItems} />}
-          </ListContainer>
-        </MenuContainer>
-        <DateRangeContainer>
-          <CustomDateRange />
-        </DateRangeContainer>
+        {console.log(`lectureData: ${JSON.stringify(searchResults)}`)}
         <LectureViewContainer>
           <LectureGird>
-            {items.map(item => {
-              const {
-                id,
-                expert,
-                category,
-                endTime,
-                title,
-                price,
-                salePercentage,
-                url,
-              } = item;
-              return (
-                <LecturePreview
-                  key={id}
-                  id={id}
-                  imageUrl={url}
-                  heartUrl={heartUrl}
-                  expert={expert}
-                  category={category}
-                  endTime={endTime}
-                  title={title}
-                  price={price}
-                  salePercentage={salePercentage}
-                />
-              );
-            })}
+            {searchResults &&
+              searchResults.map(item => {
+                const {
+                  id,
+                  expertName,
+                  category,
+                  endedAt,
+                  title,
+                  price,
+                  salePercentage,
+                  fileName,
+                } = item;
+
+                return (
+                  <LecturePreview
+                    key={id}
+                    type="getImage"
+                    id={id}
+                    imageUrl={fileName}
+                    heartUrl={heartUrl}
+                    expert={expertName}
+                    category={category}
+                    endedAt={endedAt}
+                    title={title}
+                    price={price}
+                    salePercentage={salePercentage}
+                  />
+                );
+              })}
           </LectureGird>
         </LectureViewContainer>
         <PetitionLinkContainer>
@@ -227,18 +191,20 @@ const SearchPresenter = ({
 
 SearchPresenter.propTypes = {
   searchResults: PropTypes.arrayOf(PropTypes.node),
-  loading: PropTypes.bool.isRequired,
   searchTerm: PropTypes.string,
-  handleSubmit: PropTypes.func.isRequired,
-  updateTerm: PropTypes.func.isRequired,
-  error: PropTypes.string,
   categoryItems: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 SearchPresenter.defaultProps = {
   searchResults: null,
   searchTerm: '',
-  error: null,
 };
 
-export default SearchPresenter;
+export default connect(
+  state => ({
+    search: state.search,
+  }),
+  dispatch => ({
+    SearchActions: bindActionCreators(searchActions, dispatch),
+  }),
+)(SearchPresenter);

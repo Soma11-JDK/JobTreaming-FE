@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as userActions from 'redux/modules/user';
 import { bindActionCreators } from 'redux';
+import * as searchActions from 'redux/modules/search';
 import CategoryContext from '../CategoryContext';
 import Dropdown from './Dropdown';
 
@@ -75,6 +76,7 @@ const Span = styled.div`
 
 const searchIcon = require('assets/fe:search.png');
 
+const Form = styled.form``;
 const Input = styled.input`
   background: #e3e3e3 url(${props => props.searchIconUrl}) center right
     no-repeat;
@@ -118,7 +120,7 @@ const Header = props => {
   const categoryItems = useContext(CategoryContext);
   const [dropdown, setDropdown] = useState(false);
   const [searchFocus, setSearchFocus] = useState(false);
-
+  const [searchTerm, setSearchTerm] = useState('');
   const onMouseEnter = () => {
     setDropdown(true);
   };
@@ -135,6 +137,27 @@ const Header = props => {
     setSearchFocus(false);
   };
 
+  const searchByTerm = () => {
+    const { history, SearchActions } = props;
+
+    // searchTerm = { searchTerm };
+    SearchActions.setSearchInfo(searchTerm);
+    history.push('/search');
+  };
+
+  const handleSubmit = event => {
+    event.preventDefault();
+
+    searchByTerm();
+  };
+
+  const updateTerm = event => {
+    const {
+      target: { value },
+    } = event;
+    setSearchTerm(value);
+  };
+
   const { user, location } = props;
 
   return (
@@ -146,14 +169,19 @@ const Header = props => {
             srcSet={`${smallLogo} 300w, ${mediumLogo} 768w, ${largeLogo} 1280w`}
           />
         </Link>
-        <Input
-          current={location.pathname === '/'}
-          type="text"
-          placeholder="검색하기"
-          onFocus={onFocusEnter}
-          onBlur={onFocusOut}
-          searchIconUrl={searchFocus ? '' : searchIcon}
-        />
+        <Form onSubmit={handleSubmit}>
+          <Input
+            current={location.pathname === '/'}
+            type="text"
+            placeholder="검색하기"
+            onFocus={onFocusEnter}
+            onBlur={onFocusOut}
+            name="search"
+            value={searchTerm}
+            onChange={updateTerm}
+            searchIconUrl={searchFocus ? '' : searchIcon}
+          />
+        </Form>
       </HeaderLeft>
       <HeaderRight>
         <NavItem
@@ -161,7 +189,7 @@ const Header = props => {
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}
         >
-          <SLink to="/category/1">
+          <SLink to="/category/0">
             <Span> 카테고리 </Span>
           </SLink>
           {dropdown && (
@@ -171,7 +199,7 @@ const Header = props => {
           )}
         </NavItem>
         <NavItem>
-          <SLink to="/petition/0">
+          <SLink to="/recommend">
             <Span>강연추천</Span>
           </SLink>
         </NavItem>
@@ -225,6 +253,10 @@ Header.propTypes = {
   user: PropTypes.shape({
     get: PropTypes.func.isRequired,
   }).isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+  SearchActions: PropTypes.shape().isRequired,
 };
 
 export default connect(
@@ -233,5 +265,6 @@ export default connect(
   }),
   dispatch => ({
     UserActions: bindActionCreators(userActions, dispatch),
+    SearchActions: bindActionCreators(searchActions, dispatch),
   }),
 )(withRouter(Header));

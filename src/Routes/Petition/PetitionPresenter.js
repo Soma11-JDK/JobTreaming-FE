@@ -116,8 +116,9 @@ const ProfileContainer = styled.div`
 const profileUrl = require('assets/TestProfile/Mask Group.png');
 
 const ProfileImage = styled.img`
-  width: 50px;
-  height: 50px;
+  width: 80px;
+  height: 80px;
+  border-radius: 999px;
 `;
 
 const PetitionInputContent = styled.input`
@@ -164,6 +165,7 @@ const Menu = styled.div`
 
 const PetitionPresenter = ({
   title,
+  results,
   categoryIdx,
   contents,
   handleSubmit,
@@ -190,8 +192,6 @@ const PetitionPresenter = ({
 
   return (
     <Container>
-      {console.log(`petitionTest: ${JSON.stringify(user)}`)}
-      {console.log(`petitionTest2: ${JSON.stringify(userData)}`)}
       <PetitionInfoContainer>
         <ImageContainer marginLeftValue="10px">
           <UnionImage src={unionImageUrl} />
@@ -227,7 +227,7 @@ const PetitionPresenter = ({
       </PetitionWriteContainer>
       <BelowContainer>
         <Subtitle title="청원 목록" />
-        <ListContainer
+        {/* <ListContainer
           marginTopValue="20px"
           onMouseEnter={() => onMouseEnter()}
           onMouseLeave={onMouseLeave}
@@ -238,8 +238,24 @@ const PetitionPresenter = ({
           {dropdownCategory && (
             <Dropdown categoryItems={categoryItems} nowPage="petition" />
           )}
-        </ListContainer>
-        <HorizontalPetition />
+          </ListContainer> */}
+        {results &&
+          results.length > 0 &&
+          results.map(item => {
+            // eslint-disable-next-line no-shadow
+            const { user, contents, id, createdAt } = item;
+
+            return (
+              <HorizontalPetition
+                key={id}
+                id={id}
+                type="getImage"
+                user={user}
+                contents={contents}
+                createdAt={createdAt}
+              />
+            );
+          })}
       </BelowContainer>
     </Container>
   );
@@ -253,8 +269,12 @@ PetitionPresenter.propTypes = {
   updateContents: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   categoryItems: PropTypes.arrayOf(PropTypes.object).isRequired,
+  results: PropTypes.arrayOf(),
 };
-// export default PetitionPresenter;
+
+PetitionPresenter.defaultProps = {
+  results: null,
+};
 
 export default connect(null, dispatch => ({
   UserActions: bindActionCreators(userActions, dispatch),

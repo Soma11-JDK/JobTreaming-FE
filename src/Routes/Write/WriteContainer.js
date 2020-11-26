@@ -14,7 +14,7 @@ import draftToHtml from 'draftjs-to-html';
 import { withRouter } from 'react-router-dom';
 
 import CategoryContext from 'Components/CategoryContext';
-import WritePresenter from './WritePresenter';
+import Write from './WritePresenter';
 // 글목록으로 이동하기 위해 withRouter HOC import
 
 export default compose(
@@ -61,4 +61,4 @@ export default compose(
       console.log(newLecture);
     },
   }),
-)(WritePresenter);
+)(Write);

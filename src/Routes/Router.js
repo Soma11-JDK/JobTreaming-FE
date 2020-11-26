@@ -15,6 +15,7 @@ import {
   LectureDetail,
   Setting,
   Register,
+  Recommend,
 } from './index';
 
 export default () => (
@@ -33,6 +34,7 @@ export default () => (
       <Route path="/lecturedetail/:id" component={LectureDetail} />
       <Route path="/setting" component={Setting} />
       <Route path="/register" component={Register} />
+      <Route path="/recommend" component={Recommend} />
       <Redirect from="*" to="/" />
     </Switch>
   </ScrollToTop>

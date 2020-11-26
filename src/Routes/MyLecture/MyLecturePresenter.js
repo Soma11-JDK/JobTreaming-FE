@@ -51,6 +51,7 @@ const profileImageUrl = require('assets/TestProfile/Mask Group.png');
 const ProfileImage = styled.img`
   width: 100px;
   height: 100px;
+  border-radius: 99px;
 `;
 
 const Username = styled.span`
@@ -203,9 +204,9 @@ const MyLecturePresenter = ({ param, myLectureList, user }) => {
                     key={id}
                     id={id}
                     imageUrl={fileName}
-                    expert={expertName === null ? '전문가' : expertName}
+                    expert={expertName}
                     category={category}
-                    endTime={endedAt}
+                    endedAt={endedAt}
                     title={title}
                     price={price}
                   />
@@ -222,7 +223,7 @@ const MyLecturePresenter = ({ param, myLectureList, user }) => {
           <LectureViewContainer>
             <LectureGird>
               {items.map(item => {
-                const { id, expert, category, endTime, title, url } = item;
+                const { id, expert, category, endedAt, title, url } = item;
                 return (
                   <LecturePreview
                     key={id}
@@ -230,7 +231,7 @@ const MyLecturePresenter = ({ param, myLectureList, user }) => {
                     imageUrl={url}
                     expert={expert}
                     category={category}
-                    endTime={endTime}
+                    endedAt={endedAt}
                     title={title}
                   />
                 );
@@ -253,7 +254,7 @@ const MyLecturePresenter = ({ param, myLectureList, user }) => {
                 id,
                 expert,
                 category,
-                endTime,
+                endedAt,
                 title,
                 url,
                 price,
@@ -266,7 +267,7 @@ const MyLecturePresenter = ({ param, myLectureList, user }) => {
                   imageUrl={url}
                   expert={expert}
                   category={category}
-                  endTime={endTime}
+                  endedAt={endedAt}
                   title={title}
                   price={price}
                   salePercentage={salePercentage}
@@ -328,7 +329,7 @@ const MyLecturePresenter = ({ param, myLectureList, user }) => {
           </SpanContainer>
           <LectureViewContainer marginBottomValue="60px">
             {items.map(item => {
-              const { id, expert, category, endTime, title, url, price } = item;
+              const { id, expert, category, endedAt, title, url, price } = item;
               return (
                 <HorizontalLecture
                   key={id}
@@ -336,7 +337,7 @@ const MyLecturePresenter = ({ param, myLectureList, user }) => {
                   imageUrl={url}
                   expert={expert}
                   category={category}
-                  endTime={endTime}
+                  endedAt={endedAt}
                   title={title}
                   price={price}
                   btnTitle="후기작성하기"
@@ -360,7 +361,7 @@ const MyLecturePresenter = ({ param, myLectureList, user }) => {
                 id,
                 expert,
                 category,
-                endTime,
+                endedAt,
                 title,
                 url,
                 price,
@@ -373,7 +374,7 @@ const MyLecturePresenter = ({ param, myLectureList, user }) => {
                   imageUrl={url}
                   expert={expert}
                   category={category}
-                  endTime={endTime}
+                  endedAt={endedAt}
                   title={title}
                   price={price}
                   salePercentage={salePercentage}

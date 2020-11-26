@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import PropTypes from 'prop-types';
 
 const marginTop = css`
   ${({ marginTopValue }) => marginTopValue && `margin-top : ${marginTopValue};`}
@@ -40,8 +41,9 @@ const ProfileContainer = styled.div`
 const profileUrl = require('assets/TestProfile/Mask Group.png');
 
 const ProfileImage = styled.img`
-  width: 50px;
-  height: 50px;
+  width: 80px;
+  height: 80px;
+  border-radius: 999px;
 `;
 
 const ContentContainer = styled.div`
@@ -93,22 +95,25 @@ const ButtonInsideImage = styled.img`
   max-width: 20px;
 `;
 
-const HorizontalPetition = () => {
+const defaultProfileImg = require('assets/DefaultProfile/DefaultProfile.png');
+
+const HorizontalPetition = ({ user, createdAt, contents }) => {
   return (
     <Container marginTopValue="20px">
       <ProfileContainer>
-        <ProfileImage src={profileUrl} />
+        <ProfileImage
+          src={user.imageURL === ' ' ? defaultProfileImg : user.imageURL}
+        />
         <Span marginTopValue="10px" fontWeight="bold">
-          eunhye_22
+          {user.name}
         </Span>
       </ProfileContainer>
       <ContentContainer marginLeftValue="20px">
         <Span fontWeight="bold" fontopacity="0.6" fontColor="#000000">
-          2020.10.05
+          {createdAt.substring(0, 10)}
         </Span>
         <Span fontWeight="500" fontColor="#000000">
-          카카오 블라인드 채용을 대비해서 코딩테스트 집중분석 및 노하우 관련
-          강의가 개설되었으면 좋겠습니다.
+          {contents}
         </Span>
         <Button btnColor="gray" btnHeight="30px">
           <ButtonInsideImage src={heartUrl} />
@@ -119,4 +124,9 @@ const HorizontalPetition = () => {
   );
 };
 
+HorizontalPetition.propTypes = {
+  user: PropTypes.arrayOf().isRequired,
+  createdAt: PropTypes.string.isRequired,
+  contents: PropTypes.string.isRequired,
+};
 export default HorizontalPetition;

@@ -419,7 +419,7 @@ const TutorPresenter = ({ name, param }) => {
               id,
               expert,
               category,
-              endTime,
+              endedAt,
               title,
               url,
               price,
@@ -432,7 +432,7 @@ const TutorPresenter = ({ name, param }) => {
                 imageUrl={url}
                 expert={expert}
                 category={category}
-                endTime={endTime}
+                endedAt={endedAt}
                 title={title}
                 price={price}
                 salePercentage={salePercentage}
