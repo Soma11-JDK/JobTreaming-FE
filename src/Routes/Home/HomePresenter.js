@@ -271,7 +271,7 @@ const HomePresenter = ({
 
 HomePresenter.propTypes = {
   hotResults: PropTypes.arrayOf(PropTypes.object).isRequired,
-  categoryItems: PropTypes.arrayOf(PropTypes.object).isRequired,
+  categoryItems: PropTypes.arrayOf(PropTypes.array),
   searchTerm: PropTypes.string,
   handleSubmit: PropTypes.func.isRequired,
   updateTerm: PropTypes.func.isRequired,
@@ -279,6 +279,7 @@ HomePresenter.propTypes = {
 
 HomePresenter.defaultProps = {
   searchTerm: '',
+  categoryItems: '',
 };
 export default HomePresenter;
 export { items };
