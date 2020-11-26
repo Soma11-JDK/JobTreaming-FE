@@ -166,7 +166,7 @@ const HorizontalLecture = ({
   id,
   imageUrl,
   title,
-  endTime,
+  endedAt,
   liked,
   comment,
   expert,
@@ -183,7 +183,7 @@ const HorizontalLecture = ({
       <InfoContainer marginTopValue="10px" marginLeftValue="10px">
         <TimeContainer>
           <Emoji size="20px" label="clock" symbol="⏰" />
-          <Time> &nbsp;{endTime}</Time>
+          <Time> &nbsp;{endedAt}</Time>
         </TimeContainer>
 
         <LectureInfoContainer>
@@ -233,7 +233,7 @@ HorizontalLecture.propTypes = {
   title: PropTypes.string.isRequired,
   expert: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
-  endTime: PropTypes.string.isRequired,
+  endedAt: PropTypes.string.isRequired,
   liked: PropTypes.number,
   comment: PropTypes.number,
   price: PropTypes.number,

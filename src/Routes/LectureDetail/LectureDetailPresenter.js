@@ -283,13 +283,14 @@ const Input = styled.input`
 
 const LectureDetailPresenter = ({ location, joinLecture, lecture }) => {
   const [tabTitle, setTabTitle] = useState('lecureintroduce');
-  const { expertName, title, category, maxNum, contents } = lecture;
+  const { overview, expertName, title, category, maxNum, contents } = lecture;
   const handleClick = anchor => {
     return setTabTitle(anchor);
   };
 
   return (
     <Container marginTopValue="80px">
+      {console.log(`DetailLecture: ${JSON.stringify(lecture)}`)}
       <LeftContainer marginRightValue="30px">
         <TutorContainer>
           <TutorImage marginTop="50px" src={tutorImageUrl} />
@@ -346,18 +347,7 @@ const LectureDetailPresenter = ({ location, joinLecture, lecture }) => {
             fontWeight="500px"
             paddingValue="10px"
           >
-            은행 직원부터 기상청 공무원까지,
-            <br /> 이미 많은 평범한 직장인들이 이 클래스를 통해 파이썬에
-            입문했습니다.
-            <br />
-            <br /> 대한민국 모든 직장인들을 위해 준비한 파이썬 데이터 분석 기초
-            강의!
-            <br /> "이제 우리, 엑셀 대신 파이썬해요"
-            <br />
-            <br />
-            파이썬으로 하는 보고서 작성, 업무자동화, 데이터분석!
-            <br /> 엑셀 대신 파이썬을 다루고 싶은 직장인,
-            <br /> 새로운 기술에 관심이 많은 20-30대 직장인 환영이에요.
+            {contents}
           </Span>
         </Section>
         <Section marginTopValue="80px">
@@ -543,7 +533,7 @@ const LectureDetailPresenter = ({ location, joinLecture, lecture }) => {
             <HeartImage src={heartUrl} />
             2.6K
           </HeartContainer>
-          <ApplyButton onClick={joinLecture}>깅의 수강하기</ApplyButton>
+          <ApplyButton onClick={joinLecture}>강의 수강하기</ApplyButton>
         </Row>
       </RightContainer>
     </Container>
@@ -555,7 +545,8 @@ LectureDetailPresenter.propTypes = {
     pathname: PropTypes.string,
   }).isRequired,
   joinLecture: PropTypes.func.isRequired,
-  lecture: PropTypes.arrayOf({
+  lecture: PropTypes.shape({
+    overview: PropTypes.string,
     expertName: PropTypes.string,
     title: PropTypes.string,
     maxNum: PropTypes.number,

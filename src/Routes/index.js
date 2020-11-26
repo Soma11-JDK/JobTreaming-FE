@@ -10,4 +10,5 @@ export { default as MyPage } from './MyPage/MyPageContainer';
 export { default as LectureDetail } from './LectureDetail/LectureDetailContainer';
 export { default as Register } from './Register/RegisterContainer';
 export { default as Setting } from './Setting/SettingContainer';
+export { default as Recommend } from './Recommend/RecommendContainer';
 export { default as ScrollToTop } from './Scroll/ScrollToTop';

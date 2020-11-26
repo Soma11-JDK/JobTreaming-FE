@@ -275,10 +275,6 @@ const SettingPresenter = props => {
       storage.set('loggedInfo', loggedInfo);
       UserActions.setLoggedInfo(loggedInfo);
 
-      console.log(`가입 정보1: ${JSON.stringify(loggedInfo)}`);
-      console.log(`가입 정보2: ${loggedInfo}`);
-      const loggedInfo2 = result.toJS();
-      console.log(`가입 정보3: ${loggedInfo2}`);
       // TODO: 로그인 정보 저장 (로컬스토리지/스토어)
       history.goBack(); // 유저 변경 수정시 뒤로가기
     } catch (e) {
@@ -301,9 +297,6 @@ const SettingPresenter = props => {
 
   return (
     <Container marginTopValue="80px" marginBottomValue="80px">
-      {console.log(`settingUser: ${JSON.stringify(user)}`)}
-      {console.log(`settingProps: ${JSON.stringify(props)}`)}
-      {console.log(`settingData: ${JSON.stringify(userData)}`)}
       <ProfileContainer marginBottomValue="20px">
         <ProfileImageContainer>
           <ProfileImage src={userData.imageURL} />

@@ -1,68 +1,54 @@
 import React from 'react';
 import CategoryContext from 'Components/CategoryContext';
-import SearchPresenter from './SearchPresenter';
+import { lectureApi } from 'api';
+import { connect, useSelector } from 'react-redux';
+import * as searchActions from 'redux/modules/search';
+import ImmutablePropTypes from 'react-immutable-proptypes';
+import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
+import Search from './SearchPresenter';
 
-export default class SearchContainer extends React.Component {
+class SearchContainer extends React.Component {
   constructor(props) {
     super();
     this.state = {
-      searchResults: null,
+      results: null,
       searchTerm: '',
       error: null,
       loading: false,
     };
   }
 
-  handleSubmit = event => {
-    event.preventDefault();
-    const { searchTerm } = this.state;
-    if (searchTerm !== '') {
-      this.searchByTerm();
-    }
-  };
+  async componentDidMount() {
+    const { search } = this.props;
+    const searchTerm = search.get('searchTerm');
+    try {
+      console.log(`searchTerm: ${JSON.stringify(this.props)}`);
+      console.log(`searchTerm2 ${search.get('searchTerm')}`);
+      const { data: results } = await lectureApi.searchLecture('', searchTerm);
 
-  updateTerm = event => {
-    const {
-      target: { value },
-    } = event;
-    this.setState({
-      searchTerm: value,
-    });
-  };
-
-  searchByTerm = async () => {
-    const { searchTerm } = this.state;
-    this.setState({ loading: true });
-
-    /* try {
-      const {
-        data: { results: movieResults },
-      } = await moviesApi.search(searchTerm);
-      const {
-        data: { results: tvResults },
-      } = await tvApi.search(searchTerm);
       this.setState({
-        movieResults,
-        tvResults,
+        results,
+        searchTerm,
       });
+      // history.push('/search');
     } catch {
       this.setState({ error: "Can't find results." });
     } finally {
       this.setState({ loading: false });
-    } */
-  };
+    }
+  }
 
   render() {
     const categoryItems = this.context;
-    const { searchResults, searchTerm, error, loading } = this.state;
+    const { results, searchTerm, error, loading } = this.state;
+
     return (
-      <SearchPresenter
-        searchResults={searchResults}
+      <Search
+        searchResults={results}
         loading={loading}
         error={error}
         searchTerm={searchTerm}
-        handleSubmit={this.handleSubmit}
-        updateTerm={this.updateTerm}
         categoryItems={categoryItems}
       />
     );
@@ -70,3 +56,30 @@ export default class SearchContainer extends React.Component {
 }
 
 SearchContainer.contextType = CategoryContext;
+
+SearchContainer.propTypes = {
+  search: ImmutablePropTypes.mapContains({
+    searchTerm: PropTypes.string,
+  }),
+};
+
+SearchContainer.defaultProps = {
+  search: ImmutablePropTypes.mapContains({
+    searchTerm: '',
+  }),
+};
+
+const mapStateToProps = state => ({
+  search: state.search,
+});
+
+const mapDispatchToProps = dispatch =>
+  // bindActionCreators 를 사용하면, 자동으로 액션 생성 함수에 dispatch 가 감싸진 상태로 호출 할 수 있습니다.
+  bindActionCreators(
+    {
+      searchActions,
+    },
+    dispatch,
+  );
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchContainer);

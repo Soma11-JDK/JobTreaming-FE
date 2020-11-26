@@ -16,8 +16,13 @@ const LectureDetailContainer = props => {
       setIsError(false);
       setIsLoading(true);
       try {
-        const { data: result } = await lectureApi.getLectureDetail(params.id);
-        console.log(`lectureListResult ${JSON.stringify(result.data)}`);
+        const parsedId = parseInt(params.id, 10);
+        const { data: result } = await lectureApi.getLectureDetail(parsedId);
+        console.log(
+          `lectureListResult ${JSON.stringify(
+            result.data,
+          )} params: ${JSON.stringify(params.id)}`,
+        );
 
         setLecture(result);
 
@@ -41,7 +46,7 @@ const LectureDetailContainer = props => {
     }; */
     const test = authHeader();
     console.log(`header: ${JSON.stringify(test.Authorization)}`);
-    const url = `http://streaming.jobtreaming.com?lectureId=${params.id}&jwt=${
+    const url = `https://streaming.jobtreaming.com?lectureId=${params.id}&jwt=${
       authHeader().Authorization
     }`;
     /* const xhr = new XMLHttpRequest();

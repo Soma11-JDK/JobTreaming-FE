@@ -19,7 +19,7 @@ const Line = styled.div`
 `;
 
 const List = styled.ul`
-  width: 80%;
+  width: 50%;
   display: flex;
 `;
 

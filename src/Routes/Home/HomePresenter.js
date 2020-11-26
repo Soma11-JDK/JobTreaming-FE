@@ -1,7 +1,7 @@
 /* eslint-disable global-require */
 import React from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
+import PropTypes, { array } from 'prop-types';
 
 import Slider from 'Components/common/Slider';
 import Category from 'Components/main/Category';
@@ -9,13 +9,14 @@ import PopularSlider from 'Components/main/PopularSlider';
 import Advertise from 'Components/main/Advertise';
 import Subtitle from 'Components/common/Subtitle';
 import ReviewSlider from 'Components/main/ReviewSlider';
+import SearchPresenter from '../Search/SearchPresenter';
 
 const Container = styled.div`
   width: 100%;
   height: 100%;
 `;
 
-const InputContainer = styled.div`
+const InputForm = styled.form`
   width: 100%;
   height: 100%;
   margin-top: 83px;
@@ -99,7 +100,7 @@ const items = [
     id: 1,
     expert: '문효영',
     category: '정보통신',
-    endTime: '18:30 PM',
+    endedAt: '18:30 PM',
     title: '비전공자에서 10년 경력 개발자가 될 수 있었던 노하우',
     price: 38900,
     salePercentage: 35,
@@ -109,7 +110,7 @@ const items = [
     id: 2,
     expert: '제임스오',
     category: '정보통신',
-    endTime: '18:45 PM',
+    endedAt: '18:45 PM',
     title: '실리콘벨리 개발자가 알려주는 프론트앤드 취업가이드',
     price: 53000,
     salePercentage: 28,
@@ -119,7 +120,7 @@ const items = [
     id: 3,
     expert: '김은정',
     category: '의료',
-    endTime: '19:30 PM',
+    endedAt: '19:30 PM',
     title: '예비 간호사를 위한 3대 대학병원 면접대비 방법',
     price: 37000,
     salePercentage: 40,
@@ -129,7 +130,7 @@ const items = [
     id: 4,
     expert: '조화용',
     category: '음식서비스',
-    endTime: '20:00 PM',
+    endedAt: '20:00 PM',
     title: '외식격영 전문가의 성공적인 창업을 위한 컨설팅',
     price: 25000,
     salePercentage: 20,
@@ -139,7 +140,7 @@ const items = [
     id: 5,
     expert: '문효영',
     category: '정보통신',
-    endTime: '18:30 PM',
+    endedAt: '18:30 PM',
     title: '비전공자에서 10년 경력 개발자가 될 수 있었던 노하우',
     price: 38900,
     salePercentage: 35,
@@ -149,7 +150,7 @@ const items = [
     id: 6,
     expert: '문효영',
     category: '정보통신',
-    endTime: '18:30 PM',
+    endedAt: '18:30 PM',
     title: '비전공자에서 10년 경력 개발자가 될 수 있었던 노하우',
     price: 38900,
     salePercentage: 35,
@@ -206,13 +207,25 @@ const reviewTestItems = [
   },
 ];
 
-const HomePresenter = ({ categoryItems }) => (
+const HomePresenter = ({
+  categoryItems,
+  handleSubmit,
+  updateTerm,
+  searchTerm,
+  hotResults,
+}) => (
   <>
     <Container>
+      {console.log(`hotResults: ${hotResults}`)}
       <Slider />
-      <InputContainer>
-        <Input type="text" placeholder="어떤 분야의 도움을 받고 싶으신가요?" />
-      </InputContainer>
+      <InputForm onSubmit={handleSubmit}>
+        <Input
+          type="text"
+          placeholder="어떤 분야의 도움을 받고 싶으신가요?"
+          value={searchTerm}
+          onChange={updateTerm}
+        />
+      </InputForm>
       {/* 카테고리 별 강연 찾기 */}
       <DividerContainer>
         {/* 카테고리 이미지 */}
@@ -229,7 +242,9 @@ const HomePresenter = ({ categoryItems }) => (
             <MoreSpan>전체 보기</MoreSpan>
           </TitleContainer>
           {/* 인기 강연 포스터 */}
-          <PopularSlider items={items} />
+          {hotResults && hotResults.length > 0 && (
+            <PopularSlider items={hotResults} />
+          )}
         </BelowContainer>
       </DividerContainer>
 
@@ -255,8 +270,15 @@ const HomePresenter = ({ categoryItems }) => (
 );
 
 HomePresenter.propTypes = {
+  hotResults: PropTypes.arrayOf(PropTypes.object).isRequired,
   categoryItems: PropTypes.arrayOf(PropTypes.object).isRequired,
+  searchTerm: PropTypes.string,
+  handleSubmit: PropTypes.func.isRequired,
+  updateTerm: PropTypes.func.isRequired,
 };
 
+HomePresenter.defaultProps = {
+  searchTerm: '',
+};
 export default HomePresenter;
 export { items };

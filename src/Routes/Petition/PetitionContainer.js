@@ -12,7 +12,7 @@ export default class PetitionContainer extends Component {
     super();
     this.state = {
       pageNumber: 1,
-      result: null,
+      results: null,
       error: null,
       loading: true,
       title: '',
@@ -23,11 +23,11 @@ export default class PetitionContainer extends Component {
   async componentDidMount() {
     const { pageNumber } = this.state;
     try {
-      const { data: body } = await petitionApi.petitionList(pageNumber);
+      const { data: results } = await petitionApi.petitionList(pageNumber);
       this.setState({
-        result: JSON.stringify(body),
+        results,
       });
-      console.log(`response: ${JSON.stringify(body)}`);
+      console.log(`response: ${JSON.stringify(results)}`);
     } catch {
       this.setState({ error: "Can't find petition results." });
     } finally {
@@ -35,11 +35,29 @@ export default class PetitionContainer extends Component {
     }
   }
 
+  async componentDidUpdate(preProps) {
+    const { pageNumber } = this.state;
+    const { data: results } = await petitionApi.petitionList(pageNumber);
+
+    /* if (preProps.results.length !== results.length) {
+      this.changeResults(results);
+    } */
+  }
+
+  changeResults = results => {
+    this.setState({
+      results,
+    });
+  };
+
   handleSubmit = event => {
     event.preventDefault();
     const { title, contents } = this.state;
-    if (title !== '' && contents !== '') {
+    if (contents !== '') {
       this.addPetition();
+      this.setState({
+        contents: '',
+      });
     }
   };
 
@@ -82,7 +100,7 @@ export default class PetitionContainer extends Component {
       },
     } = this.props;
     const parsedId = parseInt(id, 10);
-    const { pageNumber, result, error, loading, title, contents } = this.state;
+    const { pageNumber, results, error, loading, title, contents } = this.state;
 
     return (
       <PetionPresenter
@@ -94,6 +112,7 @@ export default class PetitionContainer extends Component {
         updateTitle={this.updateTitle}
         updateContents={this.updateContents}
         categoryItems={categoryItems}
+        results={results}
       />
     );
   }

@@ -192,7 +192,7 @@ const MyPagePresenter = ({ param, state, user }) => {
                 id,
                 expert,
                 category,
-                endTime,
+                endedAt,
                 title,
                 url,
                 price,
@@ -208,7 +208,7 @@ const MyPagePresenter = ({ param, state, user }) => {
                   expert={expert}
                   category={category}
                   title={title}
-                  endTime={endTime}
+                  endedAt={endedAt}
                   price={price}
                   payCheck
                   payDeadline={payDeadline}
@@ -226,7 +226,7 @@ const MyPagePresenter = ({ param, state, user }) => {
                 id,
                 expert,
                 category,
-                endTime,
+                endedAt,
                 title,
                 url,
                 price,
@@ -242,7 +242,7 @@ const MyPagePresenter = ({ param, state, user }) => {
                   expert={expert}
                   category={category}
                   title={title}
-                  endTime={endTime}
+                  endedAt={endedAt}
                   price={price}
                   payCheck
                   payDeadline={payDeadline}

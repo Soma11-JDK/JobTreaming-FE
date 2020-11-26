@@ -9,7 +9,7 @@ import CustomDateRange from 'Components/common/CustomDateRange';
 import TestDateRange from 'Components/TestDateRange';
 import TestDatePicker from 'Components/TestDatePicker';
 import CustomDate from 'Components/common/CustomDate';
-
+import Message from 'Components/common/Message';
 import { items } from '../Home/HomePresenter';
 
 const Container = styled.div`
@@ -118,7 +118,7 @@ const Span = styled.span`
 const heartUrl = require('assets/Heart/Heart.png');
 
 const LecturePresenter = ({
-  // result,
+  results,
   // loading,
   // error,
   categoryId,
@@ -158,34 +158,40 @@ const LecturePresenter = ({
         </MenuContainer>
         <LectureViewContainer>
           <LectureGird>
-            {items.map(item => {
-              const {
-                id,
-                expert,
-                category,
-                endTime,
-                title,
-                price,
-                salePercentage,
-                url,
-              } = item;
-              return (
-                <LecturePreview
-                  key={id}
-                  id={id}
-                  imageUrl={url}
-                  heartUrl={heartUrl}
-                  expert={expert}
-                  category={category}
-                  endTime={endTime}
-                  title={title}
-                  price={price}
-                  salePercentage={salePercentage}
-                />
-              );
-            })}
+            {results &&
+              results.length > 0 &&
+              results.map(item => {
+                const {
+                  id,
+                  expertName,
+                  category,
+                  endedAt,
+                  title,
+                  price,
+                  salePercentage,
+                  fileName,
+                } = item;
+                return (
+                  <LecturePreview
+                    key={id}
+                    id={id}
+                    type="getImage"
+                    imageUrl={fileName}
+                    heartUrl={heartUrl}
+                    expert={expertName}
+                    category={category}
+                    endedAt={endedAt}
+                    title={title}
+                    price={price}
+                    salePercentage={salePercentage}
+                  />
+                );
+              })}
           </LectureGird>
         </LectureViewContainer>
+        {results && results.length === 0 && (
+          <Message text="아직 개설된 강연이 없습니다! :(" color="#000000" />
+        )}
         <PetitionLinkContainer>
           <CircleContainer>
             <Semicircle />
@@ -213,5 +219,10 @@ LecturePresenter.propTypes = {
   categoryId: PropTypes.number.isRequired,
   categoryTitle: PropTypes.string.isRequired,
   categoryItems: PropTypes.arrayOf(PropTypes.object).isRequired,
+  results: PropTypes.arrayOf(),
+};
+
+LecturePresenter.defaultProps = {
+  results: null,
 };
 export default LecturePresenter;

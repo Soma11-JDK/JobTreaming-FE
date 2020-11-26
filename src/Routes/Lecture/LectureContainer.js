@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import { lectureApi } from 'api';
 import CategoryContext from 'Components/CategoryContext';
 import LecturePresenter from './LecturePresenter';
 
@@ -14,14 +15,16 @@ export default class LectureContainer extends Component {
       },
     } = props;
     this.state = {
-      result: null,
+      results: null,
       error: null,
       loading: true,
       categoryId: parseInt(id, 10),
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
+    const categoryItems = this.context;
+
     const {
       match: {
         params: { id },
@@ -29,8 +32,13 @@ export default class LectureContainer extends Component {
       history: { push },
     } = this.props;
     const parsedId = parseInt(id, 10);
+    const { data: results } = await lectureApi.hotLecture(
+      categoryItems[parsedId].code,
+    );
+
     this.setState({
       categoryId: parsedId,
+      results,
     });
     if (Number.isNaN(parsedId)) {
       return push('/');
@@ -38,8 +46,9 @@ export default class LectureContainer extends Component {
     return true;
   }
 
-  componentDidUpdate(preProps) {
+  async componentDidUpdate(preProps) {
     window.scrollTo(0, 0);
+    const categoryItems = this.context;
     const {
       match: {
         params: { id },
@@ -48,28 +57,34 @@ export default class LectureContainer extends Component {
     } = this.props;
     const parsedId = parseInt(id, 10);
     if (preProps.match.params.id !== id) {
-      this.changeId(parsedId);
+      const { data: results } = await lectureApi.hotLecture(
+        categoryItems[parsedId].code,
+      );
+      this.changeResults(parsedId, results);
     }
     if (Number.isNaN(parsedId)) {
       return push('/');
     }
+
     return true;
   }
 
-  changeId(id) {
+  changeResults(id, results) {
     this.setState({
       categoryId: id,
+      results,
     });
   }
 
   render() {
     const categoryItems = this.context;
-    const { result, error, loading, categoryId } = this.state;
+    const { results, error, loading, categoryId } = this.state;
     return (
       <LecturePresenter
         categoryId={categoryId}
         categoryTitle={categoryItems[categoryId].title}
         categoryItems={categoryItems}
+        results={results}
       />
     );
   }

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-
+import { baseURL } from 'api';
 import { Link } from 'react-router-dom';
 import CurrencyFormat from '../common/CurrencyFormat';
 
@@ -91,7 +91,7 @@ const Span = styled.span.attrs(props => ({
     justify-content: flex-end;
     margin-right: 15px;
   }
-  .endTime {
+  .endedAt {
     width: 100%;
     justify-content: center;
     height: 23px;
@@ -106,12 +106,13 @@ const Span = styled.span.attrs(props => ({
 `;
 
 const LecturePreview = ({
+  type,
   id,
   imageUrl,
   heartUrl,
   expert,
   category,
-  endTime,
+  endedAt,
   title,
   price,
   salePercentage,
@@ -120,17 +121,23 @@ const LecturePreview = ({
     <Container>
       <ImageContainer>
         <Heart src={heartUrl} />
-        <Image src={imageUrl} />
+        <Image
+          src={
+            type === 'getImage'
+              ? `${baseURL}/images/lecture/${imageUrl}`
+              : imageUrl
+          }
+        />
       </ImageContainer>
       <InfoContainer>
         <InfoTopContainer>
           <Span>
             <Span className="expert">
-              {expert} . {category}
+              {expert === null ? '전문가' : expert} . {category}
             </Span>
-            <Span className="endTime">
+            <Span className="endedAt">
               <span role="img" aria-label="time">
-                ⏰ {endTime.substring(0, 10)}
+                ⏰ {endedAt.substring(0, 10)}
               </span>
             </Span>
           </Span>
@@ -159,20 +166,23 @@ const LecturePreview = ({
 );
 
 LecturePreview.propTypes = {
+  type: PropTypes.string,
   id: PropTypes.number.isRequired,
   imageUrl: PropTypes.string.isRequired,
   heartUrl: PropTypes.string,
   title: PropTypes.string.isRequired,
-  expert: PropTypes.string.isRequired,
+  expert: PropTypes.string,
   category: PropTypes.string.isRequired,
-  endTime: PropTypes.string.isRequired,
+  endedAt: PropTypes.string.isRequired,
   price: PropTypes.number,
   salePercentage: PropTypes.number,
 };
 
 LecturePreview.defaultProps = {
+  type: '',
   heartUrl: '',
   price: 0,
+  expert: '전문가',
   salePercentage: 0,
 };
 export default LecturePreview;
