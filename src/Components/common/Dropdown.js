@@ -42,18 +42,19 @@ const Dropdown = ({ categoryItems, nowPage }) => {
       onClick={handleClick}
       style={{ display: click ? 'none' : 'block' }}
     >
-      {categoryItems.map((category, idx) => {
-        const { code, title } = category;
-        const path = `/${nowPage}/${idx}`;
-        // const path = '/category/1';
-        return (
-          <ListItem key={code} type="button">
-            <SLink to={path} onClick={() => setClick(false)}>
-              {title}
-            </SLink>
-          </ListItem>
-        );
-      })}
+      {categoryItems &&
+        categoryItems.map((category, idx) => {
+          const { code, title } = category;
+          const path = `/${nowPage}/${idx}`;
+          // const path = '/category/1';
+          return (
+            <ListItem key={code} type="button">
+              <SLink to={path} onClick={() => setClick(false)}>
+                {title}
+              </SLink>
+            </ListItem>
+          );
+        })}
     </Container>
   );
 };

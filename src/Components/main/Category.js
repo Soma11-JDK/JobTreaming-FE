@@ -109,22 +109,25 @@ class Category extends Component {
     return (
       <Container>
         <Grid>
-          {categoryItems.map((category, idx) => (
-            <Link key={category.id} to={`category/${idx}`}>
-              <CategoryContainer
-                key={category.id}
-                onMouseEnter={() => this.handleHover(category.id)}
-                onMouseLeave={() => this.handleUnHover()}
-              >
-                <CategoryImage
+          {categoryItems &&
+            categoryItems.map((category, idx) => (
+              <Link key={category.id} to={`category/${idx}`}>
+                <CategoryContainer
                   key={category.id}
-                  url={`${baseURL}/images/category/${category.code}.png`}
-                  alt={category.title}
-                />
-                <CategoryName key={category.id}>{category.title}</CategoryName>
-              </CategoryContainer>
-            </Link>
-          ))}
+                  onMouseEnter={() => this.handleHover(category.id)}
+                  onMouseLeave={() => this.handleUnHover()}
+                >
+                  <CategoryImage
+                    key={category.id}
+                    url={`${baseURL}/images/category/${category.code}.png`}
+                    alt={category.title}
+                  />
+                  <CategoryName key={category.id}>
+                    {category.title}
+                  </CategoryName>
+                </CategoryContainer>
+              </Link>
+            ))}
         </Grid>
       </Container>
     );
@@ -132,7 +135,10 @@ class Category extends Component {
 }
 
 Category.propTypes = {
-  categoryItems: PropTypes.arrayOf(PropTypes.object).isRequired,
+  categoryItems: PropTypes.arrayOf(PropTypes.array),
 };
 
+Category.defaultProps = {
+  categoryItems: '',
+};
 export default Category;

@@ -24,7 +24,7 @@ class HomeContainer extends Component {
       error: null,
       searchTerm: '',
       loading: true,
-      hotResults: '',
+      hotResults: [],
     };
   }
 
